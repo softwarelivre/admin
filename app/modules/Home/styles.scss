@@ -1,0 +1,17 @@
+body.splash {
+  background: url(/images/top-bg.png);
+
+}
+
+header.splash {
+  z-index: 0;
+  img.logo { display: none; }
+  h1, label { z-index: 200; }
+}
+main.splash {
+  background: transparent;
+  position: fixed;
+  left: 10%;
+  top: 0px;
+
+}

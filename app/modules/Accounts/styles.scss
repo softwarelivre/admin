@@ -1,0 +1,36 @@
+main.accounts {
+  form {
+    input {
+      font-size: xx-large;
+      width: 100%;
+    }
+  }
+
+  .result {
+    tr:nth-child(odd) {
+      background: #ccc;
+    }
+    th {
+      font-size: large;
+      background: gray;
+      color: white;
+
+      &.name     { width: 30rem; }
+      &.email    { width: 15rem; }
+      &.document { width: 8rem; }
+      &.city     { width: 15rem; }
+    }
+
+    td {
+      padding: 0.5em 0.1em;
+    }
+
+    .paid, .leader {
+      padding: 0.1em 1em;
+      border-radius: 5px;
+    }
+
+    .paid   { background: green; color: white; }
+    .leader { background: lightpink; color: black; }
+  }
+}

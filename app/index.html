@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="segue.admin">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <title>fisl - admin</title>
+    <!-- inject:vendor:css -->
+    <!-- endinject -->
+    <!-- inject:custom:css -->
+    <!-- endinject -->
+    <!-- inject:vendor:js -->
+    <!-- endinject -->
+    <!-- inject:custom:js -->
+    <!-- endinject -->
+    <!-- inject:templates:js -->
+    <!-- endinject -->
+    <script src='config.js'></script>
+  </head>
+  <body ng-controller="AdminController" class="{{ topState }}">
+    <header class="noprint {{ topState }}" ui-view="header">
+    </header>
+
+    <toast translate></toast>
+
+    <aside>
+      <logged-as></logged-as>
+    </aside>
+
+    <main class="{{ topState }}" ui-view="main">
+    </main>
+
+    <footer class="noprint">
+      {{ state.name }}
+    </footer>
+  </body>

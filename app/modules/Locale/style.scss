@@ -1,0 +1,23 @@
+locale-selector {
+  position: absolute;
+  top: 5px;
+  right: 25%;
+
+  div {
+    float: left;
+
+    input[type=radio] {
+      display: none;
+    }
+    input[type=radio] + label {
+      img { width: 32px; }
+      span { display: none; }
+    }
+    input[type=radio]:checked + label {
+      img {
+        border-bottom: 1px solid gray;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,476 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: segue-submission\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Felipe Mobus <fmobus@gmail.com>\n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "(Mercosul: use identidade nacional)"
+msgstr "(Mercosur: use national id)"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "(até 2000 caracteres)"
+msgstr "(up to 2000 characters)"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "(até 400 caracteres)"
+msgstr "(up to 400 characters)"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "(de 5 até 80 caracteres)"
+msgstr "(from 5 up to 80 characters)"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "(inclua código de área)"
+msgstr "(please include area code)"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "(mínimo 8 caracteres)"
+msgstr "(at least 8 characters)"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "(ou qualquer outra instituição)"
+msgstr "(or any other institution)"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "(será necessário para login)"
+msgstr "(will be used for login)"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "(somente residentes no Brasil)"
+msgstr "(only Brazilian residents)"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid ""
+"Detectamos sua cidade e país usando um <a href=\"http://ip-api.com/"
+"\">serviço GeoIP</a>.\n"
+"        Caso os dados estejam incorretos, sinta-se a vontade para corrigir."
+msgstr ""
+"We have detected your location using a <a href=\"http://ip-api.com/\">GeoIP "
+"service</a>.Should the location be wrong, feel free to input a correct one "
+"below."
+
+#: /Users/fmobus/segue/submission/app/modules/Invite/register.html
+msgid ""
+"Para participar como co-autor desta palestra, é\n"
+"    necessário cadastrar-se em nosso sistema. Por favor\n"
+"    preencha os dados abaixo."
+msgstr ""
+"To participate as a coauthor in this talk proposal, you must fill the "
+"following form."
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "Passaporte"
+msgstr "Passport"
+
+#: /Users/fmobus/segue/submission/app/modules/Invite/answer.html
+msgid ""
+"Você está sendo convidado por <b>{{ invite.proposal.owner.name }}</b> para\n"
+"    participar do <b>FISL 16</b> na condição de co-autor da proposta de "
+"palestra\n"
+"    descrita abaixo:"
+msgstr ""
+"You are being invited by <b>{{ invite.proposal.owner.name }}</b> to "
+"participateof <b>FISL16</b> as a coauthor of the following talk proposal:"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "a língua da palestra é obrigatória"
+msgstr "please inform the language for your talk"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "a proposta completa da palestra é obrigatória"
+msgstr "please write a full text that describes your talk"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "a proposta completa deve ter no máximo 2000 caracteres"
+msgstr "the full proposal must have 2000 characters at most"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "a proposta completa deve ter no mínimo 5 caracteres"
+msgstr "the full proposal must have at least 5 characters"
+
+#: /Users/fmobus/segue/submission/app/modules/Invite/answer.html
+msgid "aceito este convite"
+msgstr "I accept this invitation"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "cidade"
+msgstr "city"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/invite.html
+msgid "convidar co-autor"
+msgstr "invite coauthor"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/coauthors.html
+msgid "convidar co-autor..."
+msgstr "invite coauthor"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/coauthors.html
+msgid "convidar outro co-autor..."
+msgstr "invite another coauthor"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/invite.html
+msgid "convidar!"
+msgstr "invite!"
+
+#: /Users/fmobus/segue/submission/app/modules/Invite/answer.html
+msgid "convite para co-autor"
+msgstr "coauthor invite"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "criar conta"
+msgstr "create account"
+
+#: /Users/fmobus/segue/submission/app/modules/Home/home.html
+msgid "criar nova proposta de palestra"
+msgstr "create new talk proposal"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/form.html
+msgid "criar proposta"
+msgstr "create proposal"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "criar uma conta"
+msgstr "create an account"
+
+#: /Users/fmobus/segue/submission/app/modules/Authenticate/login.html
+msgid "e-mail"
+msgstr "e-mail"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/invite.html
+msgid "e-mail do convidado"
+msgstr "invitee's email"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "email"
+msgstr "e-mail"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "empresa / universidade"
+msgstr "company / university"
+
+#: /Users/fmobus/segue/submission/app/modules/Authenticate/login.html
+#: /Users/fmobus/segue/submission/app/modules/Splash/splash.html
+msgid "entrar na minha conta"
+msgstr "sign in to my account"
+
+#: /Users/fmobus/segue/submission/app/modules/Authenticate/login.html
+msgid "entrar!"
+msgstr "sign in!"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "escolha uma trilha"
+msgstr "choose a track"
+
+#: /Users/fmobus/segue/submission/app/modules/Authenticate/login.html
+msgid "esqueci minha senha!"
+msgstr "forgot my password!"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid ""
+"este endereço de e-mail já está registrado\n"
+"        no sistema, por favor escolha outro"
+msgstr "this e-mail address is already in use, please fill in another one"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/coauthors.html
+msgid "este é você!"
+msgstr "this is you!"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid ""
+"estrangeiros não-residentes, favor informar o passaporte; cidadãos do "
+"Mercosul podem informar documento de identidade nacional"
+msgstr ""
+"non-resident foreigners, please inform your passport; mercosur citizens may "
+"inform their national identity numbers"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "língua"
+msgstr "language"
+
+#: /Users/fmobus/segue/submission/app/modules/Invite/answer.html
+msgid "língua:"
+msgstr "language:"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+msgid "meus dados pessoais"
+msgstr "my personal data"
+
+#: /Users/fmobus/segue/submission/app/modules/Home/home.html
+msgid "minhas propostas de palestra"
+msgstr "my talk proposals"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "mini-currículo"
+msgstr "mini-résumé"
+
+#: /Users/fmobus/segue/submission/app/modules/Home/home.html
+msgid "modificada em {{ proposal.last_updated }}"
+msgstr "last modification: {{ proposal.last_updated }}"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "nome"
+msgstr "name"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/invite.html
+msgid "nome do convidado"
+msgstr "invitee's name"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/author.html
+msgid "não conseguimos detectar sua sessão neste computador..."
+msgstr "we could not detect a session on your computer..."
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/author.html
+msgid "não, quero criar uma conta"
+msgstr "no, I want to create an account"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "nível da palestra"
+msgstr "technical level"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "número do CPF"
+msgstr "CPF number"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "o nível técnico da palestra é obrigatório"
+msgstr "please inform the technical level of your talk"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "o que você está propondo?"
+msgstr "what do you want to talk about?"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "o título da palestra é obrigatório"
+msgstr "please give a title to your talk"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "o título deve ter no máximo 80 caracteres"
+msgstr "title must have 80 characters at most"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "o título deve ter no mínimo 5 caracteres"
+msgstr "title must have at least 5 characters"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "país"
+msgstr "country"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/form.html
+msgid "por favor verifique as mensagens acima e tente novamente"
+msgstr "please, verify the messages above and try again"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "por favor, defina uma senha com no mínimo 8 caracteres"
+msgstr "please, define a password with at least 8 characters"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "por favor, infome o seu número de telefone"
+msgstr "please, inform your phone number"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/invite.html
+msgid "por favor, informe o e-mail do convidado"
+msgstr "please, fill out the invitee's email address"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/invite.html
+msgid "por favor, informe o nome do convidado"
+msgstr "please, fill out the invitee's name"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "por favor, informe seu endereço de e-mail"
+msgstr "please, fill out your e-mail address"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "por favor, informe seu nome completo"
+msgstr "please, fill out your full name"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "por favor, informe seu país"
+msgstr "please, inform your country"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "por favor, informe sua cidade"
+msgstr "please, tell us which city you come from"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "por favor, informe uma trilha válida"
+msgstr "please select a valid track"
+
+#: /Users/fmobus/segue/submission/app/modules/Splash/splash.html
+msgid "propor nova palestra"
+msgstr "propose a talk"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "proposta"
+msgstr "proposal"
+
+#: /Users/fmobus/segue/submission/app/modules/Home/home.html
+msgid "proposta ainda não enviada!"
+msgstr "proposal not yet sent!"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/coauthors.html
+msgid "quem vai apresentar?"
+msgstr "who is going to present?"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/author.html
+msgid "quem é você?"
+msgstr "who are you?"
+
+#: /Users/fmobus/segue/submission/app/modules/Invite/answer.html
+msgid "rejeito este convite"
+msgstr "I decline this invite"
+
+#: /Users/fmobus/segue/submission/app/modules/Home/home.html
+msgid "remover"
+msgstr "remove"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "residentes no Brasil, favor informar o CPF"
+msgstr "Brazilian residents, please inform your CPF"
+
+#: /Users/fmobus/segue/submission/app/modules/Authenticate/logged-as.html
+msgid "sair"
+msgstr "log out"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Proposal/form.html
+msgid "salvar alterações"
+msgstr "save changes"
+
+#: /Users/fmobus/segue/submission/app/modules/Home/home.html
+msgid "sem título"
+msgstr "no title"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+#: /Users/fmobus/segue/submission/app/modules/Authenticate/login.html
+msgid "senha"
+msgstr "password"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/coauthors.html
+msgid "será convidado ao salvar"
+msgstr "invite will be sent upon saving"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/author.html
+msgid "sim, já tenho conta"
+msgstr "yes, I already have an account"
+
+#: /Users/fmobus/segue/submission/app/modules/Account/form.html
+#: /Users/fmobus/segue/submission/app/modules/Account/signup.html
+msgid "telefone"
+msgstr "phone"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "trilha"
+msgstr "track"
+
+#: /Users/fmobus/segue/submission/app/modules/Invite/answer.html
+msgid "trilha:"
+msgstr "track:"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/proposal.html
+msgid "título da palestra"
+msgstr "title for this talk"
+
+#: /Users/fmobus/segue/submission/app/modules/Invite/answer.html
+msgid "título:"
+msgstr "title:"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/wait.html
+msgid "verifique sua caixa de e-mail"
+msgstr "please verify your e-mail inbox"
+
+#: /Users/fmobus/segue/submission/app/modules/Authenticate/logged-as.html
+msgid "você está logado como"
+msgstr "you are logged as"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/author.html
+msgid "você já tem conta no sistema?"
+msgstr "do you have an account in this system?"
+
+#: /Users/fmobus/segue/submission/app/modules/Proposal/coauthors.html
+msgid ""
+"você pode convidar até três pessoas para\n"
+"    ajudar na apresentação dessa palestra"
+msgstr "you can invite up to three people to help you in presenting this talk"
+
+#~ msgid "repita a senha"
+#~ msgstr "repeat password"
+
+#~ msgid "modificada em <i>{{ proposal.last_updated }}</i>"
+#~ msgstr "last modification <i>{{ proposal.last_updated }}</i>"
+
+#~ msgid "(até 200 caracteres)"
+#~ msgstr "(up to 200 characters)"
+
+#~ msgid "o resumo da palestra é obrigatório"
+#~ msgstr "please write a summary of your talk"
+
+#~ msgid "o resumo deve ter no máximo 200 caracteres"
+#~ msgstr "the summary must have 200 characters at most"
+
+#~ msgid "o resumo deve ter no mínimo 5 caracteres"
+#~ msgstr "the summary must have at least 5 characters"
+
+#~ msgid "proposta completa"
+#~ msgstr "complete proposal"
+
+#~ msgid "resumo da proposta"
+#~ msgstr "proposal summary"
+
+#~ msgid "com ajuda de outras pessoas"
+#~ msgstr "along with other people"
+
+#~ msgid "pretendo apresentar essa palestra..."
+#~ msgstr "I will present this talk..."
+
+#~ msgid "quem mais vai ajudar?"
+#~ msgstr "who else will present?"
+
+#~ msgid "sozinho"
+#~ msgstr "by my own"
+
+#~ msgid "criar!"
+#~ msgstr "create!"
+
+#~ msgid "criar proposta de palestra"
+#~ msgstr "create talk proposal"
+
+#~ msgid "(somente o do autor principal)"
+#~ msgstr "(main author's only)"
+
+#~ msgid "envio de propostas de palestra"
+#~ msgstr "talk proposal submission"
