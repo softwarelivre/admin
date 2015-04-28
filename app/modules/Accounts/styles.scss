@@ -1,5 +1,10 @@
 main.accounts {
   form {
+    position: fixed;
+    top: 35px;
+    width: 75%;
+    z-index: 10;
+
     input {
       font-size: xx-large;
       width: 100%;
@@ -7,30 +12,43 @@ main.accounts {
   }
 
   .result {
-    tr:nth-child(odd) {
-      background: #ccc;
-    }
-    th {
-      font-size: large;
-      background: gray;
-      color: white;
+    position: absolute;
+    margin-top: 50px;
 
-      &.name     { width: 30rem; }
-      &.email    { width: 15rem; }
-      &.document { width: 8rem; }
-      &.city     { width: 15rem; }
-    }
+    col.name     { width: 30rem; }
+    col.email    { width: 15rem; }
+    col.document { width: 8rem; }
+    col.city     { width: 15rem; }
 
-    td {
-      padding: 0.5em 0.1em;
+    thead {
+      th {
+        font-size: large;
+        background: gray;
+        color: white;
+      }
     }
 
-    .paid, .leader {
-      padding: 0.1em 1em;
-      border-radius: 5px;
-    }
+    tbody {
+      tr:nth-child(odd) { background: #ccc; }
 
-    .paid   { background: green; color: white; }
-    .leader { background: lightpink; color: black; }
+      td {
+        padding: 0.5em 0.1em;
+      }
+
+      span {
+        display: inline-block;
+        padding: 0.1em 0.3em;
+        border-radius: 5px;
+        font-size: small;
+      }
+
+      .paid      { background: green;     color: white; }
+      .leader    { background: lightpink; color: black; }
+      .proposals { background: orange;    color: black; }
+    }
+  }
+
+  [ui-sref] {
+    cursor: hand;
   }
 }

@@ -32,6 +32,10 @@
         console.log(error);
       });
 
+      $scope.home = function() {
+        $scope.enforceAuth();
+        $state.go('home');
+      };
       $scope.enforceAuth = function() {
         if (!Auth.credentials()) { $state.go('authenticate'); }
       };

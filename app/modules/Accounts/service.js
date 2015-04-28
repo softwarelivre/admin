@@ -15,6 +15,10 @@
         }
       };
 
+      self.get = function(id) {
+        return accounts.one(id).get();
+      };
+
       return self;
     });
 

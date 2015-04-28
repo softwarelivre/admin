@@ -25,11 +25,8 @@
     .controller("LoginController", function($scope, $state, Auth, focusOn) {
       $scope.login = {};
 
-      function succeed(credentials) {
-        $scope.home();
-      }
       $scope.tryLogin = function() {
-        Auth.login($scope.login.email, $scope.login.password).then(succeed);
+        Auth.login($scope.login.email, $scope.login.password).then($scope.home);
       };
 
       focusOn('login.email');
