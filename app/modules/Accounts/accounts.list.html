@@ -15,17 +15,19 @@
     <tr ng-repeat="account in accounts" ui-sref="accounts.detail({id: account.id})">
       <td>
         {{ account.name }}
-        <span class="paid"      ng-show="account.has_valid_purchases"       translate>pago</span>
-        <span class="leader"    ng-show="account.links.caravans.count == 1" translate>líder</span>
-        <span class="proposals" ng-show="account.links.proposals.count > 0"
-              translate translate-n="account.links.proposals.count" translate-plural="{{$count}} propostas">
-              {{ account.links.proposals.count }} proposta
+        <span class="badges">
+          <span class="paid"      ng-show="account.has_valid_purchases"       translate>pago</span>
+          <span class="leader"    ng-show="account.links.caravans.count == 1" translate>líder</span>
+          <span class="proposals" ng-show="account.links.proposals.count > 0"
+                translate translate-n="account.links.proposals.count" translate-plural="{{$count}} propostas">
+                {{ account.links.proposals.count }} proposta
+          </span>
         </span>
       </td>
       <td>{{ account.email }}</td>
       <td>{{ account.document }}</td>
       <td>{{ account.city }}</td>
     </tr>
-  </thead>
+  </tbody>
 </table>
 

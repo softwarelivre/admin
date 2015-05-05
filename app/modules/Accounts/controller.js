@@ -26,10 +26,12 @@
         .state('accounts.detail', {
           url: '/detail/:id',
           views: {
+            query:   { controller: 'AccountController',     templateUrl: 'modules/Accounts/accounts.back.html' },
             content: { controller: 'AccountShowController', templateUrl: 'modules/Accounts/accounts.detail.html' }
           },
           resolve: {
-            account: function(Accounts, $stateParams) { return Accounts.get($stateParams.id); }
+            account: function(Accounts, $stateParams) { return Accounts.get($stateParams.id); },
+            purchases: function(account) { return account.follow('purchases'); }
           }
         });
     });
@@ -52,7 +54,8 @@
     .controller("AccountListController", function($scope, $state, Accounts, focusOn) {
       focusOn('query.needle');
     })
-    .controller("AccountShowController", function($scope, $state, account, focusOn) {
+    .controller("AccountShowController", function($scope, $state, account, purchases, focusOn) {
       $scope.account = account;
+      $scope.purchases = purchases;
     });
 })();

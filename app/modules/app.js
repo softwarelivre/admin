@@ -7,6 +7,7 @@
   angular
     .module('segue.admin',[
       'templates',
+      'ui.gravatar',
       'ui.router',
       'ui.router.compat',
       'ui.keypress',

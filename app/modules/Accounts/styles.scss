@@ -35,16 +35,64 @@ main.accounts {
         padding: 0.5em 0.1em;
       }
 
-      span {
-        display: inline-block;
-        padding: 0.1em 0.3em;
-        border-radius: 5px;
-        font-size: small;
-      }
+    }
+  }
 
-      .paid      { background: green;     color: white; }
-      .leader    { background: lightpink; color: black; }
-      .proposals { background: orange;    color: black; }
+  .badges span {
+    display: inline-block;
+    padding: 0.1em 0.3em;
+    border-radius: 5px;
+    font-size: small;
+
+    &.paid      { background: green;     color: white; }
+    &.leader    { background: lightpink; color: black; }
+    &.proposals { background: orange;    color: black; }
+  }
+
+
+  .detail {
+    img {
+      margin: 0.5em;
+      float: left;
+    }
+    header {
+      .name, .email, .badges {
+        padding: 0.2em;
+      }
+      .name {
+        font-size: xx-large;
+      }
+      .email {
+        font-size: x-large;
+      }
+    }
+    table.personal {
+      clear: both;
+    }
+  }
+
+  table.purchases {
+    col.id       { width: 3rem; }
+    col.status   { width: 10rem; }
+    col.category { width: 8rem; }
+    col.price    { width: 8rem; }
+    col.buyer    { width: 20rem; }
+
+    thead {
+      th {
+        font-size: large;
+        background: gray;
+        color: white;
+      }
+    }
+
+    tbody {
+      tr:nth-child(odd) { background: #ccc; }
+
+      td {
+        padding: 0.5em 0.1em;
+        text-align: center;
+      }
     }
   }
 

@@ -1,27 +1,67 @@
-<table>
-  <tr>
-    <th translate>nome</th>
-    <td>{{ account.name }}</td>
-  </tr>
-  <tr>
-    <th translate>e-mail</th>
-    <td>{{ account.email }}</td>
-  </tr>
-  <tr>
-    <th translate>documento</th>
-    <td>{{ account.document }}</td>
-  </tr>
-  <tr>
-    <th translate>cidade / país</th>
-    <td>{{ account.city }} / {{ account.country }}</td>
-  </tr>
-  <tr>
-    <th translate>Nome</th>
-    <td>{{ account.name }}</td>
-  </tr>
-  <tr>
-    <th translate>Nome</th>
-    <td>{{ account.name }}</td>
-  </tr>
-</table>
+<fieldset class="detail">
+  <legend>dados participante</legend>
 
+  <img gravatar-src="account.email" gravatar-size="100">
+  <header>
+    <div class="name">{{ account.name }}</div>
+    <div class="email">{{ account.email }}</div>
+
+    <div class="badges">
+      <span class="paid"      ng-show="account.has_valid_purchases"       translate>pago</span>
+      <span class="leader"    ng-show="account.links.caravans.count == 1" translate>líder</span>
+      <span class="proposals" ng-show="account.links.proposals.count > 0"
+            translate translate-n="account.links.proposals.count" translate-plural="{{$count}} propostas">
+                {{ account.links.proposals.count }} proposta
+      </span>
+    </div>
+  </header>
+
+  <table class="personal">
+    <tr>
+      <th translate>criado em...</th>
+      <td>{{ account.created }}</td>
+    </tr>
+    <tr>
+      <th translate>documento</th>
+      <td>{{ account.document }}</td>
+    </tr>
+    <tr>
+      <th translate>cidade / país</th>
+      <td>{{ account.city }} / {{ account.country }}</td>
+    </tr>
+    <tr>
+      <th translate>organização</th>
+      <td>{{ account.organization }}</td>
+    </tr>
+    <tr>
+      <th translate>telefone</th>
+      <td>{{ account.phone }}</td>
+    </tr>
+  </table>
+</fieldset>
+
+<fieldset>
+  <legend>ingressos deste participante</legend>
+
+  <table class="purchases">
+    <col class="id" />
+    <col class="status" />
+    <col class="category" />
+    <col class="price" />
+    <col class="buyer" />
+    <tr>
+      <th translate>id</th>
+      <th translate>situação</th>
+      <th translate>categoria</th>
+      <th translate>valor</th>
+      <th translate>comprador</th>
+    </tr>
+    <tr ng-repeat="purchase in purchases">
+      <td class="id">{{ purchase.id }}</td>
+      <td class="status">{{ purchase.status }}</td>
+      <td class="category">{{ purchase.product.category }}</td>
+      <td class="price">{{ purchase.product.price }}</td>
+      <td class="buyer">{{ purchase.buyer.name }}</td>
+    </tr>
+  </table>
+</fieldset>
