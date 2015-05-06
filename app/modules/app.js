@@ -21,7 +21,7 @@
       'segue.admin.authenticate',
       'segue.admin.accounts',
     ])
-    .controller('AdminController', function($scope, $state, Auth) {
+    .controller('AdminController', function($scope, $state, Auth, Config) {
       $scope.$on('$stateChangeSuccess', function(event, newState) {
         $scope.topState = newState.name.split('.')[0];
         $scope.state    = newState;
@@ -41,6 +41,7 @@
         if (!Auth.credentials()) { $state.go('authenticate'); }
       };
       $scope.$on('auth:changed', $scope.enforceAuth);
+      $scope.CONFIG = Config;
 
     })
     .config(function(RestangularProvider, Config) {
@@ -49,6 +50,15 @@
         if (operation == "getList") { return data.items; }
         if (data.resource) { return data.resource; }
         return data;
+      });
+      RestangularProvider.setOnElemRestangularized(function(thing, isCollection, model, Restangular) {
+        if (!isCollection) {
+          thing.follow = function(name) {
+            var path = thing.links[name].href.replace(/.api./,'');
+            return Restangular.one(path).getList();
+          };
+        }
+        return thing;
       });
     })
     .config(function($urlRouterProvider) {

@@ -57,5 +57,17 @@
     .controller("AccountShowController", function($scope, $state, account, purchases, focusOn) {
       $scope.account = account;
       $scope.purchases = purchases;
+
+      $scope.paymentsOf = {};
+
+      $scope.showPaymentsOf = function(purchase) {
+        purchase.follow("payments").then(function(payments) {
+          $scope.paymentsOf[purchase.id] = payments;
+        });
+      };
+
+      $scope.hidePaymentsOf = function(purchaseId) {
+        delete $scope.paymentsOf[purchaseId];
+      };
     });
 })();

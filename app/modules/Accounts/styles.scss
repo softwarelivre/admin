@@ -11,6 +11,21 @@ main.accounts {
     }
   }
 
+  .back {
+    position: absolute;
+    left: -5em;
+
+    button {
+      border: 0;
+      padding: 1em;
+      &:before {
+        content: '◀';
+        font-size: 70%;
+        padding-right: 1em;
+      }
+    }
+  }
+
   .result {
     position: absolute;
     margin-top: 50px;
@@ -72,11 +87,14 @@ main.accounts {
   }
 
   table.purchases {
+    border-collapse: collapse;
+
     col.id       { width: 3rem; }
-    col.status   { width: 10rem; }
-    col.category { width: 8rem; }
-    col.price    { width: 8rem; }
-    col.buyer    { width: 20rem; }
+    col.status   { width: 5rem; }
+    col.category { width: 7rem; }
+    col.price    { width: 6rem; }
+    col.buyer    { width: 15rem; }
+    col.created  { width: 18rem; }
 
     thead {
       th {
@@ -87,13 +105,32 @@ main.accounts {
     }
 
     tbody {
-      tr:nth-child(odd) { background: #ccc; }
-
-      td {
+      tr.master[ng-repeat-start] > td {
         padding: 0.5em 0.1em;
-        text-align: center;
+        border-top: 2px solid black;
+      }
+      tr.child[ng-repeat-end] td {
+        padding: 0 3em;
+        ul { margin: 0; padding: 0 1em; }
       }
     }
+  }
+
+  table.payments {
+    margin-left: 5em;
+    border-collapse: collapse;
+    col.id         { width: 2rem; }
+    col.type       { width: 6rem; }
+    col.status     { width: 6rem; }
+    col.amount     { width: 6rem; }
+    col.our_number { width: 8rem; }
+    col.due_date   { width: 8rem; }
+    col.reference  { width: 10rem; }
+    td {
+      border: 1px dotted gray;
+      text-align: center;
+    }
+
   }
 
   [ui-sref] {
