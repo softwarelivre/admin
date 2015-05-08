@@ -1,0 +1,29 @@
+<table class="proposals" ng-hide="proposals.length == 0">
+  <col class="id" />
+  <col class="status" />
+  <col class="track" />
+  <col class="title" />
+  <col class="authors" />
+  <thead>
+    <tr>
+      <th translate>id</th>
+      <th translate>situação</th>
+      <th translate>trilha</th>
+      <th translate>título</th>
+      <th translate>autores</th>
+    </tr>
+  </thead>
+  <tr class="master" ng-repeat="proposal in proposals">
+    <td class="id">{{ proposal.id }}</td>
+    <td class="status">{{ proposal.status }}</td>
+    <td class="track">
+      <div class="track">{{ proposal.track.track }}</div>
+      <div class="zone">{{ proposal.track.zone }}</div>
+    </td>
+    <td class="title">{{ proposal.title }}</td>
+    <td class="authors">
+      <span class="info" ng-hide="coauthors">sem co-autores</a>
+      <a ng-repeat="coauthor in proposal.coauthors"> {{ coauthor.name }}</a>
+    </td>
+  </tr>
+</table>

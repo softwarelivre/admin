@@ -86,54 +86,8 @@ main.accounts {
     }
   }
 
-  table.purchases {
-    border-collapse: collapse;
+}
 
-    col.id       { width: 3rem; }
-    col.status   { width: 5rem; }
-    col.category { width: 7rem; }
-    col.price    { width: 6rem; }
-    col.buyer    { width: 15rem; }
-    col.created  { width: 18rem; }
-
-    thead {
-      th {
-        font-size: large;
-        background: gray;
-        color: white;
-      }
-    }
-
-    tbody {
-      tr.master[ng-repeat-start] > td {
-        padding: 0.5em 0.1em;
-        border-top: 2px solid black;
-      }
-      tr.child[ng-repeat-end] td {
-        padding: 0 3em;
-        ul { margin: 0; padding: 0 1em; }
-      }
-    }
-  }
-
-  table.payments {
-    margin-left: 5em;
-    border-collapse: collapse;
-    col.id         { width: 2rem; }
-    col.type       { width: 6rem; }
-    col.status     { width: 6rem; }
-    col.amount     { width: 6rem; }
-    col.our_number { width: 8rem; }
-    col.due_date   { width: 8rem; }
-    col.reference  { width: 10rem; }
-    td {
-      border: 1px dotted gray;
-      text-align: center;
-    }
-
-  }
-
-  [ui-sref] {
-    cursor: hand;
-  }
+[ui-sref] {
+  cursor: hand;
 }

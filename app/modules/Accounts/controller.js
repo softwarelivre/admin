@@ -31,7 +31,8 @@
           },
           resolve: {
             account: function(Accounts, $stateParams) { return Accounts.get($stateParams.id); },
-            purchases: function(account) { return account.follow('purchases'); }
+            purchases: function(account) { return account.follow('purchases'); },
+            proposals: function(account) { return account.follow('proposals'); }
           }
         });
     });
@@ -54,9 +55,10 @@
     .controller("AccountListController", function($scope, $state, Accounts, focusOn) {
       focusOn('query.needle');
     })
-    .controller("AccountShowController", function($scope, $state, account, purchases, focusOn) {
+    .controller("AccountShowController", function($scope, $state, account, purchases, proposals, focusOn) {
       $scope.account = account;
       $scope.purchases = purchases;
+      $scope.proposals = proposals;
 
       $scope.paymentsOf = {};
 

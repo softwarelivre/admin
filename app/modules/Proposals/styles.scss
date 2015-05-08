@@ -1,0 +1,34 @@
+table.proposals {
+  border-collapse: collapse;
+
+  col.id      { width: 2rem; }
+  col.status  { width: 4rem; }
+  col.track   { width: 10rem; }
+  col.title   { width: 20rem; }
+  col.authors { width: 20rem; }
+
+  thead {
+    th {
+      font-size: large;
+      background: lightgray;
+      color: black;
+      text-align: left;
+    }
+  }
+
+  tbody {
+    td {
+      border-bottom: 1px dotted gray;
+      border-right: 1px dotted lightgray;
+
+      &.id    { font-size: small; }
+      &.authors {
+        .info { color: orange; }
+        a::after { content: ','; }
+        a:last-child::after { content: ''; }
+      }
+      .zone { font-size: small; color: gray; }
+    }
+  }
+
+}
