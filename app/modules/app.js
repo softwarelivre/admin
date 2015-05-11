@@ -20,6 +20,7 @@
       'segue.admin.home',
       'segue.admin.authenticate',
       'segue.admin.accounts',
+      'segue.admin.proposals',
     ])
     .controller('AdminController', function($scope, $state, Auth, Config) {
       $scope.$on('$stateChangeSuccess', function(event, newState) {

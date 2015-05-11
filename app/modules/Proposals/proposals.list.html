@@ -22,8 +22,11 @@
     </td>
     <td class="title">{{ proposal.title }}</td>
     <td class="authors">
-      <span class="info" ng-hide="coauthors">sem co-autores</a>
-      <a ng-repeat="coauthor in proposal.coauthors"> {{ coauthor.name }}</a>
+      <div class="owner">{{ proposal.owner.name }}</div>
+      <div class="coauthors">
+        <span class="info" ng-show="proposal.coauthors.length == 0">sem co-autores</span>
+        <a ng-repeat="coauthor in proposal.coauthors"> {{ coauthor.name }}</a>
+      </div>
     </td>
   </tr>
 </table>

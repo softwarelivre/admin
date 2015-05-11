@@ -1,3 +1,25 @@
+main.proposals {
+  .filter {
+    form {
+      position: fixed;
+      top: 35px;
+      width: 75%;
+      z-index: 10;
+
+      input {
+        font-size: xx-large;
+        width: 100%;
+      }
+    }
+  }
+
+  .content {
+    position: absolute;
+    margin-top: 50px;
+  }
+
+}
+
 table.proposals {
   border-collapse: collapse;
 
@@ -24,8 +46,12 @@ table.proposals {
       &.id    { font-size: small; }
       &.authors {
         .info { color: orange; }
-        a::after { content: ','; }
-        a:last-child::after { content: ''; }
+        .coauthors {
+          font-size: small;
+
+          a::after { content: ','; }
+          a:last-child::after { content: ''; }
+        }
       }
       .zone { font-size: small; color: gray; }
     }
