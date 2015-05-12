@@ -9,7 +9,7 @@ installation
 Assuming you have npm, gulp and bower already installed:
 
     git clone https://github.com/segue-org/admin.git
-    cd submission
+    cd admin
     npm install
     bower install
     gulp serve
