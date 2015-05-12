@@ -1,0 +1,13 @@
+<ul class="zones">
+  <li class="header">
+    trilhas
+  </li>
+  <li ng-repeat="(zone, tracks) in tracksByZone">
+    {{ zone }}
+    <ul class="tracks">
+      <li ng-repeat="track in tracks">
+        <a ui-sref="proposals.list({trackId: track.id})">{{ track.area }}</a>
+      </li>
+    </ul>
+  </li>
+</ul>

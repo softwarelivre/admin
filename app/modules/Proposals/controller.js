@@ -14,13 +14,26 @@
           views: {
             header: {                                  templateUrl: 'modules/common/nav.html' },
             main:   { controller: 'ProposalController', templateUrl: 'modules/Proposals/proposals.html' }
+          },
+          resolve: {
+            tracks: function(Tracks) { return Tracks.getList(); }
           }
         })
         .state('proposals.search', {
-          url: '/list',
+          url: '/search',
           views: {
-            query:   { controller: 'ProposalListController', templateUrl: 'modules/Proposals/proposals.query.html' },
+            query:   { controller: 'ProposalSearchController', templateUrl: 'modules/Proposals/proposals.query.html' },
+            content: { controller: 'ProposalSearchController', templateUrl: 'modules/Proposals/proposals.list.html' }
+          }
+        })
+        .state('proposals.list', {
+          url: '/list/:trackId',
+          views: {
+            query:   { controller: 'ProposalListController', templateUrl: 'modules/Proposals/proposals.tracks.html' },
             content: { controller: 'ProposalListController', templateUrl: 'modules/Proposals/proposals.list.html' }
+          },
+          resolve: {
+            proposals: function(Proposals, $stateParams) { return Proposals.getByTrack($stateParams.trackId); }
           }
         })
         .state('proposals.detail', {
@@ -50,8 +63,21 @@
         });
       };
     })
-    .controller("ProposalListController", function($scope, $state, Proposals, focusOn) {
+    .controller("ProposalSearchController", function($scope, $state, focusOn) {
+      $scope.filterType = 'search';
       focusOn('query.needle');
+    })
+    .controller("ProposalListController", function($scope, $state, tracks, proposals, focusOn) {
+      $scope.filterType = 'group';
+
+      function addZoneAndTrack(entry) {
+        var splitted = entry.name_pt.split(' - ');
+        entry.zone = splitted[0];
+        entry.area = splitted[1];
+        return entry;
+      }
+      $scope.tracksByZone = _(tracks).map(addZoneAndTrack).groupBy('zone').value();
+      $scope.proposals = proposals;
     })
     .controller("ProposalShowController", function($scope, $state, proposal, focusOn) {
       $scope.proposal = proposal;
