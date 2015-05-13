@@ -1,3 +1,6 @@
+<h3 ng-hide="proposals.length == 0">
+  {{ proposals.length }} propostas encontradas...
+</h3>
 <table class="proposals" ng-hide="proposals.length == 0">
   <col class="id" />
   <col class="status" />
@@ -20,7 +23,11 @@
       <div class="track">{{ proposal.track.track }}</div>
       <div class="zone">{{ proposal.track.zone }}</div>
     </td>
-    <td class="title">{{ proposal.title }}</td>
+    <td class="title">
+      <a ui-sref="proposals.detail({id: proposal.id})">
+        {{ proposal.title }}
+      </a>
+    </td>
     <td class="authors">
       <div class="owner">{{ proposal.owner.name }}</div>
       <div class="coauthors">
