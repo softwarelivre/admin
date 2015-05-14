@@ -44,6 +44,10 @@
       $scope.$on('auth:changed', $scope.enforceAuth);
       $scope.CONFIG = Config;
 
+      $scope.goBack = function() {
+        history.back();
+      };
+
     })
     .config(function(RestangularProvider, Config) {
       RestangularProvider.setBaseUrl(Config.API_HOST + Config.API_PATH);

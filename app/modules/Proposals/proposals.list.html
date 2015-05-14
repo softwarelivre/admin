@@ -16,7 +16,7 @@
       <th translate>autores</th>
     </tr>
   </thead>
-  <tr class="master" ng-repeat="proposal in proposals">
+  <tr class="master" ng-repeat="proposal in proposals | orderBy:'id'">
     <td class="id">{{ proposal.id }}</td>
     <td class="status">{{ proposal.status }}</td>
     <td class="track">
@@ -29,10 +29,14 @@
       </a>
     </td>
     <td class="authors">
-      <div class="owner">{{ proposal.owner.name }}</div>
+      <div class="owner">
+        {{ proposal.owner.name }}
+      </div>
       <div class="coauthors">
         <span class="info" ng-show="proposal.coauthors.length == 0">sem co-autores</span>
-        <a ng-repeat="coauthor in proposal.coauthors"> {{ coauthor.name }}</a>
+        <a ng-repeat="coauthor in proposal.coauthors">
+          {{ coauthor.name }}
+        </a>
       </div>
     </td>
   </tr>

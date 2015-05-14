@@ -39,11 +39,12 @@
         .state('proposals.detail', {
           url: '/detail/:id',
           views: {
-            query:   { controller: 'ProposalController',     templateUrl: 'modules/Proposals/proposals.back.html' },
+            query:   { controller: 'ProposalController',     templateUrl: 'modules/common/back.html' },
             content: { controller: 'ProposalShowController', templateUrl: 'modules/Proposals/proposals.detail.html' }
           },
           resolve: {
-            proposal: function(Proposals, $stateParams) { return Proposals.get($stateParams.id); }
+            proposal: function(Proposals, $stateParams) { return Proposals.get($stateParams.id); },
+            invites: function(proposal) { return proposal.follow('invites'); }
           }
         });
     });
@@ -79,7 +80,8 @@
       $scope.tracksByZone = _(tracks).map(addZoneAndTrack).groupBy('zone').value();
       $scope.proposals = proposals;
     })
-    .controller("ProposalShowController", function($scope, $state, proposal, focusOn) {
+    .controller("ProposalShowController", function($scope, $state, proposal, invites, focusOn) {
       $scope.proposal = proposal;
+      $scope.invites = invites;
     });
 })();

@@ -26,7 +26,7 @@
         .state('accounts.detail', {
           url: '/detail/:id',
           views: {
-            query:   { controller: 'AccountController',     templateUrl: 'modules/Accounts/accounts.back.html' },
+            query:   { controller: 'AccountController',     templateUrl: 'modules/common/back.html' },
             content: { controller: 'AccountShowController', templateUrl: 'modules/Accounts/accounts.detail.html' }
           },
           resolve: {

@@ -1,0 +1,49 @@
+<fieldset class="detail">
+  <legend>dados palestra</legend>
+
+  <header>
+    <div class="id">{{ proposal.id }}</div>
+    <div class="title">{{ proposal.title }}</div>
+    <div class="track">
+      <span class="area">{{ proposal.track.track }}</span>
+      <span class="zone">{{ proposal.track.zone }}</span>
+    </div>
+    <div class="badges"></div>
+  </header>
+
+  <table class="data">
+    <tr class="owner">
+      <th translate>autor</th>
+      <td>
+        <a ui-sref="accounts.detail({id: proposal.owner.id})">{{ proposal.owner.name }}</a>
+      </td>
+    </tr>
+    <tr class="coauthors">
+      <th translate>co-autores</th>
+      <td class="coauthors">
+        <span class="info" ng-show="invites.length == 0">sem co-autores</span>
+        <div class="coauthor" ng-repeat="invite in invites">
+          <a ui-sref="accounts.detail({id: invite.account_id})">{{ invite.name }}</a>
+          &lt;{{invite.email}}&gt;
+          ({{ invite.status }})
+        </div>
+      </td>
+    </tr>
+    <tr class="full">
+      <th translate>descrição</th>
+      <td>{{ proposal.full }}</td>
+    </tr>
+    <tr class="language">
+      <th translate>língua</th>
+      <td>{{ proposal.language }}</td>
+    </tr>
+    <tr class="level">
+      <th translate>nível</th>
+      <td>{{ proposal.level }}</td>
+    </tr>
+    <tr class="created">
+      <th translate>criado em...</th>
+      <td>{{ proposal.created }}</td>
+    </tr>
+  </table>
+</fieldset>

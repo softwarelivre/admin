@@ -61,6 +61,48 @@ main.proposals {
     margin-left: 1rem;
   }
 
+  .detail {
+    header {
+      .id {
+        float: left;
+        font-size: 300%;
+        background: gray;
+        color: white;
+        margin-right: 10px;
+        padding: 10px;
+      }
+      .title {
+        font-size: 300%;
+      }
+      .track {
+        .area {
+          font-size: 120%;
+        }
+        .zone {
+          font-size: 80%;
+          color: gray;
+        }
+      }
+    }
+    .data {
+      clear: left;
+      border-collapse: collapse;
+      tr {
+        th {
+          width: 5rem;
+          vertical-align: top;
+        }
+        th, td {
+          padding: 10px;
+          border-bottom: 1px dotted lightgray;
+        }
+
+        .full { white-space: pre-wrap; }
+      }
+
+    }
+  }
+
 }
 
 table.proposals {

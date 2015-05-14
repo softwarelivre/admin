@@ -206,3 +206,19 @@ fieldset {
     font-size:small;
   }
 }
+
+.back {
+  position: absolute;
+  left: -5em;
+
+  button {
+    border: 0;
+    padding: 1em;
+    &:before {
+      content: '◀';
+      font-size: 70%;
+      padding-right: 1em;
+    }
+  }
+}
+
