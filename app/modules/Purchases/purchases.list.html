@@ -19,15 +19,15 @@
   <tr class="master" ng-repeat-start="purchase in purchases">
     <td class="id">{{ purchase.id }}</td>
     <td class="status">{{ purchase.status }}</td>
-    <td class="category">{{ purchase.product.category }}</td>
-    <td class="price">{{ purchase.product.price }}</td>
+    <td class="category">{{ purchase.product.category || purchase.kind }}</td>
+    <td class="price">{{ purchase.product.price || 'isento' }}</td>
     <td class="buyer">{{ purchase.buyer.name }}</td>
     <td class="created">{{ purchase.created }}</td>
     <td class="payments">
       <span translate translate-n="purchase.links.payments.count" translate-plural="{{$count}} tentativas">
         1 tentativa
       </span>
-      <a ng-click="showPaymentsOf(purchase)" translate>(detalhes)</a>
+      <a ng-show="purchase.links.payments.count" ng-click="showPaymentsOf(purchase)" translate>(detalhes)</a>
     </td>
   </tr>
   <tr class="details" ng-repeat-end ng-show="paymentsOf[purchase.id]">
