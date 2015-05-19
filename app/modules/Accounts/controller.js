@@ -45,7 +45,7 @@
       $scope.enforceAuth();
 
       $scope.accounts = [];
-      $scope.query = { needle: 'Felipe' };
+      $scope.query = { needle: '' };
       $scope.doSearch = function() {
         Accounts.lookup($scope.query).then(function(data) {
           $scope.accounts = data;
