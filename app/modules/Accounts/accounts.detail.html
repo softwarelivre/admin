@@ -17,13 +17,18 @@
   </header>
 
   <table class="personal">
+	<col class="key"/>
+	<col class="value"/>
+	<col class="large"/>
     <tr>
       <th translate>criado em...</th>
       <td>{{ account.created }}</td>
+	  <th translate>mini-curriculo</td>
     </tr>
     <tr>
       <th translate>documento</th>
       <td>{{ account.document }}</td>
+      <td class="resume pre-wrap" rowspan="4">{{ account.resume }}</td>
     </tr>
     <tr>
       <th translate>cidade / país</th>

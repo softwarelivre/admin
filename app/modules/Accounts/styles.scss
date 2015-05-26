@@ -69,6 +69,11 @@ main.accounts {
     }
     table.personal {
       clear: both;
+
+	  col.key { width: 10rem; }
+	  col.value { width: 20rem; }
+	  col.large { width: 30rem; }
+
     }
   }
 
