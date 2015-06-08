@@ -1,0 +1,46 @@
+table.tournaments, table.rounds {
+  border-collapse: collapse;
+
+  col.id        { width: 2rem; }
+  col.selection { width: 9rem; }
+  col.status    { width: 9rem; }
+  col.round     { width: 9rem; }
+
+  col.judged     { width: 9rem; }
+  col.inprogress { width: 9rem; }
+  col.pending    { width: 9rem; }
+
+  thead {
+    th {
+      font-size: large;
+      background: lightgray;
+      color: black;
+      text-align: left;
+    }
+  }
+
+  tbody {
+    tr:nth-child(odd) {
+      background: #eee;
+    }
+    td {
+      border-bottom: 1px dotted gray;
+      border-right: 1px dotted lightgray;
+      padding: 3px;
+
+      &.id    { font-size: small; }
+      &.authors {
+        .info { color: orange; }
+        .coauthors {
+          font-size: small;
+          color: gray;
+
+          a::after { content: ','; }
+          a:last-child::after { content: ''; }
+        }
+      }
+      .zone { font-size: small; color: gray; }
+    }
+  }
+
+}

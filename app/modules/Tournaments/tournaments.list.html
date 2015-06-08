@@ -1,0 +1,24 @@
+<table class="tournaments" ng-hide="tournaments.length == 0">
+  <col class="id" />
+  <col class="selection" />
+  <col class="status" />
+  <col class="round" />
+  <thead>
+    <tr>
+      <th translate>id</th>
+      <th translate>seleção</th>
+      <th translate>status</th>
+      <th translate>rodada</th>
+    </tr>
+  </thead>
+  <tr class="master" ng-repeat="tournament in tournaments | orderBy:'id'">
+    <td class="id">{{ tournament.id }}</td>
+    <td class="selection">
+      <a ui-sref="tournaments.detail({id: tournament.id})">
+        {{ tournament.selection }}
+      </a>
+    </td>
+    <td class="status">{{ tournament.status }}</td>
+    <td class="round">{{ tournament.round }}</td>
+  </tr>
+</table>

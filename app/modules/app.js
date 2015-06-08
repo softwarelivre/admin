@@ -21,6 +21,7 @@
       'segue.admin.authenticate',
       'segue.admin.accounts',
       'segue.admin.proposals',
+      'segue.admin.tournaments',
     ])
     .controller('AdminController', function($scope, $state, Auth, Config) {
       $scope.$on('$stateChangeSuccess', function(event, newState) {

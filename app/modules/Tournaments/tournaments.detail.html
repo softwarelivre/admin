@@ -1,0 +1,29 @@
+<dl>
+  <dt translate>seleção</dt>
+  <dd>{{ tournament.selection }}</dd>
+  <dt translate>situação</dt>
+  <dd>{{ tournament.status }}</dd>
+  <dt translate>round atual</dt>
+  <dd>{{ tournament.round }}</dd>
+</dl>
+
+<table class="rounds" ng-hide="tournament.rounds.length == 0">
+  <col class="round" />
+  <col class="judged" />
+  <col class="inprogress" />
+  <col class="pending" />
+  <thead>
+    <tr>
+      <th translate>round</th>
+      <th translate>julgado</th>
+      <th translate>em julgamento</th>
+      <th translate>pendente</th>
+    </tr>
+  </thead>
+  <tr class="master" ng-repeat="(idx,round) in tournament.rounds | orderBy:'id'">
+    <td class="id">{{ idx }}</td>
+    <td class="judged">{{ round.judged }}</td>
+    <td class="inprogress">{{ round.in_progress }}</td>
+    <td class="pending">{{ round.pending }}</td>
+  </tr>
+</table>
