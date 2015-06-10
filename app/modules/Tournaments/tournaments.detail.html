@@ -23,7 +23,7 @@
   <tr class="master" ng-repeat="(idx,round) in tournament.rounds | orderBy:'id'">
     <td class="id">{{ idx }}</td>
     <td class="judged">{{ round.judged }}</td>
-    <td class="inprogress">{{ round.in_progress }}</td>
+    <td class="inprogress">{{ round.in_progress }} <span ng-hide="round.in_progress > 0">(stale={{round.stale}})</span></td>
     <td class="pending">{{ round.pending }}</td>
   </tr>
 </table>
