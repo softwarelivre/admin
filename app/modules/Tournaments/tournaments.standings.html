@@ -16,7 +16,7 @@
     <th translate>autor</th>
   </tr>
   <tr ng-repeat="player in standings">
-    <td class="position">{{ $index + 1 }}</td>
+    <td class="position">{{ player.position }}</td>
     <td class="pointing">{{ player.points }}</td>
     <td class="pointing">{{ player.victories }}</td>
     <td class="pointing">{{ player.ties }}</td>
