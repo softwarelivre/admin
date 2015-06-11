@@ -1,0 +1,32 @@
+<table class="standings">
+  <col class="pos"/>
+  <col class="points"/>
+  <col class="victories"/>
+  <col class="ties"/>
+  <col class="defeats"/>
+  <col class="proposal"/>
+  <col class="author"/>
+  <tr>
+    <th translate>pos</th>
+    <th translate>P</th>
+    <th translate>V</th>
+    <th translate>E</th>
+    <th translate>D</th>
+    <th translate>proposta</th>
+    <th translate>autor</th>
+  </tr>
+  <tr ng-repeat="player in standings">
+    <td class="position">{{ $index + 1 }}</td>
+    <td class="pointing">{{ player.points }}</td>
+    <td class="pointing">{{ player.victories }}</td>
+    <td class="pointing">{{ player.ties }}</td>
+    <td class="pointing">{{ player.defeats }}</td>
+    <td class="proposal">
+      <span class="id">{{player.id}}</span>
+      <span class="title">{{ player.title }}</span><br/>
+      <span class="zone">{{ player.zone }}</span>
+      <span class="area">{{ player.area }}</span>
+    </td>
+    <td>{{ player.author }}</td>
+  </tr>
+</table>

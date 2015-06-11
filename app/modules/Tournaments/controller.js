@@ -33,16 +33,29 @@
           resolve: {
             tournament: function(Tournaments, $stateParams) { return Tournaments.get($stateParams.id); },
           }
+        })
+        .state('tournaments.standings', {
+          url: '/standings/:id',
+          views: {
+            "main@": { controller: 'TournamentStandingsController', templateUrl: 'modules/Tournaments/tournaments.standings.html' }
+          },
+          resolve: {
+            tournament: function(Tournaments, $stateParams) { return Tournaments.get($stateParams.id); },
+            standings:  function(Tournaments, $stateParams) { return Tournaments.standings($stateParams.id); },
+          }
         });
     });
 
   angular
     .module("segue.admin.tournaments.controller", [ ])
     .controller("TournamentListController", function($scope, $state, tournaments) {
-      console.log(123);
       $scope.tournaments = tournaments;
     })
     .controller("TournamentShowController", function($scope, $state, tournament) {
       $scope.tournament = tournament;
+    })
+    .controller("TournamentStandingsController", function($scope, $state, tournament, standings) {
+      $scope.tournament = tournament;
+      $scope.standings = standings;
     });
 })();

@@ -1,4 +1,4 @@
-table.tournaments, table.rounds {
+table.tournaments, table.rounds, table.standings {
   border-collapse: collapse;
 
   col.id        { width: 2rem; }
@@ -9,6 +9,12 @@ table.tournaments, table.rounds {
   col.judged     { width: 9rem; }
   col.inprogress { width: 9rem; }
   col.pending    { width: 9rem; }
+
+  col.pos       { width: 3rem; }
+  col.points    { width: 2rem; }
+  col.victories { width: 2rem; }
+  col.ties      { width: 2rem; }
+  col.defeats   { width: 2rem; }
 
   thead {
     th {
@@ -29,16 +35,13 @@ table.tournaments, table.rounds {
       padding: 3px;
 
       &.id    { font-size: small; }
-      &.authors {
-        .info { color: orange; }
-        .coauthors {
-          font-size: small;
-          color: gray;
+    }
+  }
 
-          a::after { content: ','; }
-          a:last-child::after { content: ''; }
-        }
-      }
+  &.standings tbody {
+    .position, .pointing { text-align: center; }
+    .proposal {
+      .id { background: yellow; padding: 1px 5px; }
       .zone { font-size: small; color: gray; }
     }
   }

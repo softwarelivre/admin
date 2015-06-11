@@ -9,16 +9,17 @@
       <th translate>seleção</th>
       <th translate>status</th>
       <th translate>rodada</th>
+      <th translate>informações</th>
     </tr>
   </thead>
   <tr class="master" ng-repeat="tournament in tournaments | orderBy:'id'">
     <td class="id">{{ tournament.id }}</td>
-    <td class="selection">
-      <a ui-sref="tournaments.detail({id: tournament.id})">
-        {{ tournament.selection }}
-      </a>
-    </td>
+    <td class="selection">{{ tournament.selection }}</td>
     <td class="status">{{ tournament.status }}</td>
     <td class="round">{{ tournament.round }}</td>
+    <td class="info">
+      <a ui-sref="tournaments.detail({id: tournament.id})">rodadas</a>
+      <a ui-sref="tournaments.standings({id: tournament.id})">classificação</a>
+    </td>
   </tr>
 </table>

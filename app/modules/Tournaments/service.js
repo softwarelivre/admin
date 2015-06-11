@@ -18,6 +18,10 @@
         return tournaments.one(id).get();
       };
 
+      self.standings = function(id) {
+        return tournaments.one(id).one('standings').getList();
+      };
+
       return self;
     });
 
