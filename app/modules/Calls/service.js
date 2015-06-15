@@ -11,6 +11,7 @@
       var calls = Restangular.service('admin/call');
 
       self.get = function(tournamentId, trackId) {
+        if (!trackId) { return []; }
         return calls.one(tournamentId).one(trackId).getList();
       };
 

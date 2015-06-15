@@ -1,5 +1,5 @@
-<h3>
-  Trilha: {{ track.name_pt }}
+<h3 ng-hide="ranking.length == 0">
+	Trilha: {{ track.name_pt }} ({{ ranking.length }} propostas)
 </h3>
 
 <table class="calls" ng-hide="ranking.length == 0">
@@ -13,8 +13,8 @@
     <tr>
       <th translate>id</th>
       <th translate>tags</th>
-      <th translate>global</th>
-      <th translate>trilha</th>
+      <th translate>ordem global</th>
+      <th translate>ordem trilha</th>
       <th translate>título</th>
       <th translate>autores</th>
     </tr>
@@ -25,7 +25,10 @@
       <span class="tag {{tag}}" ng-repeat="tag in ranked.tags">{{ tag }}</span>
     </td>
     <td class="global">{{ ranked.ranking }}</td>
-    <td class="track">{{ $index }}</td>
+    <td class="track">
+		<span ng-show="ranked.ranking == 0" translate>pré-selecionado</span>
+		<span ng-hide="ranked.ranking == 0">{{ $index+1 }}º
+	</td>
     <td class="title">
       <a ui-sref="proposals.detail({id: ranked.id})" target="blank_">
         {{ ranked.title }}
