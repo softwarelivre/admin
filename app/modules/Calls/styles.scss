@@ -1,0 +1,82 @@
+main.calls {
+
+  .content.by-group {
+    border: 1px solid black;
+    position: absolute;
+    margin-left: 1rem;
+  }
+  .filter.by-group {
+    position: fixed;
+    top: 35px;
+    left: 0px;
+    width: 10rem;
+    z-index: 10;
+    border: 1px solid gray;
+
+    ul.zones {
+      list-style: none;
+      margin: 0px;
+      padding: 0px;
+      li {
+        &.header {
+          background: gray;
+          color: white;
+          font-size: large;
+          text-align: center;
+        }
+      }
+
+      ul.tracks {
+        list-style: none;
+        margin: 0px;
+        padding: 0 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &>li {
+          font-size: small;
+          color: gray;
+        }
+      }
+    }
+  }
+
+  table.calls {
+    border-collapse: collapse;
+
+    col.id     { width: 2rem; }
+    col.tags   { width: 4rem; }
+    col.global { width: 4rem; }
+    col.track  { width: 4rem; }
+    col.title  { width: 20rem; }
+    col.author { width: 20rem; }
+
+    .tags {
+      .tag.player { display: none; }
+    }
+
+    thead {
+      th {
+        font-size: large;
+        background: lightgray;
+        color: black;
+        text-align: left;
+      }
+    }
+
+    tbody {
+      tr:nth-child(odd) {
+        background: #eee;
+      }
+      td {
+        border-bottom: 1px dotted gray;
+        border-right: 1px dotted lightgray;
+        padding: 3px;
+
+        &.id    { font-size: small; }
+      }
+    }
+
+  }
+}

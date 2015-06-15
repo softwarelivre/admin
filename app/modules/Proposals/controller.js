@@ -16,7 +16,7 @@
             main:   { controller: 'ProposalController', templateUrl: 'modules/Proposals/proposals.html' }
           },
           resolve: {
-            tracks: function(Tracks) { return Tracks.getList(); }
+            tracks: function(Tracks) { return Tracks.tracksByZone(); }
           }
         })
         .state('proposals.search', {
@@ -70,14 +70,8 @@
     })
     .controller("ProposalListController", function($scope, $state, tracks, proposals, focusOn) {
       $scope.filterType = 'group';
+      $scope.tracksByZone = tracks;
 
-      function addZoneAndTrack(entry) {
-        var splitted = entry.name_pt.split(' - ');
-        entry.zone = splitted[0];
-        entry.area = splitted[1];
-        return entry;
-      }
-      $scope.tracksByZone = _(tracks).map(addZoneAndTrack).groupBy('zone').value();
       $scope.proposals = proposals;
     })
     .controller("ProposalShowController", function($scope, $state, proposal, invites, focusOn) {

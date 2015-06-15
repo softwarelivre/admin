@@ -9,6 +9,20 @@
     .factory('Tracks', function(Restangular) {
       var service = Restangular.service('proposals/tracks');
       var extensions = {};
+
+      extensions.tracksByZone = function() {
+        return service.getList().then(function(tracks) {
+          return _(tracks).map(addZoneAndTrack).groupBy('zone').value();
+        });
+      };
+
+      function addZoneAndTrack(entry) {
+        var splitted = entry.name_pt.split(' - ');
+        entry.zone = splitted[0];
+        entry.area = splitted[1];
+        return entry;
+      }
+
       return _.extend(service, extensions);
     })
     .service("Proposals", function(Restangular) {
@@ -28,7 +42,7 @@
       self.getByTrack = function(trackId) {
         if (!trackId) { return []; }
         return proposals.getList({track_id: trackId });
-      }
+      };
 
       return self;
     });

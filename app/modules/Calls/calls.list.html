@@ -1,0 +1,38 @@
+<h3>
+  Trilha: {{ track.name_pt }}
+</h3>
+
+<table class="calls" ng-hide="ranking.length == 0">
+  <col class="id" />
+  <col class="tags" />
+  <col class="global" />
+  <col class="track" />
+  <col class="title" />
+  <col class="authors" />
+  <thead>
+    <tr>
+      <th translate>id</th>
+      <th translate>tags</th>
+      <th translate>global</th>
+      <th translate>trilha</th>
+      <th translate>título</th>
+      <th translate>autores</th>
+    </tr>
+  </thead>
+  <tr class="master" ng-repeat="ranked in ranking">
+    <td class="id">{{ ranked.id }}</td>
+    <td class="tags">
+      <span class="tag {{tag}}" ng-repeat="tag in ranked.tags">{{ tag }}</span>
+    </td>
+    <td class="global">{{ ranked.ranking }}</td>
+    <td class="track">{{ $index }}</td>
+    <td class="title">
+      <a ui-sref="proposals.detail({id: proposal.id})" target="blank_">
+        {{ ranked.title }}
+      </a>
+    </td>
+    <td class="authors">
+      {{ ranked.author }}
+    </td>
+  </tr>
+</table>
