@@ -44,6 +44,10 @@
         return proposals.getList({track_id: trackId });
       };
 
+      self.changeTrackOfProposal = function(proposalId, newTrackId) {
+        return proposals.one(proposalId).post('set-track', { track_id: newTrackId });
+      };
+
       return self;
     });
 

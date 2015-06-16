@@ -16,7 +16,8 @@
             main:   { controller: 'ProposalController', templateUrl: 'modules/Proposals/proposals.html' }
           },
           resolve: {
-            tracks: function(Tracks) { return Tracks.tracksByZone(); }
+            tracks:       function(Tracks) { return Tracks.getList(); },
+            tracksByZone: function(Tracks) { return Tracks.tracksByZone(); }
           }
         })
         .state('proposals.search', {
@@ -68,14 +69,20 @@
       $scope.filterType = 'search';
       focusOn('query.needle');
     })
-    .controller("ProposalListController", function($scope, $state, tracks, proposals, focusOn) {
+    .controller("ProposalListController", function($scope, $state, tracksByZone, proposals, focusOn) {
       $scope.filterType = 'group';
-      $scope.tracksByZone = tracks;
+      $scope.tracksByZone = tracksbyZone;
 
       $scope.proposals = proposals;
     })
-    .controller("ProposalShowController", function($scope, $state, proposal, invites, focusOn) {
+    .controller("ProposalShowController", function($scope, $state, proposal, invites, tracks, Proposals, focusOn) {
       $scope.proposal = proposal;
       $scope.invites = invites;
+      $scope.tracks = tracks;
+
+      $scope.changeTrackOfProposal = function(newTrackId) {
+        return Proposals.changeTrackOfProposal(proposal.id, newTrackId)
+                        .then($state.reload);
+      };
     });
 })();

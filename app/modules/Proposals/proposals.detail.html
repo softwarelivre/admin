@@ -45,5 +45,14 @@
       <th translate>criado em...</th>
       <td>{{ proposal.created }}</td>
     </tr>
+    <tr class="change_track">
+		<th translate>trocar para trilha...</th>
+		<td>
+			<select ng-model="newTrackId" ng-options="t.id as t.name_pt for t in tracks">
+				<option class="empty" value="" translate>escolha nova trilha</option>
+			</select>
+			<button ng-click="changeTrackOfProposal(newTrackId)" ng-show="newTrackId" translate>executar troca!</button>
+		</td>
+    </tr>
   </table>
 </fieldset>
