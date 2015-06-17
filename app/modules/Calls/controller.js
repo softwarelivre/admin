@@ -45,6 +45,11 @@
       $scope.tournament = tournament;
       $scope.tracksByZone = tracks;
       $scope.track = track;
+      $scope.marked = _.filter($scope.ranking, isMarked).length;
+
+      function isMarked(ranked) {
+        return _(ranked.tags).contains('marked');
+      }
 
       function reload() {
         $state.reload();
