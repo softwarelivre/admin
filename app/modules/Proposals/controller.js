@@ -71,7 +71,7 @@
     })
     .controller("ProposalListController", function($scope, $state, tracksByZone, proposals, focusOn) {
       $scope.filterType = 'group';
-      $scope.tracksByZone = tracksbyZone;
+      $scope.tracksByZone = tracksByZone;
 
       $scope.proposals = proposals;
     })
