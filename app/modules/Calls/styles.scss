@@ -45,16 +45,29 @@ main.calls {
   table.calls {
     border-collapse: collapse;
 
-    col.id     { width: 2rem; }
-    col.tags   { width: 4rem; }
-    col.global { width: 4rem; }
-    col.track  { width: 4rem; }
-    col.title  { width: 20rem; }
-    col.author { width: 20rem; }
+    col.id      { width: 2rem; }
+    col.tags    { width: 8rem; }
+    col.global  { width: 4rem; }
+    col.track   { width: 4rem; }
+    col.title   { width: 20rem; }
+    col.author  { width: 20rem; }
+    col.actions { width: 20rem; }
 
-    .tags {
-      .tag.player { display: none; }
+    .tags span {
+      display: inline-block;
+      padding: 0.1em 0.3em;
+      border-radius: 5px;
+      font-size: small;
+      background: gray;
+      color: white;
+
+      &.player { display: none; }
+      &.rejected  { background: lightpink; color: black; }
+      &.marked    { background: yellow;    color: black; }
+      &.confirmed { background: green;     color: white; }
+      &.approved  { background: blue;      color: white; }
     }
+
 
     thead {
       th {

@@ -40,10 +40,21 @@
 
   angular
     .module("segue.admin.calls.controller", [ ])
-    .controller("CallController", function($scope, $state, ranking, tournament, track, tracks) {
+    .controller("CallController", function($scope, $state, Proposals, ranking, tournament, track, tracks) {
       $scope.ranking = ranking;
       $scope.tournament = tournament;
       $scope.tracksByZone = tracks;
       $scope.track = track;
+
+      function reload() {
+        $state.reload();
+      }
+
+      $scope.tagAs = function(proposalId, tagName) {
+        Proposals.addTagToProposal(proposalId, tagName).then(reload);
+      };
+      $scope.untag = function(proposalId, tagName) {
+        Proposals.removeTagFromProposal(proposalId, tagName).then(reload);
+      };
     });
 })();

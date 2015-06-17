@@ -26,9 +26,9 @@
     </td>
     <td class="global">{{ ranked.ranking }}</td>
     <td class="track">
-		<span ng-show="ranked.ranking == 0" translate>pré-selecionado</span>
-		<span ng-hide="ranked.ranking == 0">{{ $index+1 }}º
-	</td>
+      <span ng-show="ranked.ranking == 0" translate>pré-selecionado</span>
+      <span ng-hide="ranked.ranking == 0">{{ $index+1 }}º
+    </td>
     <td class="title">
       <a ui-sref="proposals.detail({id: ranked.id})" target="blank_">
         {{ ranked.title }}
@@ -36,6 +36,10 @@
     </td>
     <td class="authors">
       {{ ranked.author }}
+    </td>
+    <td class="actions">
+      <button ng-click="tagAs(ranked.id, 'marked')" translate>marcar classificado</button>
+      <button ng-click="untag(ranked.id, 'marked')" translate>remover marcação</button>
     </td>
   </tr>
 </table>

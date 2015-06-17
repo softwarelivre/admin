@@ -8,7 +8,11 @@
       <span class="area">{{ proposal.track.track }}</span>
       <span class="zone">{{ proposal.track.zone }}</span>
     </div>
-    <div class="badges"></div>
+    <div class="badges">
+      <span ng-repeat="tag in proposal.tags" class="{{tag}}">
+        {{ tag }}
+      </span>
+    </div>
   </header>
 
   <table class="data">

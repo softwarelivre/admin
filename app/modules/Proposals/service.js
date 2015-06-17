@@ -47,6 +47,12 @@
       self.changeTrackOfProposal = function(proposalId, newTrackId) {
         return proposals.one(proposalId).post('set-track', { track_id: newTrackId });
       };
+      self.addTagToProposal = function(proposalId, tagName) {
+        return proposals.one(proposalId).one('tags').post(tagName, {});
+      };
+      self.removeTagFromProposal = function(proposalId, tagName) {
+        return proposals.one(proposalId).one('tags').one(tagName).remove();
+      };
 
       return self;
     });

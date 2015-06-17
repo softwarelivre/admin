@@ -62,6 +62,22 @@ main.proposals {
     margin-left: 1rem;
   }
 
+
+  .badges span {
+    display: inline-block;
+    padding: 0.1em 0.3em;
+    border-radius: 5px;
+    font-size: small;
+    background: gray;
+    color: white;
+
+    &.rejected  { background: lightpink; color: black; }
+    &.marked    { background: yellow;    color: black; }
+    &.confirmed { background: green;     color: black; }
+    &.approved  { background: blue;      color: white; }
+  }
+
+
   .detail {
     header {
       .id {
