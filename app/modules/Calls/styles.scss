@@ -47,13 +47,14 @@ main.calls {
 
     col.id      { width: 2rem; }
     col.tags    { width: 8rem; }
+    col.status  { width: 5rem; }
     col.global  { width: 4rem; }
     col.track   { width: 4rem; }
     col.title   { width: 20rem; }
-    col.author  { width: 20rem; }
-    col.actions { width: 20rem; }
+    col.authors { width: 15rem; }
+    col.actions { width: 15rem; }
 
-    .tags span {
+    .tags span, .status span {
       display: inline-block;
       padding: 0.1em 0.3em;
       border-radius: 5px;
@@ -62,8 +63,11 @@ main.calls {
       color: white;
 
       &.player { display: none; }
+      &.proposal { display: none; }
       &.rejected  { background: lightpink; color: black; }
+      &.declined  { background: lightpink; color: black; }
       &.marked    { background: yellow;    color: black; }
+      &.pending   { background: yellow;    color: black; }
       &.confirmed { background: green;     color: white; }
       &.approved  { background: blue;      color: white; }
     }

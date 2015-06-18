@@ -77,6 +77,16 @@ main.proposals {
     &.approved  { background: blue;      color: white; }
   }
 
+  .status {
+	  float: right;
+	  font-size: xx-large;
+	  padding: 1rem;
+	  &.confirmed { background-color: green; }
+	  &.pending   { background-color: yellow; }
+	  &.declined  { background-color: lightpink; }
+	  &.proposal  { display: none; }
+  }
+
 
   .detail {
     header {

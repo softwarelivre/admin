@@ -20,6 +20,7 @@
     <td class="id">{{ proposal.id }}</td>
     <td class="status badges">
       <span class="{{tag}}" ng-repeat="tag in proposal.tags">{{ tag }}</span>
+	  <span class="status {{proposal.status}}" ng-hide="proposal.status == 'proposal'">{{ status }}</span>
     </td>
     <td class="track">
       <div class="track">{{ proposal.track.track }}</div>

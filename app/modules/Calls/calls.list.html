@@ -6,24 +6,31 @@
 <table class="calls" ng-hide="ranking.length == 0">
   <col class="id" />
   <col class="tags" />
+  <col class="status" />
   <col class="global" />
   <col class="track" />
   <col class="title" />
   <col class="authors" />
+  <col class="actions" />
   <thead>
     <tr>
       <th translate>id</th>
       <th translate>tags</th>
+      <th translate>status</th>
       <th translate>ordem global</th>
       <th translate>ordem trilha</th>
       <th translate>título</th>
       <th translate>autores</th>
+      <th translate>ações</th>
     </tr>
   </thead>
   <tr class="master" ng-repeat="ranked in ranking">
     <td class="id">{{ ranked.id }}</td>
     <td class="tags">
       <span class="tag {{tag}}" ng-repeat="tag in ranked.tags">{{ tag }}</span>
+    </td>
+    <td class="status">
+	   <span class="status {{ranked.status}}">{{ ranked.status }}</span>
     </td>
     <td class="global">{{ ranked.ranking }}</td>
     <td class="track">
