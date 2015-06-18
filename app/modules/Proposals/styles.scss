@@ -63,7 +63,7 @@ main.proposals {
   }
 
 
-  .badges span {
+  .tags span, .status span {
     display: inline-block;
     padding: 0.1em 0.3em;
     border-radius: 5px;
@@ -72,19 +72,12 @@ main.proposals {
     color: white;
 
     &.rejected  { background: lightpink; color: black; }
+    &.declined  { background: lightpink; color: black; }
     &.marked    { background: yellow;    color: black; }
+    &.pending   { background: yellow;    color: black; }
     &.confirmed { background: green;     color: black; }
     &.approved  { background: blue;      color: white; }
-  }
-
-  .status {
-	  float: right;
-	  font-size: xx-large;
-	  padding: 1rem;
-	  &.confirmed { background-color: green; }
-	  &.pending   { background-color: yellow; }
-	  &.declined  { background-color: lightpink; }
-	  &.proposal  { display: none; }
+    &.proposal  { display: none; }
   }
 
 
@@ -136,6 +129,7 @@ table.proposals {
   border-collapse: collapse;
 
   col.id      { width: 2rem; }
+  col.tags    { width: 8rem; }
   col.status  { width: 4rem; }
   col.track   { width: 10rem; }
   col.title   { width: 20rem; }

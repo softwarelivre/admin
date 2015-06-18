@@ -3,6 +3,7 @@
 </h3>
 <table class="proposals" ng-hide="proposals.length == 0">
   <col class="id" />
+  <col class="tags" />
   <col class="status" />
   <col class="track" />
   <col class="title" />
@@ -10,6 +11,7 @@
   <thead>
     <tr>
       <th translate>id</th>
+      <th translate>tags</th>
       <th translate>situação</th>
       <th translate>trilha</th>
       <th translate>título</th>
@@ -18,9 +20,11 @@
   </thead>
   <tr class="master" ng-repeat="proposal in proposals | orderBy:'id'">
     <td class="id">{{ proposal.id }}</td>
-    <td class="status badges">
+    <td class="tags">
       <span class="{{tag}}" ng-repeat="tag in proposal.tags">{{ tag }}</span>
-	  <span class="status {{proposal.status}}" ng-hide="proposal.status == 'proposal'">{{ status }}</span>
+	</td>
+	<td class="status">
+	  <span class="status {{proposal.status}}">{{ proposal.status }}</span>
     </td>
     <td class="track">
       <div class="track">{{ proposal.track.track }}</div>
