@@ -4,6 +4,7 @@
   angular
     .module("segue.admin.authenticate",[
       "segue.admin",
+      "segue.admin.authenticate.directive",
       "segue.admin.authenticate.controller",
       "segue.admin.authenticate.service",
     ])

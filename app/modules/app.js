@@ -44,6 +44,7 @@
         if (!Auth.credentials()) { $state.go('authenticate'); }
       };
       $scope.$on('auth:changed', $scope.enforceAuth);
+
       $scope.CONFIG = Config;
 
       $scope.goBack = function() {
