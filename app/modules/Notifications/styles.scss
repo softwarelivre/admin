@@ -22,7 +22,7 @@ main.notifications {
     col.title    { width: 20rem; }
     col.authors  { width: 15rem; }
 
-    .status span {
+    .status span, .deadline span {
       display: inline-block;
       padding: 0.1em 0.3em;
       border-radius: 5px;
@@ -33,6 +33,7 @@ main.notifications {
       &.declined  { background: lightpink; color: black; }
       &.pending   { background: yellow;    color: black; }
       &.confirmed { background: green;     color: white; }
+      &.expired   { background: orange;    color: black; }
     }
 
     .sent, .deadline {

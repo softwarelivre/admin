@@ -39,7 +39,10 @@
       <span class="status {{notification.status}}">{{ notification.status }}</span>
     </td>
     <td class="sent">{{ notification.sent }}</td>
-    <td class="deadline">{{ notification.deadline }}</td>
+    <td class="deadline">
+      {{ notification.deadline }}
+      <span class="expired" ng-show="notification.is_expired">expirado</span>
+    </td>
     <td class="title">
       <a ui-sref="proposals.detail({id: notification.proposal_id})" target="blank_">
         {{ notification.proposal }}
