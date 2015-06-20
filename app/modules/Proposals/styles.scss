@@ -63,7 +63,7 @@ main.proposals {
   }
 
 
-  .tags span, .status span {
+  .tags span, .status {
     display: inline-block;
     padding: 0.1em 0.3em;
     border-radius: 5px;
@@ -92,7 +92,7 @@ main.proposals {
         padding: 10px;
       }
       .title {
-        font-size: 300%;
+        font-size: 200%;
       }
       .track {
         .area {
@@ -102,6 +102,14 @@ main.proposals {
           font-size: 80%;
           color: gray;
         }
+      }
+      .tags .tag {
+        padding: 0.5em 1em;
+      }
+      .status {
+        float: right;
+        font-size: 200%;
+        padding: 1rem;
       }
     }
     .data {
@@ -119,7 +127,6 @@ main.proposals {
 
         .full { white-space: pre-wrap; }
       }
-
     }
   }
 

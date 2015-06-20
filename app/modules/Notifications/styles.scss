@@ -1,4 +1,17 @@
 main.notifications {
+  .summary {
+    border: 1px solid blue;
+    background: lightblue;
+    padding: 1em;
+    width: 50%;
+  }
+  .instructions {
+    border: 1px solid red;
+    background: lightpink;
+    padding: 1em;
+    width: 50%;
+  }
+
   table.notifications {
     border-collapse: collapse;
 

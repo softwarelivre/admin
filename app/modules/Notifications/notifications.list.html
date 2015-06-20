@@ -8,9 +8,12 @@
 
 </header>
 
-<div>
+<div class="summary" ng-show="statusName">
   mostrando <b>{{ notifications.length }}</b> notificações
   do tipo <b>{{ kind }}</b> com status <b>{{ statusName }}</b>
+</div>
+<div class="instructions" ng-hide="statusName">
+  selecione um status acima
 </div>
 
 <table class="notifications" ng-hide="notifications.length == 0">
