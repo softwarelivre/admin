@@ -1,0 +1,52 @@
+main.notifications {
+  table.notifications {
+    border-collapse: collapse;
+
+    col.id       { width: 2rem; }
+    col.status   { width: 4rem; }
+    col.sent     { width: 9rem; }
+    col.deadline { width: 9rem; }
+    col.title    { width: 20rem; }
+    col.authors  { width: 15rem; }
+
+    .status span {
+      display: inline-block;
+      padding: 0.1em 0.3em;
+      border-radius: 5px;
+      font-size: small;
+      background: gray;
+      color: white;
+
+      &.declined  { background: lightpink; color: black; }
+      &.pending   { background: yellow;    color: black; }
+      &.confirmed { background: green;     color: white; }
+    }
+
+    .sent, .deadline {
+      font-size: small;
+    }
+
+    thead {
+      th {
+        font-size: large;
+        background: lightgray;
+        color: black;
+        text-align: left;
+      }
+    }
+
+    tbody {
+      tr:nth-child(odd) {
+        background: #eee;
+      }
+      td {
+        border-bottom: 1px dotted gray;
+        border-right: 1px dotted lightgray;
+        padding: 3px;
+
+        &.id    { font-size: small; }
+      }
+    }
+
+  }
+}

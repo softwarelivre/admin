@@ -16,17 +16,5 @@
       };
 
       return self;
-    })
-    .service("Notifications", function(Restangular) {
-      var self = {};
-      var notifications = Restangular.service('admin/notifications');
-
-      self.listByStatus = function(statusName) {
-        if (!statusName) { return []; }
-        return notifications.getList(st);
-      };
-
-      return self;
     });
-
 })();

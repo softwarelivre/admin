@@ -23,6 +23,7 @@
       'segue.admin.proposals',
       'segue.admin.tournaments',
       'segue.admin.calls',
+      'segue.admin.notifications',
     ])
     .controller('AdminController', function($scope, $state, Auth, Config) {
       $scope.$on('$stateChangeSuccess', function(event, newState) {

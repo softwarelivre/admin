@@ -36,36 +36,11 @@
             track:   function(Tracks, $stateParams) { return Tracks.one($stateParams.trackId).get(); },
             ranking: function(Calls, $stateParams)  { return Calls.get($stateParams.tournamentId, $stateParams.trackId); }
           }
-        })
-        .state('notifications', {
-          abstract: true,
-          url: '^/notifications',
-          views: {
-            header: { templateUrl: 'modules/common/nav.html' },
-            main:   { templateUrl: 'modules/Calls/notifications.html', controller: 'NotificationController' }
-          },
-          resolve: {
-            notifications: function(Notifications) { return []; }
-          }
-        })
-        .state('notifications.list', {
-          url: '^/notifications/:statusName',
-          views: {
-            header: { templateUrl: 'modules/common/nav.html' },
-            main:   { templateUrl: 'modules/Calls/notifications.list.html', controller: 'NotificationController' }
-          },
-          resolve: {
-            notifications: function(Notifications) { return Notifications.listByStatus($stateParams.statusName); }
-          }
         });
-
     });
 
   angular
     .module("segue.admin.calls.controller", [ ])
-    .controller("NotificationController", function($scope, $state, notifications) {
-      $scope.notifications = notifications;
-    })
     .controller("CallController", function($scope, $state, Proposals, ranking, tournament, track, tracks) {
       $scope.ranking = ranking;
       $scope.tournament = tournament;

@@ -1,0 +1,49 @@
+<header>
+  mostrar:
+  [
+  <a ui-sref="notifications({ kind: 'call', statusName: 'confirmed'})">só confirmadas</a> |
+  <a ui-sref="notifications({ kind: 'call', statusName: 'pending'}  )">só pendentes</a>   |
+  <a ui-sref="notifications({ kind: 'call', statusName: 'declined'} )">só declinadas</a>
+  ]
+
+</header>
+
+<div>
+  mostrando <b>{{ notifications.length }}</b> notificações
+  do tipo <b>{{ kind }}</b> com status <b>{{ statusName }}</b>
+</div>
+
+<table class="notifications" ng-hide="notifications.length == 0">
+  <col class="id" />
+  <col class="status" />
+  <col class="sent" />
+  <col class="deadline" />
+  <col class="title" />
+  <col class="authors" />
+  <thead>
+    <tr>
+      <th translate>id</th>
+      <th translate>status</th>
+      <th translate>envio</th>
+      <th translate>prazo</th>
+      <th translate>título</th>
+      <th translate>autor</th>
+    </tr>
+  </thead>
+  <tr class="master" ng-repeat="notification in notifications | orderBy:'proposal'">
+    <td class="id">{{ notification.proposal_id }}</td>
+    <td class="status">
+      <span class="status {{notification.status}}">{{ notification.status }}</span>
+    </td>
+    <td class="sent">{{ notification.sent }}</td>
+    <td class="deadline">{{ notification.deadline }}</td>
+    <td class="title">
+      <a ui-sref="proposals.detail({id: notification.proposal_id})" target="blank_">
+        {{ notification.proposal }}
+      </a>
+    </td>
+    <td class="authors">
+      {{ notification.author }}
+    </td>
+  </tr>
+</table>
