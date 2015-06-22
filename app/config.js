@@ -11,7 +11,9 @@
         { abbr: 'es', name: 'espanhol' },
         { abbr: 'en', name: 'inglês' },
       ],
-      PROPOSAL_LEVELS: [ "beginner", "advanced" ]
+      PROPOSAL_LEVELS: [ "beginner", "advanced" ],
+      EVENT_DAYS: ["2015-07-08","2015-07-09","2015-07-10","2015-07-11"],
+      HOURS: [ 9,10,11,12,13,14,15,16,17,18,19 ]
     });
 
 })();

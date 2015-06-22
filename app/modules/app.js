@@ -24,10 +24,12 @@
       'segue.admin.tournaments',
       'segue.admin.calls',
       'segue.admin.notifications',
+      'segue.admin.schedule',
     ])
     .controller('AdminController', function($scope, $state, Auth, Config) {
       $scope.$on('$stateChangeSuccess', function(event, newState) {
         $scope.topState = newState.name.split('.')[0];
+        $scope.subState = $scope.topState + "-" + newState.name.split('.')[1];
         $scope.state    = newState;
       });
       $scope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {

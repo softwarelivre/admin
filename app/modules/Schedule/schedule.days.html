@@ -1,0 +1,6 @@
+<img class="logo" ng-click="home()" src="/images/logo-fisl-small.png"/>
+<div class="days">
+  <button ng-repeat="day in days"
+          ng-class="{ current: day == currentDay }"
+          ui-sref="schedule.grid({day: day})">{{ day }}</button>
+</div>

@@ -1,17 +1,17 @@
-body.splash {
+body.home {
   background: url(/images/top-bg.png);
 
 }
 
-header.splash {
+header.home {
   z-index: 0;
   img.logo { display: none; }
   h1, label { z-index: 200; }
 }
-main.splash {
-  background: transparent;
-  position: fixed;
-  left: 10%;
-  top: 0px;
-
+main.home {
+  button {
+    width: 20rem;
+    padding: 2em 0;
+    font-size: large;
+  }
 }

@@ -22,11 +22,11 @@
 
     <toast translate></toast>
 
-    <aside>
+    <aside class="{{ topState }} {{ subState }}">
       <logged-as></logged-as>
     </aside>
 
-    <main class="{{ topState }}" ui-view="main">
+    <main class="{{ topState }} {{ subState }}" ui-view="main">
     </main>
 
     <footer class="noprint">

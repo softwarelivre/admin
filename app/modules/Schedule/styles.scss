@@ -1,0 +1,96 @@
+aside.schedule.schedule-grid {
+  top: -15px;
+}
+
+header.schedule {
+  div.days {
+    text-align: center;
+    button {
+      font-size: small;
+      padding: 0.5rem;
+      border: 1px solid gray;
+      background: lightgray;
+
+      &.current {
+        background: white;
+        font-weight: bold;
+        border-bottom: 1px solid white;
+      }
+    }
+  }
+}
+main.schedule.schedule-days {
+  img { display: none; }
+  button {
+    width: 20rem;
+    padding: 2em 0;
+    font-size: large;
+  }
+}
+
+$marginTop: 1rem;
+$roomsWidth: 6rem;
+$hoursHeight: 3rem;
+$slotWidth: 10rem;
+$slotHeight: 10vh;
+
+main.schedule.schedule-grid {
+  margin: 0 0px;
+  left: 0;
+  max-width: initial;
+  width: 12*$slotWidth;
+
+  .hours-row {
+    top: -$marginTop;
+    margin-left: $roomsWidth + 1rem;
+    position: absolute;
+    text-align: center;
+    background: gray;
+    color: white;
+    font-weight: bold;
+    font-size: x-large;
+    .hour {
+      float: left;
+      width: $slotWidth;
+    }
+  }
+
+  .room-column {
+    padding-left: 0.5rem;
+    top: $marginTop+ $hoursHeight;
+    position: fixed;
+    border-right: 1px solid black;
+    background: white;
+    width: $roomsWidth;
+    z-index: 10;
+
+    header {
+      position: relative;
+      height: $slotHeight;
+      width: $roomsWidth;
+
+      .name {
+        font-size: xx-large;
+      }
+      .capacity {
+        font-size: small;
+        color: gray;
+      }
+
+    }
+  }
+  .slots {
+    position: absolute;
+    margin-left: $roomsWidth + 1rem;
+    top: $marginTop;
+
+    .slot-line {
+      .slot {
+        width: $slotWidth;
+        height: $slotHeight;
+        float: left;
+        outline: 1px dotted lightgray;
+      }
+    }
+  }
+}
