@@ -62,9 +62,10 @@
         return _.each($scope.rooms, reloadRoom);
       }
 
-      function resetZoom() {
+      $scope.resetZoom = function($event) {
+        $event.stopPropagation();
         $scope.zoomedId = null;
-      }
+      };
 
       $scope.zoomOnSlot = function(slot) {
         $scope.zoomedId = slot.id;
@@ -73,12 +74,12 @@
       $scope.blockSlot = function(slot) {
         Schedule.blockSlot(slot.id)
                 .then(_.partial(reloadRoom, slot.room))
-                .then(resetZoom);
+                .then($scope.resetZoom);
       };
       $scope.unblockSlot = function(slot) {
         Schedule.unblockSlot(slot.id)
                 .then(_.partial(reloadRoom, slot.room))
-                .then(resetZoom);
+                .then($scope.resetZoom);
       };
 
       reloadAllRooms();
