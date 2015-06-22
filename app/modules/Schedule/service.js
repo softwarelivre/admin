@@ -24,6 +24,12 @@
       self.slotsOfRoom = function(roomId, day) {
         return slots.getList({ day: day, room: roomId });
       };
+      self.blockSlot = function(slotId) {
+        return slots.one(slotId).post('block');
+      };
+      self.unblockSlot = function(slotId) {
+        return slots.one(slotId).post('unblock');
+      };
 
       return self;
     });

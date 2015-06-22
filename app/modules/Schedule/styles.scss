@@ -53,6 +53,7 @@ main.schedule.schedule-grid {
       float: left;
       width: $slotWidth;
     }
+
   }
 
   .room-column {
@@ -83,14 +84,66 @@ main.schedule.schedule-grid {
     position: absolute;
     margin-left: $roomsWidth + 1rem;
     top: $marginTop;
+    overflow: visible;
 
     .slot-line {
+      position: relative;
+      height: $slotHeight;
       .slot {
         width: $slotWidth;
         height: $slotHeight;
+        position: absolute;
         float: left;
         outline: 1px dotted lightgray;
+        background-repeat: no-repeat;
+        background-position: bottom right;
+
+        .info, .actions { display: none; }
+
+        &.empty {
+          background-color: lightyellow;
+          .title {
+            color: red;
+            font-size: small;
+            font-style: italic;
+          }
+        }
       }
+      .slot.zoomed {
+        border: 2px solid black;
+        box-shadow: 3px 3px 3px 3px gray;
+        outline: 0px;
+        padding: 3px;
+        margin-top:  -0.2 * $slotHeight;
+        margin-left: -0.5 * $slotHeight;
+        width: 2 * $slotWidth;
+        height: 2* $slotHeight;
+        z-index: 100;
+
+        .info {
+          display: block;
+          background: gray;
+          color: black;
+          div { margin-right: 1em; }
+          b { color: white; }
+          .id { font-size: small; }
+        }
+        .actions {
+          display: block;
+        }
+      }
+
+      .slot.hour-9  { left: 0  * $slotWidth; }
+      .slot.hour-10 { left: 1  * $slotWidth; }
+      .slot.hour-11 { left: 2  * $slotWidth; }
+      .slot.hour-12 { left: 3  * $slotWidth; }
+      .slot.hour-13 { left: 4  * $slotWidth; }
+      .slot.hour-14 { left: 5  * $slotWidth; }
+      .slot.hour-15 { left: 6  * $slotWidth; }
+      .slot.hour-16 { left: 7  * $slotWidth; }
+      .slot.hour-17 { left: 8  * $slotWidth; }
+      .slot.hour-18 { left: 9  * $slotWidth; }
+      .slot.hour-19 { left: 10 * $slotWidth; }
     }
   }
 }

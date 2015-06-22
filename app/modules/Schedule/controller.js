@@ -50,9 +50,10 @@
       $scope.rooms = rooms;
       $scope.currentDay = day;
       $scope.slotsOfRoom = {};
+      $scope.zoomedId = 1;
 
       function reloadRoom(room) {
-        Schedule.slotsOfRoom(room.id, $scope.currentDay).then(function(data) {
+        return Schedule.slotsOfRoom(room.id, $scope.currentDay).then(function(data) {
           $scope.slotsOfRoom[room.id] = data;
         });
       }
@@ -60,6 +61,25 @@
       function reloadAllRooms() {
         return _.each($scope.rooms, reloadRoom);
       }
+
+      function resetZoom() {
+        $scope.zoomedId = null;
+      }
+
+      $scope.zoomOnSlot = function(slot) {
+        $scope.zoomedId = slot.id;
+      };
+
+      $scope.blockSlot = function(slot) {
+        Schedule.blockSlot(slot.id)
+                .then(_.partial(reloadRoom, slot.room))
+                .then(resetZoom);
+      };
+      $scope.unblockSlot = function(slot) {
+        Schedule.unblockSlot(slot.id)
+                .then(_.partial(reloadRoom, slot.room))
+                .then(resetZoom);
+      };
 
       reloadAllRooms();
     });

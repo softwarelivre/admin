@@ -1,5 +1,5 @@
 <div class="hours-row">
-  <div class="hour" ng-repeat="hour in hours">{{ hour }}:00</div>
+  <div class="hour hour-{{hour}}" ng-repeat="hour in hours">{{ hour }}:00</div>
 </div>
 
 <div class="room-column">
@@ -11,8 +11,30 @@
 
 <div class="slots">
   <div class="slot-line" ng-repeat="room in rooms">
-    <div class="slot" ng-repeat="slot in slotsOfRoom[room.id]">
-      {{ slot.id }}
+    <div class="slot {{slot.status}} hour-{{ slot.hour }}"
+         ng-class="{zoomed: slot.id == zoomedId}"
+         ng-click="zoomOnSlot(slot)"
+         ng-repeat="slot in slotsOfRoom[room.id]">
+
+      <div class="info">
+        <span class="id">{{ slot.id }}</span>
+        <span class="hour"><b>horário:</b> {{ slot.begins | time_locale }}</span>
+        <span class="room"><b>sala:</b> {{ slot.room.name }}</span>
+      </div>
+
+      <div class="title">
+        <img ng-show="{{ slot.blocked }}" src="images/lock.png" />
+        <span ng-hide="slot.talk">sem palestra designada</span>
+        <span ng-show="slot.talk">{{ slot.talk.title }}</span>
+      </div>
+
+      <div class="actions">
+        <button ng-hide="slot.blocked" ng-click="blockSlot(slot)">bloquear</button>
+        <button ng-show="slot.blocked" ng-click="unblockSlot(slot)">desbloquear</button>
+        <!--
+        <button ng-hide="slot.talk" ng-click="createTalk(slot)">cadastrar palestra</button>
+        <button ng-show="slot.talk" ng-click="emptySlot(slot)">esvaziar slot</button>-->
+      </div>
     </div>
   </div>
 </div>
