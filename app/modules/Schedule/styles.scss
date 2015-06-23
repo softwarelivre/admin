@@ -131,7 +131,8 @@ main.schedule.schedule-grid {
           div { margin-right: 1em; }
           b { color: white; }
           .id { font-size: small; }
-          .close { margin-right: 5px; float: right; }
+          .close { margin-right: 5px; float: right; cursor: hand; }
+
         }
         .actions {
           display: block;
