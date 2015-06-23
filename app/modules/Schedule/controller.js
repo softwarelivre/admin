@@ -63,7 +63,7 @@
       }
 
       $scope.resetZoom = function($event) {
-        $event.stopPropagation();
+        if ($event) $event.stopPropagation();
         $scope.zoomedId = null;
       };
 
