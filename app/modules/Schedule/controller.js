@@ -46,12 +46,12 @@
 
     .controller("ProposalLookupController", function($scope, Proposals, focusOn) {
       $scope.query = 'banana';
-      $scope.$watch('query', function(newValue) {
-        console.log(newValue);
-        Proposals.lookup({ needle: newValue }).then(function(data) {
+      $scope.doQuery = function() {
+        console.log($scope.query);
+        Proposals.lookup({ needle: $scope.query }).then(function(data) {
           $scope.results = data;
         });
-      });
+      };
       focusOn('query');
     })
 
