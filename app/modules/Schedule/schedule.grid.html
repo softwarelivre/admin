@@ -4,6 +4,7 @@
 
 <div class="room-column" fixed-horizontal>
   <header ng-repeat="room in rooms">
+    <img src="images/loading.gif" ng-hide="slotsOfRoom[room.id]"/>
     <div class="name">{{ room.name }}</div>
     <div class="capacity">{{ room.capacity }} pessoas</div>
   </header>

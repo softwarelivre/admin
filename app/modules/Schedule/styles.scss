@@ -70,8 +70,14 @@ main.schedule.schedule-grid {
       height: $slotHeight;
       width: $roomsWidth;
       outline: 1px solid gray;
+      background: white;
+      img {
+        transform: rotate(90deg) translateX(20px);
+        float: right;
+      }
 
       .name {
+        margin-left: 5px;
         font-size: xx-large;
         height: 1em;
         overflow: hidden;
@@ -79,10 +85,17 @@ main.schedule.schedule-grid {
         white-space: pre;
       }
       .capacity {
+        margin-left: 5px;
         font-size: small;
         color: gray;
       }
 
+      &:hover {
+        width: $roomsWidth * 2;
+        .name {
+          overflow: initial;
+        }
+      }
     }
   }
   .slots {
