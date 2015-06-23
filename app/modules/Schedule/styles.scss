@@ -50,7 +50,7 @@ main.schedule.schedule-grid {
     font-size: x-large;
     z-index: 10;
     .hour {
-      border-right: 1px dotted black;
+      outline: 1px solid lightgray;
       float: left;
       width: $slotWidth;
     }
@@ -69,7 +69,7 @@ main.schedule.schedule-grid {
       position: relative;
       height: $slotHeight;
       width: $roomsWidth;
-      border-bottom: 1px dotted gray;
+      outline: 1px solid gray;
 
       .name {
         font-size: xx-large;
@@ -98,8 +98,7 @@ main.schedule.schedule-grid {
         width: $slotWidth;
         height: $slotHeight;
         position: absolute;
-        float: left;
-        border: 1px dotted lightgray;
+        outline: 1px solid gray;
         background-repeat: no-repeat;
         background-position: bottom right;
 
