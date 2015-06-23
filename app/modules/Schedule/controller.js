@@ -3,7 +3,9 @@
 
   angular
     .module("segue.admin.schedule",[
+
       "segue.admin",
+      'segue.admin.proposals.service',
       'segue.admin.schedule.service',
       "segue.admin.schedule.controller"
     ])
@@ -41,15 +43,29 @@
 
   angular
     .module("segue.admin.schedule.controller", [ ])
+
+    .controller("ProposalLookupController", function($scope, Proposals, focusOn) {
+      $scope.query = 'banana';
+      $scope.$watch('query', function(newValue) {
+        console.log(newValue);
+        Proposals.lookup({ needle: newValue }).then(function(data) {
+          $scope.results = data;
+        });
+      });
+      focusOn('query');
+    })
+
     .controller("ScheduleDaysController", function($scope, $state, days) {
       $scope.days = days;
     })
+
     .controller("ScheduleGridController", function($scope, $state, Schedule, day, days, hours, rooms) {
       $scope.days = days;
       $scope.hours = hours;
       $scope.rooms = rooms;
       $scope.currentDay = day;
       $scope.slotsOfRoom = {};
+      $scope.showTalkSelector = true;
       $scope.zoomedId = 1;
 
       function reloadRoom(room) {
@@ -80,6 +96,10 @@
         Schedule.unblockSlot(slot.id)
                 .then(_.partial(reloadRoom, slot.room))
                 .then($scope.resetZoom);
+      };
+
+      $scope.chooseTalkForSlot = function($slot, $event) {
+        $scope.showTalkSelector = true;
       };
 
       reloadAllRooms();

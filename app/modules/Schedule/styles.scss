@@ -40,6 +40,20 @@ main.schedule.schedule-grid {
   max-width: initial;
   width: 12*$slotWidth;
 
+  .proposals {
+    position: fixed;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    border: 1px solid red;
+    z-index: 30;
+
+    input { width: 98%; }
+    .results {
+      min-height: 20rem;
+    }
+  }
+
   .hours-row {
     margin-top: -$marginTop;
     margin-left: $roomsWidth + 1rem;
@@ -130,7 +144,6 @@ main.schedule.schedule-grid {
         border: 2px solid black;
         box-shadow: 3px 3px 3px 3px gray;
         outline: 0px;
-        padding: 3px;
         margin-top:  -0.2 * $slotHeight;
         margin-left: -0.5 * $slotHeight;
         width: 2 * $slotWidth;
@@ -138,8 +151,9 @@ main.schedule.schedule-grid {
         z-index: 100;
 
         .info {
+          padding: 3px;
           display: block;
-          background: gray;
+          background: #999;
           color: black;
           div { margin-right: 1em; }
           b { color: white; }

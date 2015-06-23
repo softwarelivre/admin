@@ -25,7 +25,7 @@
 
       return _.extend(service, extensions);
     })
-    .service("Proposals", function(Restangular) {
+    .service("Proposals", function(Restangular, $q) {
       var self = {};
       var proposals = Restangular.service('admin/proposals');
 
@@ -33,6 +33,7 @@
         if (query.needle) {
           return proposals.getList({ q: query.needle });
         }
+        return $q.when([]);
       };
 
       self.get = function(id) {

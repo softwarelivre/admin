@@ -15,3 +15,8 @@
     <ng-include src="'modules/Schedule/schedule.slot.html'"/>
   </div>
 </div>
+
+<div class="proposals" ng-if="showTalkSelector" ng-controller="ProposalLookupController">
+  <ng-include src="'modules/Schedule/schedule.proposals.html'" />
+
+</div>
