@@ -29,7 +29,7 @@ main.schedule.schedule-days {
 }
 
 $marginTop: 1rem;
-$roomsWidth: 6rem;
+$roomsWidth: 8rem;
 $hoursHeight: 3rem;
 $slotWidth: 10rem;
 $slotHeight: 10vh;
@@ -41,15 +41,16 @@ main.schedule.schedule-grid {
   width: 12*$slotWidth;
 
   .hours-row {
-    top: -$marginTop;
+    margin-top: -$marginTop;
     margin-left: $roomsWidth + 1rem;
-    position: absolute;
     text-align: center;
     background: gray;
     color: white;
     font-weight: bold;
     font-size: x-large;
+    z-index: 10;
     .hour {
+      border-right: 1px dotted black;
       float: left;
       width: $slotWidth;
     }
@@ -58,8 +59,7 @@ main.schedule.schedule-grid {
 
   .room-column {
     padding-left: 0.5rem;
-    top: $marginTop+ $hoursHeight;
-    position: fixed;
+    top: $marginTop;
     border-right: 1px solid black;
     background: white;
     width: $roomsWidth;
@@ -69,9 +69,14 @@ main.schedule.schedule-grid {
       position: relative;
       height: $slotHeight;
       width: $roomsWidth;
+      border-bottom: 1px dotted gray;
 
       .name {
         font-size: xx-large;
+        height: 1em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: pre;
       }
       .capacity {
         font-size: small;
@@ -94,7 +99,7 @@ main.schedule.schedule-grid {
         height: $slotHeight;
         position: absolute;
         float: left;
-        outline: 1px dotted lightgray;
+        border: 1px dotted lightgray;
         background-repeat: no-repeat;
         background-position: bottom right;
 

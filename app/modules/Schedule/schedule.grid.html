@@ -1,8 +1,8 @@
-<div class="hours-row">
+<div class="hours-row" fixed-vertical>
   <div class="hour hour-{{hour}}" ng-repeat="hour in hours">{{ hour }}:00</div>
 </div>
 
-<div class="room-column">
+<div class="room-column" fixed-horizontal>
   <header ng-repeat="room in rooms">
     <div class="name">{{ room.name }}</div>
     <div class="capacity">{{ room.capacity }} pessoas</div>
