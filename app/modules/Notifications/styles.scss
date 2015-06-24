@@ -38,7 +38,7 @@ main.notifications {
       &.confirmed { background: green;     color: white; }
       &.expired   { background: orange;    color: black; }
     }
-	.title, .authors { @include ellipsis; }
+    .title, .authors { @include ellipsis; }
 
     .sent, .deadline {
       font-size: small;
@@ -60,7 +60,7 @@ main.notifications {
       td {
         border-bottom: 1px dotted gray;
         border-right: 1px dotted lightgray;
-        padding: 3px;
+        padding: 10px 3px;
 
         &.id    { font-size: small; }
       }
