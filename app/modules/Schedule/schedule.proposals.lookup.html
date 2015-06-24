@@ -3,6 +3,7 @@
     <small>selecionando palestra para <u>{{ slot.room.name }}</u>, <u>{{ day }}</u>, <u>{{ slot.begins | time_locale }}</u></small>
     <input type="text" focusable
          ui-keypress="{ 'enter': 'doSearch()' }"
+         placeholder="buscar palestra (título)"
          ng-model="query.needle"/>
   </header>
 

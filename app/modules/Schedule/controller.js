@@ -52,7 +52,7 @@
       $scope.slot = $scope.ngDialogData.slot;
 
       $scope.proposals = [];
-      $scope.query = { needle: 'hacker', limit: 20 };
+      $scope.query = { needle: '', limit: 20 };
       $scope.doSearch = function() {
         Proposals.lookup($scope.query).then(function(data) {
           $scope.proposals = data;
