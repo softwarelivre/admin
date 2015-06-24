@@ -36,6 +36,9 @@
       self.emptySlot = function(slotId, talkId) {
         return slots.one(slotId).one('talk').remove();
       };
+      self.annotateSlot = function(slotId, content) {
+        return slots.one(slotId).post('annotation', { content: content });
+      };
 
       return self;
     });

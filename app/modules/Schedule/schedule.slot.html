@@ -44,6 +44,15 @@
     <button ng-show="slot.talk"    ng-click="emptySlot(slot, $event)">esvaziar slot</button>
   </div>
 
+  <div class="annotation">
+    <span>{{ slot.annotation }}</span>
+    <textarea placeholder="observações sobre esse slot..." focusable
+              ng-model="slot.annotation"
+              ui-keypress="{ 'ctrl-enter': 'saveAnnotation(slot)' } "></textarea>
+    <button ng-click="saveAnnotation(slot)">salvar (ctrl+enter)</button>
+  </div>
+
+
   <img ng-show="{{ slot.blocked }}" src="images/lock.png" />
 </div>
 

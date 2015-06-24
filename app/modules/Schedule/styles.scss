@@ -166,6 +166,12 @@ main.schedule.schedule-grid {
           color: gray;
         }
 
+        .annotation {
+            span { display: block; }
+            textarea { display: none; }
+            button { display: none; }
+        }
+
         &.empty {
           background-color: lightyellow;
           .title {
@@ -217,6 +223,12 @@ main.schedule.schedule-grid {
         .actions {
           padding: 10px;
           display: block;
+        }
+
+        .annotation {
+            span { display: none; }
+            textarea { display: block; float: left; width: 70%; }
+            textarea.ng-dirty + button { display: block; float: left; }
         }
       }
 

@@ -68,7 +68,7 @@
       $scope.days = days;
     })
 
-    .controller("ScheduleGridController", function($scope, $state, ngDialog, hotkeys, Schedule, day, days, hours, rooms) {
+    .controller("ScheduleGridController", function($scope, $state, ngDialog, hotkeys, Schedule, day, days, hours, rooms, focusOn) {
       $scope.days = days;
       $scope.hours = hours;
       $scope.rooms = rooms;
@@ -93,6 +93,8 @@
 
       $scope.zoomOnSlot = function(slot) {
         $scope.zoomedId = slot.id;
+        console.log(slot.annotation);
+        focusOn('slot.annotation');
       };
 
       $scope.blockSlot = function(slot) {
@@ -107,6 +109,11 @@
       };
       $scope.emptySlot = function(slot) {
         Schedule.emptySlot(slot.id)
+                .then(_.partial(reloadRoom, slot.room))
+                .then($scope.resetZoom);
+      };
+      $scope.saveAnnotation = function(slot) {
+        Schedule.annotateSlot(slot.id, slot.annotation)
                 .then(_.partial(reloadRoom, slot.room))
                 .then($scope.resetZoom);
       };
