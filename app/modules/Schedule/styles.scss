@@ -1,3 +1,5 @@
+@import 'modules/common/mixins.scss';
+
 aside.schedule.schedule-grid {
   top: -15px;
 }
@@ -32,7 +34,7 @@ $marginTop: 1rem;
 $roomsWidth: 8rem;
 $hoursHeight: 3rem;
 $slotWidth: 10rem;
-$slotHeight: 10vh;
+$slotHeight: 4rem;
 
 main.schedule.schedule-grid {
   margin: 0 0px;
@@ -91,12 +93,10 @@ main.schedule.schedule-grid {
       }
 
       .name {
+        @include ellipsis;
         margin-left: 5px;
         font-size: xx-large;
         height: 1em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: pre;
       }
       .capacity {
         margin-left: 5px;
@@ -126,16 +126,49 @@ main.schedule.schedule-grid {
         height: $slotHeight;
         position: absolute;
         outline: 1px solid gray;
+        background-color: lightgray;
         background-repeat: no-repeat;
         background-position: bottom right;
 
-        .info, .actions { display: none; }
+        label { display: none; }
+
+        .info, .actions, .status { display: none; }
+        img {
+          position: absolute;
+          bottom: 5px;
+          right: 5px;
+        }
+
+        .track {
+          @include ellipsis;
+          padding-left: 3px;
+          height: 1.2em;
+          width: $slotWidth;
+          font-size: small;
+          color: gray;
+          background: lightgray;
+        }
+        .title {
+          @include box-text;
+          padding-left: 3px;
+          height: 2.4em;
+          width: $slotWidth * 0.9;
+          font-size: small;
+          color: black;
+        }
+        .author {
+          @include box-text;
+          padding-left: 3px;
+          height: 1.1em;
+          width: $slotWidth;
+          font-size: small;
+          color: gray;
+        }
 
         &.empty {
           background-color: lightyellow;
           .title {
             color: red;
-            font-size: small;
             font-style: italic;
           }
         }
@@ -146,9 +179,29 @@ main.schedule.schedule-grid {
         outline: 0px;
         margin-top:  -0.2 * $slotHeight;
         margin-left: -0.5 * $slotHeight;
-        width: 2 * $slotWidth;
-        height: 2* $slotHeight;
+        width: 3 * $slotWidth;
+        height: initial;
         z-index: 100;
+
+        label {
+          font-weight: bold;
+          display: initial;
+        }
+
+        .track, .title, .author, .status {
+          display: block;
+          padding-left: 3px;
+          width: initial;
+          color: initial;
+          font-size: large;
+          white-space: normal;
+          height: initial;
+        }
+        .title .id {
+          background: white;
+          padding: 0 5px;
+          display: initial;
+        }
 
         .info {
           padding: 3px;
@@ -159,24 +212,61 @@ main.schedule.schedule-grid {
           b { color: white; }
           .id { font-size: small; }
           .close { margin-right: 5px; float: right; cursor: hand; }
-
         }
         .actions {
+          padding: 10px;
           display: block;
         }
       }
 
-      .slot.hour-9  { left: 0  * $slotWidth; }
-      .slot.hour-10 { left: 1  * $slotWidth; }
-      .slot.hour-11 { left: 2  * $slotWidth; }
-      .slot.hour-12 { left: 3  * $slotWidth; }
-      .slot.hour-13 { left: 4  * $slotWidth; }
-      .slot.hour-14 { left: 5  * $slotWidth; }
-      .slot.hour-15 { left: 6  * $slotWidth; }
-      .slot.hour-16 { left: 7  * $slotWidth; }
-      .slot.hour-17 { left: 8  * $slotWidth; }
-      .slot.hour-18 { left: 9  * $slotWidth; }
-      .slot.hour-19 { left: 10 * $slotWidth; }
+      .slot.hour-10 { left: 0 * $slotWidth; }
+      .slot.hour-11 { left: 1 * $slotWidth; }
+      .slot.hour-12 { left: 2 * $slotWidth; }
+      .slot.hour-13 { left: 3 * $slotWidth; }
+      .slot.hour-14 { left: 4 * $slotWidth; }
+      .slot.hour-15 { left: 5 * $slotWidth; }
+      .slot.hour-16 { left: 6 * $slotWidth; }
+      .slot.hour-17 { left: 7 * $slotWidth; }
+      .slot.hour-18 { left: 8 * $slotWidth; }
+      .slot.hour-19 { left: 9 * $slotWidth; }
+    }
+  }
+}
+
+.dialog-proposal-lookup {
+  .ngdialog-content {
+    width: 77vw !important;
+  }
+
+  header {
+    input {
+      width: 100%;
+      font-size: large;
+    }
+  }
+  .results {
+    border-collapse: collapse;
+
+    td {
+      border-right: 1px solid black;
+      padding-left: 3px;
+    }
+    td.id     { width: 3vw;  max-width: 3vw;  }
+    td.title  { width: 40vw; max-width: 40vw; }
+    td.author { width: 20vw; max-width: 20vw; }
+    td.status { width: 10vw; max-width: 10vw;  }
+    td.action { width: 10vw; max-width: 10vw; border: 0px; }
+
+    tr {
+      &.proposal  { color: gray; }
+      &.pending   { color: orange; }
+      &.confirmed { color: black; }
+      &.declined  { color: red; }
+
+      .id { color: gray; font-size: small; }
+      .title { @include ellipsis; }
+      .author { @include ellipsis; }
+
     }
   }
 }

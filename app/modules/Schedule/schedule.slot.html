@@ -10,16 +10,36 @@
     <span class="close" ng-click="resetZoom($event)">&times;</span>
   </div>
 
+  <div ng-show="slot.talk" class="track">
+    <label>trilha:</label>
+    {{ slot.talk.track }}
+  </div>
   <div class="title">
-    <img ng-show="{{ slot.blocked }}" src="images/lock.png" />
-    <span ng-hide="slot.talk">sem palestra designada</span>
-    <span ng-show="slot.talk">{{ slot.talk.title }}</span>
+    <label>título:</label>
+    <span class="id">{{ slot.talk.id }}</span>
+    <span class="empty"  ng-hide="slot.talk">sem palestra designada</span>
+    <span class="filled" ng-show="slot.talk">{{ slot.talk.title }}</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span ng-show="slot.talk">{{ slot.talk.owner }}</span>
+  </div>
+
+  <div class="status">
+    <label>horário aceito?</label>
+    <span ng-show="slot.status == 'dirty'">notificação ainda não enviada</span>
+    <span ng-show="slot.status == 'pending'">aguardando confirmação</span>
+    <span ng-show="slot.status == 'confirmed'">confirmado</span>
   </div>
 
   <div class="actions">
     <button ng-hide="slot.blocked" ng-click="blockSlot(slot)">bloquear</button>
     <button ng-show="slot.blocked" ng-click="unblockSlot(slot)">desbloquear</button>
     <button ng-hide="slot.talk"    ng-click="chooseTalkForSlot(slot, $event)">escolher palestra</button>
+    <button ng-show="slot.talk"    ng-click="emptySlot(slot, $event)">esvaziar slot</button>
   </div>
+
+  <img ng-show="{{ slot.blocked }}" src="images/lock.png" />
 </div>
 
