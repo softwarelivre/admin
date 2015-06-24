@@ -56,9 +56,8 @@
     ])
     .controller("ProposalController", function($scope, $state, Proposals, focusOn) {
       $scope.enforceAuth();
-
       $scope.proposals = [];
-      $scope.query = { needle: '' };
+      $scope.query = { needle: '', limit: 20 };
       $scope.doSearch = function() {
         Proposals.lookup($scope.query).then(function(data) {
           $scope.proposals = data;

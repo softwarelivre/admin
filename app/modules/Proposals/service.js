@@ -30,8 +30,8 @@
       var proposals = Restangular.service('admin/proposals');
 
       self.lookup = function(query) {
-        if (query.needle) {
-          return proposals.getList({ q: query.needle });
+        if (query.needle.length > 3) {
+          return proposals.getList({ q: query.needle, limit: query.limit });
         }
         return $q.when([]);
       };
