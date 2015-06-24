@@ -47,6 +47,13 @@
       <a ui-sref="proposals.detail({id: notification.proposal_id})" target="blank_">
         {{ notification.proposal }}
       </a>
+        <div ng-repeat="slot in notification.slots">
+          dia
+          <b>{{ slot.begins | date_locale }}</b> às
+          <b>{{ slot.begins | time_locale }}</b>
+          (sala <b> {{ slot.room }}</b>)
+          <span class="status">{{ slot.status }}</span>
+      </div>
     </td>
     <td class="authors">
       {{ notification.author }}

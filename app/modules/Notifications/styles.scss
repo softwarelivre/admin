@@ -1,3 +1,5 @@
+@import 'modules/common/mixins.scss';
+
 main.notifications {
   .summary {
     border: 1px solid blue;
@@ -13,16 +15,17 @@ main.notifications {
   }
 
   table.notifications {
+    table-layout: fixed;
     border-collapse: collapse;
 
-    col.id       { width: 2rem; }
-    col.status   { width: 4rem; }
-    col.sent     { width: 9rem; }
-    col.deadline { width: 9rem; }
-    col.title    { width: 20rem; }
-    col.authors  { width: 15rem; }
+    td.id,       col.id       { max-width: 2rem; }
+    td.status,   col.status   { max-width: 4rem; }
+    td.sent,     col.sent     { max-width: 8rem; }
+    td.deadline, col.deadline { max-width: 8rem; }
+    td.title,    col.title    { max-width: 25rem; }
+    td.authors,  col.authors  { max-width: 10rem; }
 
-    .status span, .deadline span {
+    .status span, .deadline span, .title .status {
       display: inline-block;
       padding: 0.1em 0.3em;
       border-radius: 5px;
@@ -35,6 +38,7 @@ main.notifications {
       &.confirmed { background: green;     color: white; }
       &.expired   { background: orange;    color: black; }
     }
+	.title, .authors { @include ellipsis; }
 
     .sent, .deadline {
       font-size: small;

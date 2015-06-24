@@ -27,7 +27,7 @@
       <td class="author">{{ proposal.owner.name }}</td>
       <td class="status">{{ proposal.status }}</td>
       <td class="action">
-        <button ng-click="selectTalk(proposal)" ng-show="proposal.status == 'confirmed'" ng-hide="proposal.slotted">
+        <button ng-click="selectTalk(proposal)" ng-show="proposal.status == 'confirmed' && !proposal.slotted">
           selecionar
         </button>
         <div ng-show="proposal.slotted">
