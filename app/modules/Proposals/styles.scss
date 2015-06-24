@@ -110,6 +110,14 @@ main.proposals {
         float: right;
         font-size: 200%;
         padding: 1rem;
+
+        &.rejected  { background: lightpink; color: black; }
+        &.declined  { background: lightpink; color: black; }
+        &.marked    { background: yellow;    color: black; }
+        &.pending   { background: yellow;    color: black; }
+        &.confirmed { background: green;     color: black; }
+        &.approved  { background: blue;      color: white; }
+        &.proposal  { display: none; }
       }
     }
     .data {

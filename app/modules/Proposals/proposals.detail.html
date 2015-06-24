@@ -53,13 +53,27 @@
       <td>{{ proposal.created }}</td>
     </tr>
     <tr class="change_track">
-		<th translate>trocar para trilha...</th>
-		<td>
-			<select ng-model="newTrackId" ng-options="t.id as t.name_pt for t in tracks">
-				<option class="empty" value="" translate>escolha nova trilha</option>
-			</select>
-			<button ng-click="changeTrackOfProposal(newTrackId)" ng-show="newTrackId" translate>executar troca!</button>
-		</td>
+      <th translate>trocar para trilha...</th>
+      <td>
+        <select ng-model="newTrackId" ng-options="t.id as t.name_pt for t in tracks">
+          <option class="empty" value="" translate>escolha nova trilha</option>
+        </select>
+        <button ng-click="changeTrackOfProposal(newTrackId)" ng-show="newTrackId" translate>executar troca!</button>
+      </td>
     </tr>
+    <tr class="slots">
+      <th translate>agendamentos</th>
+      <td>
+        <p ng-hide="proposal.slots">não possui</p>
+        <div ng-repeat="slot in proposal.slots">
+          dia
+          <b>{{ slot.begins | date_locale }}</b> às
+          <b>{{ slot.begins | time_locale }}</b>
+          (sala <b> {{ slot.room }}</b>)
+          <span class="status">{{ slot.status }}</span>
+        </div>
+      </td>
+    </tr>
+
   </table>
 </fieldset>
