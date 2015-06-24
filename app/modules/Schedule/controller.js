@@ -3,6 +3,8 @@
 
   angular
     .module("segue.admin.schedule",[
+      'ngDialog',
+      'ui.keypress',
 
       "segue.admin",
       'segue.admin.proposals.service',
@@ -45,27 +47,32 @@
     .module("segue.admin.schedule.controller", [ ])
 
     .controller("ProposalLookupController", function($scope, Proposals, focusOn) {
-      $scope.query = 'banana';
-      $scope.doQuery = function() {
-        console.log($scope.query);
-        Proposals.lookup({ needle: $scope.query }).then(function(data) {
-          $scope.results = data;
+      $scope.day  = $scope.ngDialogData.day;
+      $scope.slot = $scope.ngDialogData.slot;
+
+      $scope.proposals = [];
+      $scope.query = { needle: 'hacker', limit: 20 };
+      $scope.doSearch = function() {
+        Proposals.lookup($scope.query).then(function(data) {
+          $scope.proposals = data;
         });
       };
-      focusOn('query');
+      $scope.selectTalk = function(proposal) {
+        $scope.closeThisDialog(proposal);
+      };
+      focusOn('query.needle');
     })
 
     .controller("ScheduleDaysController", function($scope, $state, days) {
       $scope.days = days;
     })
 
-    .controller("ScheduleGridController", function($scope, $state, Schedule, day, days, hours, rooms) {
+    .controller("ScheduleGridController", function($scope, $state, ngDialog, Schedule, day, days, hours, rooms) {
       $scope.days = days;
       $scope.hours = hours;
       $scope.rooms = rooms;
       $scope.currentDay = day;
       $scope.slotsOfRoom = {};
-      $scope.showTalkSelector = true;
       $scope.zoomedId = 1;
 
       function reloadRoom(room) {
@@ -97,9 +104,28 @@
                 .then(_.partial(reloadRoom, slot.room))
                 .then($scope.resetZoom);
       };
+      $scope.emptySlot = function(slot) {
+        Schedule.emptySlot(slot.id)
+                .then(_.partial(reloadRoom, slot.room))
+                .then($scope.resetZoom);
+      };
 
-      $scope.chooseTalkForSlot = function($slot, $event) {
-        $scope.showTalkSelector = true;
+      $scope.chooseTalkForSlot = function(slot) {
+        var options = {
+          controller: 'ProposalLookupController',
+          template: 'modules/Schedule/schedule.proposals.lookup.html',
+          data: { day: day, slot: slot },
+          className: 'ngdialog-theme-default dialog-proposal-lookup',
+        };
+        var dialog = ngDialog.open(options);
+        dialog.closePromise.then(function(data) {
+          if (_(data.value).isString()) { return; }
+          if (_(data.value).isEmpty()) { return; }
+          if (_(data.value.id).isUndefined()) { return; }
+          Schedule.setTalkForSlot(slot.id, data.value.id)
+                  .then(_.partial(reloadRoom, slot.room))
+                  .then($scope.resetZoom);
+        });
       };
 
       reloadAllRooms();

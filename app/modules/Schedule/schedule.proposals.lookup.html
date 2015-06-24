@@ -1,0 +1,31 @@
+<section class="proposal-lookup">
+  <header>
+    <small>selecionando palestra para <u>{{ slot.room.name }}</u>, <u>{{ day }}</u>, <u>{{ slot.begins | time_locale }}</u></small>
+    <input type="text" focusable
+         ui-keypress="{ 'enter': 'doSearch()' }"
+         ng-model="query.needle"/>
+  </header>
+
+  <div ng-show="query.needle && proposals.length == 0">
+    não foi possível encontrar palestras com esses critérios de busca
+  </div>
+
+  <table class="results" ng-show="proposals.length > 0">
+    <col class="id"/>
+    <col class="title"/>
+    <col class="author"/>
+    <col class="status"/>
+    <col class="action"/>
+    <tr class="{{proposal.status}}" ng-repeat="proposal in proposals">
+      <td class="id">{{ proposal.id }}</td>
+      <td class="title">{{ proposal.title }}</td>
+      <td class="author">{{ proposal.owner.name }}</td>
+      <td class="status">{{ proposal.status }}</td>
+      <td class="action">
+        <button ng-click="selectTalk(proposal)" ng-show="proposal.status == 'confirmed'">
+          selecionar
+        </button>
+      </td>
+    </tr>
+  </table>
+</section>

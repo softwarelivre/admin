@@ -30,6 +30,12 @@
       self.unblockSlot = function(slotId) {
         return slots.one(slotId).post('unblock');
       };
+      self.setTalkForSlot = function(slotId, talkId) {
+        return slots.one(slotId).post('talk', { proposal_id: talkId });
+      };
+      self.emptySlot = function(slotId, talkId) {
+        return slots.one(slotId).one('talk').remove();
+      };
 
       return self;
     });
