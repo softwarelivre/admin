@@ -4,6 +4,7 @@
   angular
     .module("segue.admin.schedule",[
       'ngDialog',
+      'cfp.hotkeys',
       'ui.keypress',
 
       "segue.admin",
@@ -67,7 +68,7 @@
       $scope.days = days;
     })
 
-    .controller("ScheduleGridController", function($scope, $state, ngDialog, Schedule, day, days, hours, rooms) {
+    .controller("ScheduleGridController", function($scope, $state, ngDialog, hotkeys, Schedule, day, days, hours, rooms) {
       $scope.days = days;
       $scope.hours = hours;
       $scope.rooms = rooms;
@@ -126,7 +127,11 @@
                   .then(_.partial(reloadRoom, slot.room))
                   .then($scope.resetZoom);
         });
+
       };
+
+      hotkeys.bindTo($scope)
+              .add({ combo: 'esc', callback: $scope.resetZoom });
 
       reloadAllRooms();
     });
