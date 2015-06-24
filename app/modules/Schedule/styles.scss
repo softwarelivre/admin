@@ -155,6 +155,7 @@ main.schedule.schedule-grid {
           width: $slotWidth * 0.9;
           font-size: small;
           color: black;
+          .id { display: none; }
         }
         .author {
           @include box-text;
