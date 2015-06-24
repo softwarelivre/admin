@@ -37,7 +37,7 @@
         return slots.one(slotId).one('talk').remove();
       };
       self.annotateSlot = function(slotId, content) {
-        return slots.one(slotId).post('annotation', { content: content });
+        return slots.one(slotId).post('annotation', { content: content.trim() });
       };
 
       return self;

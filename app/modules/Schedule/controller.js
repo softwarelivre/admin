@@ -93,7 +93,6 @@
 
       $scope.zoomOnSlot = function(slot) {
         $scope.zoomedId = slot.id;
-        console.log(slot.annotation);
         focusOn('slot.annotation');
       };
 
@@ -137,8 +136,7 @@
 
       };
 
-      hotkeys.bindTo($scope)
-              .add({ combo: 'esc', callback: $scope.resetZoom });
+      hotkeys.bindTo($scope).add({ combo: 'esc', callback: $scope.resetZoom });
 
       reloadAllRooms();
     });
