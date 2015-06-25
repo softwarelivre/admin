@@ -25,6 +25,7 @@ header.schedule {
       .situation { display: none; }
     }
   }
+  .proposals { display: none; }
 }
 main.schedule.schedule-days {
   img { display: none; }
@@ -41,6 +42,9 @@ main.schedule.schedule-days {
       width: 20rem;
       float: left;
     }
+  }
+  .proposals {
+    clear: both;
   }
 }
 

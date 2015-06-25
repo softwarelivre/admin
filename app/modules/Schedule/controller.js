@@ -66,7 +66,7 @@
     })
 
     .controller("ScheduleDaysController", function($scope, $state, situation, days) {
-      $scope.situation = situation.days;
+      $scope.situation = situation;
       $scope.days = days;
     })
 
