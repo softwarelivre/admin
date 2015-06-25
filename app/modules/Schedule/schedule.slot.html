@@ -6,7 +6,8 @@
   <div class="info">
     <span class="id">{{ slot.id }}</span>
     <span class="room"><b>sala:</b> {{ slot.room.name }}</span>
-    <span class="hour"><b>horário:</b> {{ slot.begins | time_locale }} {{ slot.duration }}min</span>
+    <span class="hour"><b>horário:</b> {{ slot.begins | time_locale }}</span>
+    <span class="duration"><b>duração</b> {{ slot.duration }}min</span>
     <span class="close" ng-click="resetZoom($event)">&times;</span>
   </div>
 
