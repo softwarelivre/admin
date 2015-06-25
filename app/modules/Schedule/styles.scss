@@ -232,16 +232,17 @@ main.schedule.schedule-grid {
         }
       }
 
-      .slot.hour-10 { left: 0 * $slotWidth; }
-      .slot.hour-11 { left: 1 * $slotWidth; }
-      .slot.hour-12 { left: 2 * $slotWidth; }
-      .slot.hour-13 { left: 3 * $slotWidth; }
-      .slot.hour-14 { left: 4 * $slotWidth; }
-      .slot.hour-15 { left: 5 * $slotWidth; }
-      .slot.hour-16 { left: 6 * $slotWidth; }
-      .slot.hour-17 { left: 7 * $slotWidth; }
-      .slot.hour-18 { left: 8 * $slotWidth; }
-      .slot.hour-19 { left: 9 * $slotWidth; }
+      .slot.hour-10 { left: 0  * $slotWidth; }
+      .slot.hour-10 { left: 1  * $slotWidth; }
+      .slot.hour-11 { left: 2  * $slotWidth; }
+      .slot.hour-12 { left: 3  * $slotWidth; }
+      .slot.hour-13 { left: 4  * $slotWidth; }
+      .slot.hour-14 { left: 5  * $slotWidth; }
+      .slot.hour-15 { left: 6  * $slotWidth; }
+      .slot.hour-16 { left: 7  * $slotWidth; }
+      .slot.hour-17 { left: 8  * $slotWidth; }
+      .slot.hour-18 { left: 9  * $slotWidth; }
+      .slot.hour-19 { left: 10 * $slotWidth; }
     }
   }
 }
