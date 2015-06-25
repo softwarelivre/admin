@@ -8,15 +8,13 @@
             ui-sref="schedule.grid({day: day})">{{ day }}</button>
     <div class="situation">
       <b>situação:</b><br/>
-      ocupado:
-        bloqueado={{ situation.slots[day].used_blocked }},
-        não-bloquado={{ situation.slots[day].used_non_blocked }}<br/>
-
-      não-ocupado:
-        bloqueado={{ situation.slots[day].free_blocked }},
-        não-bloqueado={{ situation.slots[day].free_non_blocked }}<br/>
+      - ocupado e bloqueado:                  {{ situation.slots[day].used_blocked }}<br/>
+      - ocupado e não-bloqueado:              {{ situation.slots[day].used_non_blocked }}<br/>
+      - não-ocupado e bloqueado:              {{ situation.slots[day].free_blocked }}<br/>
+      - não-ocupado e não bloqueado (livres): <b>{{ situation.slots[day].free_non_blocked }}</b><br/>
     </div>
   </div>
+  <div class="sum">total de livres: {{ sum_free_non_blocked }}</div>
 </div>
 <div class="proposals">
   <div class="situation">

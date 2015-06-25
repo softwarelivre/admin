@@ -25,11 +25,16 @@ header.schedule {
       .situation { display: none; }
     }
   }
+  .sum { display: none }
   .proposals { display: none; }
 }
 main.schedule.schedule-days {
   img { display: none; }
   h1 { display: none; }
+  .sum {
+    float: right;
+    font-size: x-large;
+  }
   .day {
     clear: both;
     button {

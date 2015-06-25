@@ -67,6 +67,7 @@
 
     .controller("ScheduleDaysController", function($scope, $state, situation, days) {
       $scope.situation = situation;
+      $scope.sum_free_non_blocked = _.sum(situation.slots, 'free_non_blocked');
       $scope.days = days;
     })
 
