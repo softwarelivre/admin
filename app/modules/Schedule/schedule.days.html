@@ -1,6 +1,18 @@
 <img class="logo" ng-click="home()" src="/images/logo-fisl-small.png"/>
+<h1 ng-click="home()">
+  segue - admin
+</h1>  
 <div class="days">
-  <button ng-repeat="day in days"
-          ng-class="{ current: day == currentDay }"
-          ui-sref="schedule.grid({day: day})">{{ day }}</button>
+  <div class="day" ng-repeat="day in days">
+    <button ng-class="{ current: day == currentDay }"
+            ui-sref="schedule.grid({day: day})">{{ day }}</button>
+    <div class="situation">
+      <b>situação:</b><br/>
+      ocupado e bloqueado         = {{ situation[day].used_blocked }}<br/>
+      ocupado e não-bloqueado     = {{ situation[day].used_non_blocked }}<br/>
+      não-ocupado e bloqueado     = {{ situation[day].free_blocked }}<br/>
+      não-ocupado e não-bloqueado = {{ situation[day].free_non_blocked }}<br/>
+    </div>
+  </div>
+
 </div>

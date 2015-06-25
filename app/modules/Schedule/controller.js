@@ -21,7 +21,8 @@
             header: { templateUrl: 'modules/common/nav.html' },
           },
           resolve: {
-            days: function(Schedule, $stateParams) { return Schedule.days(); }
+            situation: function(Schedule) { return Schedule.situation(); },
+            days: function(Schedule) { return Schedule.days(); }
           }
         })
         .state('schedule.days', {
@@ -64,7 +65,8 @@
       focusOn('query.needle');
     })
 
-    .controller("ScheduleDaysController", function($scope, $state, days) {
+    .controller("ScheduleDaysController", function($scope, $state, situation, days) {
+      $scope.situation = situation.days;
       $scope.days = days;
     })
 

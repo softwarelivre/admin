@@ -39,6 +39,9 @@
       self.annotateSlot = function(slotId, content) {
         return slots.one(slotId).post('annotation', { content: content.trim() });
       };
+      self.situation = function() {
+        return slots.one('situation').get();
+      };
 
       return self;
     });

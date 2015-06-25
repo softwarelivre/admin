@@ -7,26 +7,40 @@ aside.schedule.schedule-grid {
 header.schedule {
   div.days {
     text-align: center;
-    button {
-      font-size: small;
-      padding: 0.5rem;
-      border: 1px solid gray;
-      background: lightgray;
+    .day {
+      display: inline;
 
-      &.current {
-        background: white;
-        font-weight: bold;
-        border-bottom: 1px solid white;
+      button {
+        font-size: small;
+        padding: 0.5rem;
+        border: 1px solid gray;
+        background: lightgray;
+
+        &.current {
+          background: white;
+          font-weight: bold;
+          border-bottom: 1px solid white;
+        }
       }
+      .situation { display: none; }
     }
   }
 }
 main.schedule.schedule-days {
   img { display: none; }
-  button {
-    width: 20rem;
-    padding: 2em 0;
-    font-size: large;
+  h1 { display: none; }
+  .day {
+    clear: both;
+    button {
+      float: left;
+      width: 20rem;
+      padding: 2em 0;
+      font-size: large;
+    }
+    .situation {
+      width: 20rem;
+      float: left;
+    }
   }
 }
 
