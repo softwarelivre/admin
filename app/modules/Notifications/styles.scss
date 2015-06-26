@@ -21,8 +21,7 @@ main.notifications {
     td.id,       col.id       { max-width: 2rem; }
     td.status,   col.status   { max-width: 4rem; }
     td.sent,     col.sent     { max-width: 8rem; }
-    td.deadline, col.deadline { max-width: 8rem; }
-    td.title,    col.title    { max-width: 25rem; }
+    td.title,    col.title    { max-width: 35rem; }
     td.authors,  col.authors  { max-width: 10rem; }
 
     .status span, .deadline span, .title .status {

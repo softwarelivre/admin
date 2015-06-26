@@ -53,7 +53,11 @@
     <button ng-click="saveAnnotation(slot)">salvar (ctrl+enter)</button>
   </div>
 
-
-  <img ng-show="{{ slot.blocked }}" src="images/lock.png" />
+  <div class="icons">
+    <img ng-show="{{ slot.blocked }}" src="images/lock.png" />
+    <img ng-show="{{ slot.status == 'confirmed' }}" src="images/confirmed.png" />
+    <img ng-show="{{ slot.status == 'pending'   }}" src="images/pending.png" />
+    <img ng-show="{{ slot.status == 'declined'  }}" src="images/declined.png" />
+  </div>
 </div>
 

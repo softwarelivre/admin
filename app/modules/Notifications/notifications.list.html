@@ -20,15 +20,13 @@
   <col class="id" />
   <col class="status" />
   <col class="sent" />
-  <col class="deadline" />
   <col class="title" />
   <col class="authors" />
   <thead>
     <tr>
       <th translate>id</th>
       <th translate>status</th>
-      <th translate>envio</th>
-      <th translate>prazo</th>
+      <th translate>envio/prazo</th>
       <th translate>título</th>
       <th translate>autor</th>
     </tr>
@@ -38,9 +36,8 @@
     <td class="status">
       <span class="status {{notification.status}}">{{ notification.status }}</span>
     </td>
-    <td class="sent">{{ notification.sent }}</td>
-    <td class="deadline">
-      {{ notification.deadline }}
+    <td class="sent">
+      {{ notification.sent }}<br/>{{ notification.deadline }}
       <span class="expired" ng-show="notification.is_expired">expirado</span>
     </td>
     <td class="title">
@@ -48,10 +45,9 @@
         {{ notification.proposal }}
       </a>
         <div ng-repeat="slot in notification.slots">
-          dia
-          <b>{{ slot.begins | date_locale }}</b> às
-          <b>{{ slot.begins | time_locale }}</b>
-          (sala <b> {{ slot.room }}</b>)
+          sala <b> {{ slot.room }}</b>,
+          dia <b>{{ slot.begins | date_locale }}</b>,
+          às <b>{{ slot.begins | time_locale }}</b>
           <span class="status">{{ slot.status }}</span>
       </div>
     </td>

@@ -156,10 +156,11 @@ main.schedule.schedule-grid {
         label { display: none; }
 
         .info, .actions, .status { display: none; }
-        img {
+        .icons {
           position: absolute;
           bottom: 5px;
           right: 5px;
+          width: 20px;
         }
 
         .track {
