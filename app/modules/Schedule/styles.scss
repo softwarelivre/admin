@@ -203,6 +203,15 @@ main.schedule.schedule-grid {
             font-style: italic;
           }
         }
+        &.pending {
+          background-color: lightblue;
+        }
+        &.declined {
+          background-color: lightpink;
+        }
+        &.confirmed {
+          background-color: lightgreen;
+        }
       }
       .slot.zoomed {
         border: 2px solid black;
