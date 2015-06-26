@@ -29,5 +29,21 @@
       $scope.notifications = notifications;
       $scope.kind = $stateParams.kind;
       $scope.statusName = $stateParams.statusName;
+      $scope.currentFilter = null;
+
+      $scope.setCurrentFilter = function(v) {
+        $scope.currentFilter = v;
+      };
+    })
+    .filter('filterByStatus', function() {
+      function hasSlotWithStatus(desired) {
+        return function(entity) {
+          return _(entity.slots).pluck('status').contains(desired);
+        };
+      }
+      return function(entities, desired) {
+        if (!desired) { return entities; }
+        return _.filter(entities, hasSlotWithStatus(desired));
+      };
     });
 })();

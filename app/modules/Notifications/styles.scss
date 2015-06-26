@@ -18,11 +18,18 @@ main.notifications {
     table-layout: fixed;
     border-collapse: collapse;
 
-    td.id,       col.id       { max-width: 2rem; }
-    td.status,   col.status   { max-width: 4rem; }
-    td.sent,     col.sent     { max-width: 8rem; }
-    td.title,    col.title    { max-width: 35rem; }
-    td.authors,  col.authors  { max-width: 10rem; }
+    td.id,       col.id       { width: 2rem; max-width: 2rem; }
+    td.status,   col.status   { width: 4rem; max-width: 4rem; }
+    td.sent,     col.sent     { width: 8rem; max-width: 8rem; }
+    td.title,    col.title    { width: 35rem; max-width: 35rem; }
+    td.authors,  col.authors  { width: 10rem; max-width: 10rem; }
+
+	th.title small {
+		color: gray;
+		font-size: small;
+		float: right;
+		a { color: blue; cursor: pointer; }
+	}
 
     .status span, .deadline span, .title .status {
       display: inline-block;

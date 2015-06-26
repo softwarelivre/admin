@@ -27,11 +27,23 @@
       <th translate>id</th>
       <th translate>status</th>
       <th translate>envio/prazo</th>
-      <th translate>título</th>
+      <th translate class="title">
+          título
+          <small>
+			  situação horário
+			  [
+              <a ng-click="setCurrentFilter()">todos</a>|
+              <a ng-click="setCurrentFilter('dirty')">não-notificados</a>|
+              <a ng-click="setCurrentFilter('pending')">pendentes</a>|
+              <a ng-click="setCurrentFilter('declined')">declinados</a>|
+              <a ng-click="setCurrentFilter('confirmed')">confirmados</a>
+			  ]
+          </small>
+      </th>
       <th translate>autor</th>
     </tr>
   </thead>
-  <tr class="master" ng-repeat="notification in notifications | orderBy:'proposal'">
+  <tr class="master" ng-repeat="notification in notifications | orderBy:'proposal' | filterByStatus:currentFilter">
     <td class="id">{{ notification.proposal_id }}</td>
     <td class="status">
       <span class="status {{notification.status}}">{{ notification.status }}</span>
@@ -48,7 +60,7 @@
           sala <b> {{ slot.room }}</b>,
           dia <b>{{ slot.begins | date_locale }}</b>,
           às <b>{{ slot.begins | time_locale }}</b>
-          <span class="status">{{ slot.status }}</span>
+          <span class="status {{slot.status}}">{{ slot.status }}</span>
       </div>
     </td>
     <td class="authors">
