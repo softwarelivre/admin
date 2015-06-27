@@ -25,7 +25,7 @@
 
   angular
     .module("segue.admin.notifications.controller", [ ])
-    .controller("NotificationController", function($scope, $stateParams, notifications) {
+    .controller("NotificationController", function($scope, $filter, $stateParams, notifications) {
       $scope.notifications = notifications;
       $scope.kind = $stateParams.kind;
       $scope.statusName = $stateParams.statusName;
@@ -34,10 +34,17 @@
       $scope.setCurrentFilter = function(v) {
         $scope.currentFilter = v;
       };
+
+      var slotStatuses = ['none','dirty','pending','declined','confirmed'];
+      $scope.count = _.zipObject(slotStatuses, _.map(slotStatuses, function(st) {
+        var filtered = $filter('filterByStatus')(notifications, st);
+        return filtered.length;
+      }));
     })
     .filter('filterByStatus', function() {
       function hasSlotWithStatus(desired) {
         return function(entity) {
+          if (desired == 'none') { return entity.slots.length === 0; }
           return _(entity.slots).pluck('status').contains(desired);
         };
       }

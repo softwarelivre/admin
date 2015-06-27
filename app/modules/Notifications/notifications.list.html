@@ -30,14 +30,14 @@
       <th translate class="title">
           título
           <small>
-			  situação horário
-			  [
+              [
               <a ng-click="setCurrentFilter()">todos</a>|
-              <a ng-click="setCurrentFilter('dirty')">não-notificados</a>|
-              <a ng-click="setCurrentFilter('pending')">pendentes</a>|
-              <a ng-click="setCurrentFilter('declined')">declinados</a>|
-              <a ng-click="setCurrentFilter('confirmed')">confirmados</a>
-			  ]
+              <a ng-click="setCurrentFilter('none')">não-alocados</a>     ({{ count.none      }}) |
+              <a ng-click="setCurrentFilter('dirty')">não-notificados</a> ({{ count.dirty     }}) |
+              <a ng-click="setCurrentFilter('pending')">pendentes</a>     ({{ count.pending   }}) |
+              <a ng-click="setCurrentFilter('declined')">declinados</a>   ({{ count.declined  }}) |
+              <a ng-click="setCurrentFilter('confirmed')">confirmados</a> ({{ count.confirmed }})
+              ]
           </small>
       </th>
       <th translate>autor</th>
