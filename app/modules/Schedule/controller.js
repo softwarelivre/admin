@@ -8,6 +8,7 @@
       'ui.keypress',
 
       "segue.admin",
+      'segue.admin.proposals.controller',
       'segue.admin.proposals.service',
       'segue.admin.schedule.service',
       "segue.admin.schedule.controller"
@@ -47,7 +48,6 @@
 
   angular
     .module("segue.admin.schedule.controller", [ ])
-
     .controller("ProposalLookupController", function($scope, Proposals, focusOn) {
       $scope.day  = $scope.ngDialogData.day;
       $scope.slot = $scope.ngDialogData.slot;
@@ -62,7 +62,7 @@
       $scope.selectTalk = function(proposal) {
         $scope.closeThisDialog(proposal);
       };
-      focusOn('query.needle');
+      focusOn('query.needle',200);
     })
 
     .controller("ScheduleDaysController", function($scope, $state, situation, days) {
@@ -120,6 +120,22 @@
                 .then($scope.resetZoom);
       };
 
+      $scope.createTalkForSlot = function(slot) {
+        var options = {
+          controller: 'ProposalCreateController',
+          template: 'modules/Proposals/proposals.create.html',
+          data: { day: day, slot: slot },
+          className: 'ngdialog-theme-default dialog-proposal-create',
+        };
+        var dialog = ngDialog.open(options);
+        dialog.closePromise.then(function(data) {
+          if (noData(data)) { return; }
+          Schedule.setTalkForSlot(slot.id, data.value.id)
+                  .then(_.partial(reloadRoom, slot.room))
+                  .then($scope.resetZoom);
+        });
+      };
+
       $scope.chooseTalkForSlot = function(slot) {
         var options = {
           controller: 'ProposalLookupController',
@@ -129,15 +145,20 @@
         };
         var dialog = ngDialog.open(options);
         dialog.closePromise.then(function(data) {
-          if (_(data.value).isString()) { return; }
-          if (_(data.value).isEmpty()) { return; }
-          if (_(data.value.id).isUndefined()) { return; }
+          if (noData(data)) { return; }
           Schedule.setTalkForSlot(slot.id, data.value.id)
                   .then(_.partial(reloadRoom, slot.room))
                   .then($scope.resetZoom);
         });
 
       };
+
+      function noData(data) {
+          if (_(data.value).isString()) { return true; }
+          if (_(data.value).isEmpty()) { return true; }
+          if (_(data.value.id).isUndefined()) { return true; }
+          return false;
+      }
 
       hotkeys.bindTo($scope).add({ combo: 'esc', callback: $scope.resetZoom });
 

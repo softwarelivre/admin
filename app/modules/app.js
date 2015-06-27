@@ -15,6 +15,7 @@
       'restangular',
       'angular-loading-bar',
 
+      'segue.admin.errors',
       'segue.admin.filters',
       'segue.admin.directives',
       'segue.admin.locale',

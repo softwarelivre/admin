@@ -47,6 +47,15 @@
             proposal: function(Proposals, $stateParams) { return Proposals.get($stateParams.id); },
             invites: function(proposal) { return proposal.follow('invites'); }
           }
+        })
+        .state('proposals.create', {
+          url: '/create',
+          views: {
+            query:   { controller: 'ProposalController',       templateUrl: 'modules/common/back.html' },
+            content: { controller: 'ProposalCreateController', templateUrl: 'modules/Proposals/proposals.edit.html' }
+          },
+          resolve: {
+          }
         });
     });
 
@@ -83,5 +92,15 @@
         return Proposals.changeTrackOfProposal(proposal.id, newTrackId)
                         .then($state.reload);
       };
+    })
+    .controller("ProposalCreateController", function($scope, tracks, focusOn) {
+      if ($scope.ngDialogData) {
+        $scope.day  = $scope.ngDialogData.day;
+        $scope.slot = $scope.ngDialogData.slot;
+      }
+
+      $scope.tracks = tracks;
+      $scope.proposal = {};
+      focusOn('proposal.title',200);
     });
 })();

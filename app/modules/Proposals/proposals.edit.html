@@ -1,0 +1,78 @@
+<section class="proposal-edit">
+  <header ng-if="slot">
+    <small>criando palestra para <u>{{ slot.room.name }}</u>, <u>{{ day }}</u>, <u>{{ slot.begins | time_locale }}</u></small>
+  </header>
+
+  <form class="lines">
+    <p>
+      <label>
+        <span translate>título da palestra</span>
+        <small translate>(de 5 até 80 caracteres)</small>
+      </label>
+      <input type="text" required focusable
+            minlength="5" maxlength="80"
+            ng-model="proposal.title"/>
+      <i class="fa fa-check"></i>
+      <span form-error="title.object_required"     translate>o título da palestra é obrigatório</span>
+      <span form-error="title.string_length_short" translate>o título deve ter no mínimo 5 caracteres</span>
+      <span form-error="title.string_length_long"  translate>o título deve ter no máximo 80 caracteres</span>
+    </p>
+
+    <p>
+      <label>
+        <span translate>proposta</span>
+        <small translate>(até 2000 caracteres)</small>
+      </label>
+      <textarea required minlength="5" maxlength="2000"
+                ng-model="proposal.full" class="large"></textarea>
+      <i class="fa fa-check"></i>
+      <span form-error="full.object_required"     translate>a proposta completa da palestra é obrigatória</span>
+      <span form-error="full.string_length_short" translate>a proposta completa deve ter no mínimo 5 caracteres</span>
+      <span form-error="full.string_length_long"  translate>a proposta completa deve ter no máximo 2000 caracteres</span>
+    </p>
+
+    <p>
+      <label class="notip" translate>trilha</label>
+      <select ng-model="proposal.track_id" ng-options="t.id as t.name_pt for t in tracks">
+        <option class="empty" value="" ng-hide="proposal.track_id" translate>escolha uma trilha</option>
+      </select>
+      <span form-error="track_id.invalid_type" translate>por favor, informe uma trilha válida</span>
+    </p>
+
+    <p>
+      <label>
+        <span translate>língua</span>
+      </label>
+      <span ng-repeat="lang in languages">
+        <input type="radio" id="lang_{{lang.abbr}}" value="{{ lang.abbr }}" ng-model="proposal.language" />
+        <label for="lang_{{lang.abbr}}">{{ lang.name | translate }}</label>
+      </span>
+      <span form-error="language.object_required" translate>a língua da palestra é obrigatória</span>
+    </p>
+
+    <p>
+      <label>
+        <span translate>nível da palestra</span>
+      </label>
+      <span ng-repeat="level in levels">
+        <input type="radio" id="level_{{level}}" value="{{ level }}"
+              ng-model="proposal.level" />
+        <label for="level_{{level}}">{{ level | translate }}</label>
+      </span>
+      <span form-error="level.object_required" translate>o nível técnico da palestra é obrigatório</span>
+    </p>
+
+    <p class="owner">
+      <label>
+        <span translate>autor principal</span>
+      </label>
+      <span>
+        <input type="text" placeholder="nome"     model="owner.name"/>
+        <input type="text" placeholder="email"    model="owner.email"/>
+        <input type="text" placeholder="document" model="owner.document"/>
+      </span>
+    </p>
+
+  </form>
+
+</section>

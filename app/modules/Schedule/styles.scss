@@ -280,17 +280,22 @@ main.schedule.schedule-grid {
   }
 }
 
-.dialog-proposal-lookup {
-  .ngdialog-content {
-    width: 77vw !important;
-  }
+.ngdialog.ngdialog-theme-default {
+  &.dialog-proposal-create,
+  &.dialog-proposal-lookup {
+    .ngdialog-content {
+      width: 77vw;
+    }
 
-  header {
-    input {
-      width: 100%;
-      font-size: large;
+    header {
+      input {
+        width: 100%;
+        font-size: large;
+      }
     }
   }
+}
+.ngdialog.ngdialog-theme-default.dialog-proposal-lookup {
   .results {
     border-collapse: collapse;
 
@@ -316,4 +321,20 @@ main.schedule.schedule-grid {
 
     }
   }
+}
+
+.ngdialog.ngdialog-theme-default.dialog-proposal-create {
+  padding: 5vh 0;
+
+  .ngdialog-content {
+    height: 90vh;
+
+    .lines p {
+      margin-top: 0;
+      margin-bottom: 0;
+      label { line-height: initial; }
+    }
+
+  }
+
 }
