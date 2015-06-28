@@ -1,6 +1,6 @@
 @import 'modules/common/mixins.scss';
 main.accounts {
-  form {
+  form.query {
     position: fixed;
     top: 35px;
     width: 75%;
@@ -101,6 +101,18 @@ main.accounts {
       padding: 0 1rem;
 
       &.selected { background: lightgreen; }
+    }
+  }
+}
+
+.ngdialog-theme-default.dialog-account-create {
+  .ngdialog-content {
+    width: 80vw;
+  }
+  label {
+    width: 12rem;
+    small {
+      margin: 0;
     }
   }
 }

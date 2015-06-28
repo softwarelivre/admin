@@ -69,7 +69,6 @@
         delete cloned.owner;
         delete cloned.coauthors;
         cloned.owner_id  = proposal.owner.id;
-        console.log(cloned);
         return cloned;
       };
       self.createOne = function(proposal) {

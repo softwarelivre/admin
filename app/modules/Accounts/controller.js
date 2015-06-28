@@ -4,6 +4,8 @@
   angular
     .module("segue.admin.accounts",[
       "segue.admin",
+      "segue.admin.libs",
+      "segue.admin.errors",
       "segue.admin.accounts.controller",
     ])
     .config(function($stateProvider) {
@@ -34,6 +36,14 @@
             purchases: function(account) { return account.follow('purchases'); },
             proposals: function(account) { return account.follow('proposals'); }
           }
+        })
+        .state('accounts.create', {
+          url: '/create/:id',
+          views: {
+            query:   { controller: 'AccountController',       templateUrl: 'modules/common/back.html' },
+            content: { controller: 'AccountCreateController', templateUrl: 'modules/Accounts/accounts.create.html' }
+          },
+          resolve: { }
         });
     });
 
@@ -71,5 +81,23 @@
       $scope.hidePaymentsOf = function(purchaseId) {
         delete $scope.paymentsOf[purchaseId];
       };
+    })
+    .controller("AccountCreateController", function($scope, $state, Validator, FormErrors, Accounts, focusOn) {
+      $scope.account = {};
+      focusOn("account.name", 200);
+
+      $scope.submit = function() {
+        Validator.validate($scope.account, "accounts/admin_create")
+                 .then(Accounts.createOne)
+                 .then(moveToNextState)
+                 .catch(FormErrors.set);
+      };
+      function moveToNextState(account) {
+        if ($scope.closeThisDialog) {
+          $scope.closeThisDialog(account);
+        } else {
+          $state.go('accounts.detail', { id: account.id });
+        }
+      }
     });
 })();

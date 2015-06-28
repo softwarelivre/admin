@@ -21,6 +21,10 @@
         return accounts.one(id).get();
       };
 
+      self.createOne = function(account) {
+        return accounts.post(account);
+      };
+
       return self;
     });
 

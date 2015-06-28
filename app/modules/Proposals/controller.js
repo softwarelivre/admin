@@ -3,6 +3,7 @@
 
   angular
     .module("segue.admin.proposals",[
+      "ngDialog",
       "segue.admin",
       "segue.admin.errors",
       "segue.admin.libs",
@@ -111,7 +112,7 @@
                         .then($state.reload);
       };
     })
-    .controller("ProposalCreateController", function($scope, $state,
+    .controller("ProposalCreateController", function($scope, $state, ngDialog,
                                                      Validator, FormErrors, Config, Accounts, Schedule, Proposals,
                                                      currentProposal, tracks, slot, focusOn) {
       $scope.slot = slot;
@@ -144,9 +145,6 @@
         focusOn('coauthor', 100);
       };
 
-      $scope.createOwner = function() {
-        console.log(1);
-      };
       $scope.createCoauthor = function() {
         console.log(2);
       };
@@ -158,12 +156,50 @@
                  .then(Proposals.addCoauthors($scope.proposal.coauthors))
                  .then(moveToDetailPage)
                  .then(Schedule.pushTalkToSlot(slot))
+                 .then(Proposals.localForget)
                  .catch(FormErrors.set);
       };
       function moveToDetailPage(talk) {
         $state.go('proposals.detail', { id: talk.id });
         return talk;
       }
+
+      $scope.createOwner = function(slot) {
+        var options = {
+          controller: 'AccountCreateController',
+          template: 'modules/Accounts/accounts.create.html',
+          className: 'ngdialog-theme-default dialog-account-create',
+        };
+        var dialog = ngDialog.open(options);
+        dialog.closePromise.then(function(data) {
+          if (noData(data)) { return; }
+          $scope.setOwner(data.value);
+        });
+
+      };
+      $scope.createCoauthor = function(slot) {
+        var options = {
+          controller: 'AccountCreateController',
+          template: 'modules/Accounts/accounts.create.html',
+          className: 'ngdialog-theme-default dialog-account-create',
+        };
+        var dialog = ngDialog.open(options);
+        dialog.closePromise.then(function(data) {
+          if (noData(data)) { return; }
+          $scope.pushCoauthor(data.value);
+        });
+
+      };
+
+
+
+      function noData(data) {
+          if (_(data.value).isString()) { return true; }
+          if (_(data.value).isEmpty()) { return true; }
+          if (_(data.value.id).isUndefined()) { return true; }
+          return false;
+      }
+
     });
 
 })();
