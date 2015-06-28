@@ -1,3 +1,4 @@
+@import 'modules/common/mixins.scss';
 main.accounts {
   form {
     position: fixed;
@@ -70,9 +71,9 @@ main.accounts {
     table.personal {
       clear: both;
 
-	  col.key { width: 10rem; }
-	  col.value { width: 20rem; }
-	  col.large { width: 30rem; }
+      col.key { width: 10rem; }
+      col.value { width: 20rem; }
+      col.large { width: 30rem; }
 
     }
   }
@@ -82,3 +83,25 @@ main.accounts {
 [ui-sref] {
   cursor: hand;
 }
+
+.account-lookup {
+  .results {
+    border: 1px solid gray;
+    width: 50%;
+    margin-top: 1.7rem;
+    margin-left: 1rem;
+    background: white;
+    padding: 0 0;
+    position: absolute;
+
+    li {
+      @include ellipsis;
+      list-style: none;
+      margin: 0;
+      padding: 0 1rem;
+
+      &.selected { background: lightgreen; }
+    }
+  }
+}
+

@@ -71,7 +71,7 @@
       $scope.days = days;
     })
 
-    .controller("ScheduleGridController", function($scope, $state, ngDialog, hotkeys, Schedule, day, days, hours, rooms, focusOn) {
+    .controller("ScheduleGridController", function($scope, $state, $window, ngDialog, hotkeys, Schedule, day, days, hours, rooms, focusOn) {
       $scope.days = days;
       $scope.hours = hours;
       $scope.rooms = rooms;
@@ -121,19 +121,8 @@
       };
 
       $scope.createTalkForSlot = function(slot) {
-        var options = {
-          controller: 'ProposalCreateController',
-          template: 'modules/Proposals/proposals.create.html',
-          data: { day: day, slot: slot },
-          className: 'ngdialog-theme-default dialog-proposal-create',
-        };
-        var dialog = ngDialog.open(options);
-        dialog.closePromise.then(function(data) {
-          if (noData(data)) { return; }
-          Schedule.setTalkForSlot(slot.id, data.value.id)
-                  .then(_.partial(reloadRoom, slot.room))
-                  .then($scope.resetZoom);
-        });
+        var url = $state.href('proposals.create_for_slot', { slotId: slot.id });
+        $window.open(url, "_blank");
       };
 
       $scope.chooseTalkForSlot = function(slot) {

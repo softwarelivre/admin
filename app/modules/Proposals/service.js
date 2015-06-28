@@ -4,6 +4,7 @@
   angular
     .module("segue.admin.proposals.service", [
       'segue.admin',
+      'ngStorage',
       'restangular',
     ])
     .factory('Tracks', function(Restangular) {
@@ -25,7 +26,7 @@
 
       return _.extend(service, extensions);
     })
-    .service("Proposals", function(Restangular, $q) {
+    .service("Proposals", function(Restangular, $q, $localStorage) {
       var self = {};
       var proposals = Restangular.service('admin/proposals');
 
@@ -53,6 +54,31 @@
       };
       self.removeTagFromProposal = function(proposalId, tagName) {
         return proposals.one(proposalId).one('tags').one(tagName).remove();
+      };
+      self.current = function() {
+        return $localStorage.savedProposal || {};
+      };
+      self.localSave = function(value) {
+        $localStorage.savedProposal = value || {};
+      };
+      self.localForget = function() {
+        $localStorage.savedProposal = {};
+      };
+      self.cleanUp = function(proposal) {
+        var cloned = _.clone(proposal);
+        delete cloned.owner;
+        delete cloned.coauthors;
+        cloned.owner_id  = proposal.owner.id;
+        console.log(cloned);
+        return cloned;
+      };
+      self.createOne = function(proposal) {
+        return proposals.post(proposal);
+      };
+      self.addCoauthors = function(coauthors) {
+        return function(proposal) {
+          return proposal.post('coauthors', _.pluck(coauthors, 'id'));
+        };
       };
 
       return self;

@@ -322,19 +322,3 @@ main.schedule.schedule-grid {
     }
   }
 }
-
-.ngdialog.ngdialog-theme-default.dialog-proposal-create {
-  padding: 5vh 0;
-
-  .ngdialog-content {
-    height: 90vh;
-
-    .lines p {
-      margin-top: 0;
-      margin-bottom: 0;
-      label { line-height: initial; }
-    }
-
-  }
-
-}

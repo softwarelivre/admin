@@ -1,0 +1,24 @@
+<div class="account-lookup" ng-if="!owner">
+  <input ng-model="query.needle" focusable
+         placeholder="buscar por nome/email"
+         ng-model-options="{ debounce: 300 }"
+         ui-keydown="{ 'down':       'moveDown()',
+                       'up':         'moveUp()',
+                       'enter':      'select()',
+                       'ctrl-enter': 'register()' }"
+         ng-focus="focus()"
+         ng-change="perform()"
+         ng-blur="blur()" />
+
+  <ul class="results" ng-if="display">
+    <li ng-repeat="entry in result"
+        ng-class="classes($index)">
+        {{ entry.name }}
+        ({{ entry.email }})
+    </li>
+
+    <li ng-hide="lookup.coauthors.result.length">
+      <a ng-click="lookup.coauthors.register()">cadastrar pessoa (ctrl+enter)</a>
+    </li>
+  </ul>
+</div>

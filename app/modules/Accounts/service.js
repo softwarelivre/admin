@@ -6,7 +6,7 @@
       'segue.admin',
       'restangular',
     ])
-    .service("Accounts", function(Restangular) {
+    .service("Accounts", function(Restangular, $q) {
       var self = {};
       var accounts = Restangular.service('admin/accounts');
 
@@ -14,6 +14,7 @@
         if (query.needle) {
           return accounts.getList({ q: query.needle });
         }
+        return $q.when([]);
       };
 
       self.get = function(id) {

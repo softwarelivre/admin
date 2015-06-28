@@ -42,8 +42,7 @@
     <button ng-hide="slot.blocked" ng-click="blockSlot(slot)">bloquear</button>
     <button ng-show="slot.blocked" ng-click="unblockSlot(slot)">desbloquear</button>
     <button ng-hide="slot.talk"    ng-click="chooseTalkForSlot(slot, $event)">escolher palestra</button>
-    <!--    <button ng-hide="slot.talk"    ng-click="createTalkForSlot(slot, $event)">criar nova palestra</button> -->
-
+    <button ng-hide="slot.talk"    ng-click="createTalkForSlot(slot, $event)">criar nova palestra...</button>
     <button ng-show="slot.talk"    ng-click="emptySlot(slot, $event)">esvaziar slot</button>
   </div>
 

@@ -5,7 +5,7 @@
     .module("segue.admin.directives", [ 'segue.admin' ])
     .directive("focusable", function($timeout) {
       return function(scope, elem, attr) {
-        var myName = attr.focusable || attr.ngModel;
+        var myName = attr.focusable || scope.$parent.focusLabel || attr.ngModel;
         scope.$on('focus-on', function(e, name) {
           if(name === myName) {
             $timeout(function() {

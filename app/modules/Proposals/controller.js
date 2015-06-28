@@ -4,6 +4,11 @@
   angular
     .module("segue.admin.proposals",[
       "segue.admin",
+      "segue.admin.errors",
+      "segue.admin.libs",
+      "segue.admin.schedule.service",
+      "segue.admin.accounts.directives",
+      "segue.admin.accounts.controller",
       "segue.admin.proposals.controller",
     ])
     .config(function($stateProvider) {
@@ -55,6 +60,19 @@
             content: { controller: 'ProposalCreateController', templateUrl: 'modules/Proposals/proposals.edit.html' }
           },
           resolve: {
+            currentProposal: function(Proposals) { return Proposals.current(); },
+            slot: function() { return null; }
+          }
+        })
+        .state('proposals.create_for_slot', {
+          url: '/create/forSlot/:slotId',
+          views: {
+            query:   { controller: 'ProposalController',       templateUrl: 'modules/common/back.html' },
+            content: { controller: 'ProposalCreateController', templateUrl: 'modules/Proposals/proposals.edit.html' }
+          },
+          resolve: {
+            slot: function(Schedule,$stateParams) { return Schedule.getSlot($stateParams.slotId); },
+            currentProposal: function(Proposals) { return Proposals.current(); }
           }
         });
     });
@@ -93,14 +111,59 @@
                         .then($state.reload);
       };
     })
-    .controller("ProposalCreateController", function($scope, tracks, focusOn) {
-      if ($scope.ngDialogData) {
-        $scope.day  = $scope.ngDialogData.day;
-        $scope.slot = $scope.ngDialogData.slot;
-      }
-
+    .controller("ProposalCreateController", function($scope, $state,
+                                                     Validator, FormErrors, Config, Accounts, Schedule, Proposals,
+                                                     currentProposal, tracks, slot, focusOn) {
+      $scope.slot = slot;
       $scope.tracks = tracks;
-      $scope.proposal = {};
+      $scope.languages = Config.PROPOSAL_LANGUAGES;
+      $scope.levels = Config.PROPOSAL_LEVELS;
+
+      $scope.proposal = currentProposal;
+      if (!$scope.proposal.coauthors) { $scope.proposal.coauthors = []; }
+      $scope.$watch('proposal', Proposals.localSave);
+
       focusOn('proposal.title',200);
+
+      $scope.setOwner = function(person) {
+        $scope.proposal.owner = person;
+        $scope.proposal.owner_id = person.id;
+        focusOn('proposal.full', 100);
+      };
+      $scope.pushCoauthor = function(person) {
+        $scope.proposal.coauthors.push(person);
+        focusOn('coauthor', 100);
+      };
+      $scope.removeOwner = function() {
+        $scope.proposal.owner = null;
+        $scope.proposal.owner_id = null;
+        focusOn('owner', 100);
+      };
+      $scope.removeCoauthor = function(index) {
+        _.pullAt($scope.proposal.coauthors, index);
+        focusOn('coauthor', 100);
+      };
+
+      $scope.createOwner = function() {
+        console.log(1);
+      };
+      $scope.createCoauthor = function() {
+        console.log(2);
+      };
+
+      $scope.submitAll = function() {
+        Validator.validate($scope.proposal, 'proposals/admin_create')
+                 .then(Proposals.cleanUp)
+                 .then(Proposals.createOne)
+                 .then(Proposals.addCoauthors($scope.proposal.coauthors))
+                 .then(moveToDetailPage)
+                 .then(Schedule.pushTalkToSlot(slot))
+                 .catch(FormErrors.set);
+      };
+      function moveToDetailPage(talk) {
+        $state.go('proposals.detail', { id: talk.id });
+        return talk;
+      }
     });
+
 })();

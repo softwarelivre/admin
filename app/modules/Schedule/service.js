@@ -33,6 +33,12 @@
       self.setTalkForSlot = function(slotId, talkId) {
         return slots.one(slotId).post('talk', { proposal_id: talkId });
       };
+      self.pushTalkToSlot = function(slot) {
+        return function(talk) {
+          if (!slot) { return talk; }
+          return self.setTalkForSlot(slot.id, talk.id);
+        };
+      };
       self.emptySlot = function(slotId, talkId) {
         return slots.one(slotId).one('talk').remove();
       };
@@ -41,6 +47,9 @@
       };
       self.situation = function() {
         return slots.one('situation').get();
+      };
+      self.getSlot = function(slotId) {
+        return slots.one(slotId).get();
       };
 
       return self;

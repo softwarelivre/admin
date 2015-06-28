@@ -22,7 +22,7 @@ form.inside, form.lines.collapsed, form.lines.normal {
 
 
 form.lines {
-  p {
+  p, >div {
     margin-top: 1rem;
     clear:both;
 
@@ -113,7 +113,7 @@ form.lines {
     }
   }
 
-  p.action {
+  p.action, div.action {
     padding: 2rem;
   }
 
@@ -121,6 +121,10 @@ form.lines {
     text-align: right;
     font-size: x-large;
     padding: 1rem;
+  }
+  button.small {
+    font-size: x-small;
+    padding: 5px;
   }
 }
 

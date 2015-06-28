@@ -1,6 +1,9 @@
 <section class="proposal-edit">
-  <header ng-if="slot">
-    <small>criando palestra para <u>{{ slot.room.name }}</u>, <u>{{ day }}</u>, <u>{{ slot.begins | time_locale }}</u></small>
+  <header ng-show="slot">
+    criando palestra para
+    <u>{{ slot.room.name }}</u>
+    dia <u>{{ slot.begins | date_locale }}</u>,
+    às <u>{{ slot.begins | time_locale }}</u>
   </header>
 
   <form class="lines">
@@ -18,12 +21,25 @@
       <span form-error="title.string_length_long"  translate>o título deve ter no máximo 80 caracteres</span>
     </p>
 
+    <div class="owner">
+      <label ng-class="{'notip':!proposal.owner}">
+        <span translate>autor principal</span>
+      </label>
+
+      <span ng-show="proposal.owner">
+        <span class="id">{{proposal.owner.id}}</span> {{ proposal.owner.email }} ({{ proposal.owner.email }})
+        <button type="button" class="small" ng-click="removeOwner()">trocar autor</button>
+      </span>
+
+      <account-lookup focus-label="owner" on-selected="setOwner" on-register="createOwner" ng-if="!proposal.owner" />
+    </div>
+
     <p>
       <label>
         <span translate>proposta</span>
         <small translate>(até 2000 caracteres)</small>
       </label>
-      <textarea required minlength="5" maxlength="2000"
+      <textarea required minlength="5" maxlength="2000" focusable
                 ng-model="proposal.full" class="large"></textarea>
       <i class="fa fa-check"></i>
       <span form-error="full.object_required"     translate>a proposta completa da palestra é obrigatória</span>
@@ -55,24 +71,33 @@
         <span translate>nível da palestra</span>
       </label>
       <span ng-repeat="level in levels">
-        <input type="radio" id="level_{{level}}" value="{{ level }}"
-              ng-model="proposal.level" />
+        <input type="radio" id="level_{{level}}" value="{{ level }}" ng-model="proposal.level" />
         <label for="level_{{level}}">{{ level | translate }}</label>
       </span>
       <span form-error="level.object_required" translate>o nível técnico da palestra é obrigatório</span>
     </p>
 
-    <p class="owner">
-      <label>
-        <span translate>autor principal</span>
+    <div class="coauthors">
+      <label class="notip">
+        <span translate>co-autores</span>
       </label>
-      <span>
-        <input type="text" placeholder="nome"     model="owner.name"/>
-        <input type="text" placeholder="email"    model="owner.email"/>
-        <input type="text" placeholder="document" model="owner.document"/>
-      </span>
-    </p>
 
+      <div ng-repeat="person in proposal.coauthors">
+        <span class="id">{{person.id}}</span>
+        <a ui-sref="accounts.detail({ id: person.id })" target="_blank">{{ person.name }}</a>
+        ({{ person.email }})
+        <button type="button" class="small" ng-click="removeCoauthor($index)">remover</button>
+      </div>
+
+      <account-lookup focus-label="coauthor" on-selected="pushCoauthor" on-register="createCoauthor" />
+    </div>
+
+
+    <aside class="action">
+      <button type="button" ng-click="submitAll()">
+        salvar
+      </button>
+    </aside>
   </form>
 
 </section>

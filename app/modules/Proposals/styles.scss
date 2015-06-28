@@ -1,3 +1,5 @@
+@import 'modules/common/mixins.scss';
+
 main.proposals {
   .filter.by-search {
     form {
@@ -185,12 +187,43 @@ table.proposals {
 
 }
 
-.proposals-create {
-  .owner {
+.proposal-edit {
+  .owner, .coauthors {
+    .id {
+      background: gray;
+      padding: 0 5px;
+      color: white;
+    }
     input {
-      width: 20%;
+      margin-bottom: 15px;
+      width: 50%;
       float: left;
+    }
+    div {
+      margin-left: 11.2rem;
     }
   }
 
+  aside.action {
+    transition: all 1s ease;
+    position: fixed;
+    bottom: 0;
+    right: 15%;
+    width: 15rem;
+    background: rgba(128,128,128,0.3);
+    border-top-left-radius:  20px;
+    border-top-right-radius: 20px;
+    box-shadow: 3px 3px 3px gray;
+
+    button {
+      font-size: large;
+      margin: 1rem;
+    }
+
+    .error {
+      font-size: 80%;
+      width: 10rem;
+    }
+
+  }
 }
