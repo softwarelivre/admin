@@ -30,8 +30,10 @@
         <span class="id">{{proposal.owner.id}}</span> {{ proposal.owner.email }} ({{ proposal.owner.email }})
         <button type="button" class="small" ng-click="removeOwner()">trocar autor</button>
       </span>
+      <span form-error="owner_id.object_required" translate>por favor escolha um autor</span>
 
-      <account-lookup focus-label="owner" on-selected="setOwner" on-register="createOwner" ng-if="!proposal.owner" />
+      <account-lookup focus-label="owner" on-selected="setOwner" on-register="createOwner" ng-if="!proposal.owner"></account-lookup>
+
     </div>
 
     <p>
@@ -52,6 +54,7 @@
       <select ng-model="proposal.track_id" ng-options="t.id as t.name_pt for t in tracks">
         <option class="empty" value="" ng-hide="proposal.track_id" translate>escolha uma trilha</option>
       </select>
+      <span form-error="track_id.object_required" translate>por favor, selectione uma trilha</span>
       <span form-error="track_id.invalid_type" translate>por favor, informe uma trilha válida</span>
     </p>
 
@@ -92,10 +95,56 @@
       <account-lookup focus-label="coauthor" on-selected="pushCoauthor" on-register="createCoauthor" />
     </div>
 
+    <div class="call_status">
+      <label translate>
+        situação apresentação
+      </label>
+
+      <div>
+        <span>
+          <input type="radio" id="call_status_pending" value="pending" ng-model="proposal.status" />
+          <label for="call_status_pending">pendente</label>
+        </span>
+        <span>
+          <input type="radio" id="call_status_declined" value="declined" ng-model="proposal.status" />
+          <label for="call_status_declined">declinado</label>
+        </span>
+        <span>
+          <input type="radio" id="call_status_confirmed" value="confirmed" ng-model="proposal.status" />
+          <label for="call_status_confirmed">confirmado</label>
+        </span>
+      </div>
+    </div>
+
+    <div class="slot_status" ng-if="slot">
+      <label translate>
+        situação horário
+      </label>
+      {{ slot_status }}
+      <div ng-show="slot.id">
+        <span>
+          <input type="radio" id="slot_status_dirty" value="dirty" ng-model="slot.status" />
+          <label for="slot_status_dirty">segurar notificação</label>
+        </span>
+        <span>
+          <input type="radio" id="slot_status_pending" value="pending" ng-model="slot.status" />
+          <label for="slot_status_pending">notificar</label>
+        </span>
+        <span>
+          <input type="radio" id="slot_status.declined" value="declined" ng-model="slot.status" />
+          <label for="slot_status_declined">declinado</label>
+        </span>
+        <span>
+          <input type="radio" id="slot_status_confirmed" value="confirmed" ng-model="slot.status" />
+          <label for="slot_status_confirmed">confirmado</label>
+        </span>
+      </div>
+    </div>
+
 
     <aside class="action">
       <button type="button" ng-click="submitAll()">
-        salvar
+        criar palestra
       </button>
     </aside>
   </form>

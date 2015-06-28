@@ -49,6 +49,12 @@
       self.changeTrackOfProposal = function(proposalId, newTrackId) {
         return proposals.one(proposalId).post('set-track', { track_id: newTrackId });
       };
+      self.setStatusOfProposal = function(proposalId, status) {
+        return proposals.one(proposalId).post('status', { status: status });
+      };
+      self.setCoauthorsOfProposal = function(proposalId, coauthors) {
+        return proposals.one(proposalId).post('coauthors', _.pluck(coauthors, 'id'));
+      };
       self.addTagToProposal = function(proposalId, tagName) {
         return proposals.one(proposalId).one('tags').post(tagName, {});
       };
@@ -68,15 +74,21 @@
         var cloned = _.clone(proposal);
         delete cloned.owner;
         delete cloned.coauthors;
+        delete cloned.status;
         cloned.owner_id  = proposal.owner.id;
         return cloned;
       };
       self.createOne = function(proposal) {
         return proposals.post(proposal);
       };
-      self.addCoauthors = function(coauthors) {
+      self.pipeCoauthorsToProposal = function(coauthors) {
         return function(proposal) {
-          return proposal.post('coauthors', _.pluck(coauthors, 'id'));
+          return self.setCoauthorsOfProposal(proposal.id, coauthors);
+        };
+      };
+      self.pipeStatusToProposal = function(status) {
+        return function(proposal) {
+          return self.setStatusOfProposal(proposal.id, status);
         };
       };
 

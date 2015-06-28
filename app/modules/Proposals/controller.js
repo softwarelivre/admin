@@ -62,7 +62,7 @@
           },
           resolve: {
             currentProposal: function(Proposals) { return Proposals.current(); },
-            slot: function() { return null; }
+            slot: function() { return { status: 'dirty' }; }
           }
         })
         .state('proposals.create_for_slot', {
@@ -120,8 +120,7 @@
       $scope.languages = Config.PROPOSAL_LANGUAGES;
       $scope.levels = Config.PROPOSAL_LEVELS;
 
-      $scope.proposal = currentProposal;
-      if (!$scope.proposal.coauthors) { $scope.proposal.coauthors = []; }
+      $scope.proposal = _.defaults(currentProposal, { coauthors: [], status: 'pending' });
       $scope.$watch('proposal', Proposals.localSave);
 
       focusOn('proposal.title',200);
@@ -145,23 +144,26 @@
         focusOn('coauthor', 100);
       };
 
-      $scope.createCoauthor = function() {
-        console.log(2);
-      };
-
       $scope.submitAll = function() {
         Validator.validate($scope.proposal, 'proposals/admin_create')
                  .then(Proposals.cleanUp)
                  .then(Proposals.createOne)
-                 .then(Proposals.addCoauthors($scope.proposal.coauthors))
-                 .then(moveToDetailPage)
+                 .then(Proposals.pipeStatusToProposal($scope.proposal.status))
+                 .then(Proposals.pipeCoauthorsToProposal($scope.proposal.coauthors))
+                 .then(updateProposal)
                  .then(Schedule.pushTalkToSlot(slot))
+                 .then(Schedule.pipeStatusToSlot($scope.slot.status))
                  .then(Proposals.localForget)
+                 .then(moveToDetailsPage)
                  .catch(FormErrors.set);
       };
-      function moveToDetailPage(talk) {
-        $state.go('proposals.detail', { id: talk.id });
-        return talk;
+      function updateProposal(proposal) {
+        $scope.proposal.id = proposal.id;
+        return proposal;
+      }
+      function moveToDetailsPage() {
+        if (!$scope.proposal.id) { return; }
+        $state.go('proposals.detail', { id: $scope.proposal.id });
       }
 
       $scope.createOwner = function(slot) {

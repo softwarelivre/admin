@@ -35,9 +35,20 @@
       };
       self.pushTalkToSlot = function(slot) {
         return function(talk) {
-          if (!slot) { return talk; }
+          if (!slot) { return null; }
           return self.setTalkForSlot(slot.id, talk.id);
         };
+      };
+      self.pipeStatusToSlot = function(status) {
+        return function(slot) {
+          console.log(slot, status);
+          if (!slot) { return null; }
+          if (!status) { return slot; }
+          return self.setSlotStatus(slot.id, status);
+        };
+      };
+      self.setSlotStatus = function(slotId, status) {
+        return slots.one(slotId).post('status', { status: status });
       };
       self.emptySlot = function(slotId, talkId) {
         return slots.one(slotId).one('talk').remove();
