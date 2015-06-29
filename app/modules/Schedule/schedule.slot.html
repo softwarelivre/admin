@@ -44,6 +44,8 @@
     <button ng-hide="slot.talk"    ng-click="chooseTalkForSlot(slot, $event)">escolher palestra</button>
     <button ng-hide="slot.talk"    ng-click="createTalkForSlot(slot, $event)">criar nova palestra...</button>
     <button ng-show="slot.talk"    ng-click="emptySlot(slot, $event)">esvaziar slot</button>
+
+    <button ng-show="slot.talk && slot.status != 'confirmed'" ng-click="setStatusOfSlot(slot, 'confirmed')">marcar como confirmado</button>
   </div>
 
   <div class="annotation">

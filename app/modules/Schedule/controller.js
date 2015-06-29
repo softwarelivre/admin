@@ -71,7 +71,19 @@
       $scope.days = days;
     })
 
-    .controller("ScheduleGridController", function($scope, $state, $window, ngDialog, hotkeys, Schedule, day, days, hours, rooms, focusOn) {
+    .controller("ScheduleGridController", function($scope, $state, $window,
+                                                   ngDialog, hotkeys,
+                                                   Schedule, Config,
+                                                   day, days, hours, rooms, focusOn) {
+
+      var socket = io(Config.API_HOST+":9001");
+      socket.on("sync-room", function(room) {
+        $scope.reloadRoom(room);
+      });
+      function emitSignal(room) {
+        socket.emit("room", room);
+      }
+
       $scope.days = days;
       $scope.hours = hours;
       $scope.rooms = rooms;
@@ -79,15 +91,16 @@
       $scope.slotsOfRoom = {};
       $scope.zoomedId = 1;
 
-      function reloadRoom(room) {
+      $scope.reloadRoom = function(room) {
+        if (!room) { return; }
         return Schedule.slotsOfRoom(room.id, $scope.currentDay).then(function(data) {
           $scope.slotsOfRoom[room.id] = data;
         });
-      }
+      };
 
-      function reloadAllRooms() {
-        return _.each($scope.rooms, reloadRoom);
-      }
+      $scope.reloadAllRooms = function(room) {
+        return _.each($scope.rooms, $scope.reloadRoom);
+      };
 
       $scope.resetZoom = function($event) {
         if ($event) $event.stopPropagation();
@@ -101,22 +114,32 @@
 
       $scope.blockSlot = function(slot) {
         Schedule.blockSlot(slot.id)
-                .then(_.partial(reloadRoom, slot.room))
+                .then(_.partial(emitSignal, slot.room))
+                .then(_.partial($scope.reloadRoom, slot.room))
                 .then($scope.resetZoom);
       };
       $scope.unblockSlot = function(slot) {
         Schedule.unblockSlot(slot.id)
-                .then(_.partial(reloadRoom, slot.room))
+                .then(_.partial(emitSignal, slot.room))
+                .then(_.partial($scope.reloadRoom, slot.room))
                 .then($scope.resetZoom);
       };
       $scope.emptySlot = function(slot) {
         Schedule.emptySlot(slot.id)
-                .then(_.partial(reloadRoom, slot.room))
+                .then(_.partial(emitSignal, slot.room))
+                .then(_.partial($scope.reloadRoom, slot.room))
                 .then($scope.resetZoom);
       };
       $scope.saveAnnotation = function(slot) {
         Schedule.annotateSlot(slot.id, slot.annotation)
-                .then(_.partial(reloadRoom, slot.room))
+                .then(_.partial(emitSignal, slot.room))
+                .then(_.partial($scope.reloadRoom, slot.room))
+                .then($scope.resetZoom);
+      };
+      $scope.setStatusOfSlot = function(slot, status) {
+        Schedule.setSlotStatus(slot.id, status)
+                .then(_.partial(emitSignal, slot.room))
+                .then(_.partial($scope.reloadRoom, slot.room))
                 .then($scope.resetZoom);
       };
 
@@ -136,7 +159,8 @@
         dialog.closePromise.then(function(data) {
           if (noData(data)) { return; }
           Schedule.setTalkForSlot(slot.id, data.value.id)
-                  .then(_.partial(reloadRoom, slot.room))
+                  .then(_.partial(emitSignal, slot.room))
+                  .then(_.partial($scope.reloadRoom, slot.room))
                   .then($scope.resetZoom);
         });
 
@@ -151,6 +175,6 @@
 
       hotkeys.bindTo($scope).add({ combo: 'esc', callback: $scope.resetZoom });
 
-      reloadAllRooms();
+      $scope.reloadAllRooms();
     });
 })();

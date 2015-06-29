@@ -126,11 +126,20 @@ main.schedule.schedule-grid {
         font-size: small;
         color: gray;
       }
+      .reload {
+        margin-left: 5px;
+        display: none;
+      }
 
       &:hover {
         width: $roomsWidth * 2;
         .name {
           overflow: initial;
+        }
+        .reload {
+          font-size: small;
+          color: blue;
+          display: block;
         }
       }
     }
