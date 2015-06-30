@@ -76,7 +76,7 @@
             isCreation: function() { return true; },
             slot: function() { return null; },
             proposal: function(Proposals) {
-              return _.defaults(Proposals.current(), { coauthors: [], status: 'pending' });
+              return _.defaults(Proposals.current(), { coauthors: [], status: 'confirmed' });
             }
           }
         })
@@ -90,7 +90,7 @@
             isCreation: function() { return true; },
             slot: function(Schedule,$stateParams) { return Schedule.getSlot($stateParams.slotId); },
             proposal: function(Proposals) {
-              return _.defaults(Proposals.current(), { coauthors: [], status: 'pending' });
+              return _.defaults(Proposals.current(), { coauthors: [], status: 'confirmed' });
             }
           }
         });

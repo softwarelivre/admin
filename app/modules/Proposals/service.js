@@ -79,7 +79,10 @@
         return cloned;
       };
       self.saveObject = function(proposal) {
-        return proposal.save();
+        if (proposal.id) {
+          return proposal.save();
+        }
+        return proposals.post(proposal);
       };
       self.pipeCoauthorsToProposal = function(coauthors) {
         return function(proposal) {
