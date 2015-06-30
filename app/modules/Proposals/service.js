@@ -53,7 +53,7 @@
         return proposals.one(proposalId).post('status', { status: status });
       };
       self.setCoauthorsOfProposal = function(proposalId, coauthors) {
-        return proposals.one(proposalId).post('coauthors', _.pluck(coauthors, 'id'));
+        return proposals.one(proposalId).post('coauthors', _.pluck(coauthors, 'account_id'));
       };
       self.addTagToProposal = function(proposalId, tagName) {
         return proposals.one(proposalId).one('tags').post(tagName, {});
@@ -78,8 +78,8 @@
         cloned.owner_id  = proposal.owner.id;
         return cloned;
       };
-      self.createOne = function(proposal) {
-        return proposals.post(proposal);
+      self.saveObject = function(proposal) {
+        return proposal.save();
       };
       self.pipeCoauthorsToProposal = function(coauthors) {
         return function(proposal) {

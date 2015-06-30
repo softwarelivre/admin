@@ -33,6 +33,7 @@
       self.setTalkForSlot = function(slotId, talkId) {
         return slots.one(slotId).post('talk', { proposal_id: talkId });
       };
+
       self.pushTalkToSlot = function(slot) {
         return function(talk) {
           if (!slot) { return null; }

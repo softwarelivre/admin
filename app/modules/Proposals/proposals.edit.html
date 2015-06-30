@@ -1,11 +1,10 @@
 <section class="proposal-edit">
   <header ng-show="slot">
-    criando palestra para
+    editando palestra para
     <u>{{ slot.room.name }}</u>
     dia <u>{{ slot.begins | date_locale }}</u>,
     às <u>{{ slot.begins | time_locale }}</u>
   </header>
-
   <form class="lines">
     <p>
       <label>
@@ -85,10 +84,10 @@
         <span translate>co-autores</span>
       </label>
 
-      <div ng-repeat="person in proposal.coauthors">
-        <span class="id">{{person.id}}</span>
-        <a ui-sref="accounts.detail({ id: person.id })" target="_blank">{{ person.name }}</a>
-        ({{ person.email }})
+      <div ng-repeat="coauthor in proposal.coauthors">
+        <span class="id">{{coauthor.account_id}}</span>
+        <a ui-sref="accounts.detail({ id: person.account_id })" target="_blank">{{ coauthor.name }}</a>
+        ({{ coauthor.email }})
         <button type="button" class="small" ng-click="removeCoauthor($index)">remover</button>
       </div>
 
@@ -120,14 +119,13 @@
       <label translate>
         situação horário
       </label>
-      {{ slot_status }}
       <div ng-show="slot.id">
         <span>
           <input type="radio" id="slot_status_dirty" value="dirty" ng-model="slot.status" />
           <label for="slot_status_dirty">segurar notificação</label>
         </span>
         <span>
-          <input type="radio" id="slot_status.declined" value="declined" ng-model="slot.status" />
+          <input type="radio" id="slot_status_declined" value="declined" ng-model="slot.status" />
           <label for="slot_status_declined">declinado</label>
         </span>
         <span>
@@ -140,7 +138,7 @@
 
     <aside class="action">
       <button type="button" ng-click="submitAll()">
-        criar palestra
+        salvar palestra
       </button>
     </aside>
   </form>

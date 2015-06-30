@@ -54,26 +54,44 @@
             invites: function(proposal) { return proposal.follow('invites'); }
           }
         })
+        .state('proposals.edit', {
+          url: '/edit/:id',
+          views: {
+            query:   { controller: 'ProposalController',     templateUrl: 'modules/common/back.html' },
+            content: { controller: 'ProposalEditController', templateUrl: 'modules/Proposals/proposals.edit.html' }
+          },
+          resolve: {
+            isCreation: function() { return false; },
+            slot: function(proposal) { return proposal.slots[0]; },
+            proposal: function(Proposals, $stateParams) { return Proposals.get($stateParams.id); }
+          }
+        })
         .state('proposals.create', {
           url: '/create',
           views: {
             query:   { controller: 'ProposalController',       templateUrl: 'modules/common/back.html' },
-            content: { controller: 'ProposalCreateController', templateUrl: 'modules/Proposals/proposals.edit.html' }
+            content: { controller: 'ProposalEditController', templateUrl: 'modules/Proposals/proposals.edit.html' }
           },
           resolve: {
-            currentProposal: function(Proposals) { return Proposals.current(); },
-            slot: function() { return { status: 'dirty' }; }
+            isCreation: function() { return true; },
+            slot: function() { return null; },
+            proposal: function(Proposals) {
+              return _.defaults(Proposals.current(), { coauthors: [], status: 'pending' });
+            }
           }
         })
         .state('proposals.create_for_slot', {
           url: '/create/forSlot/:slotId',
           views: {
-            query:   { controller: 'ProposalController',       templateUrl: 'modules/common/back.html' },
-            content: { controller: 'ProposalCreateController', templateUrl: 'modules/Proposals/proposals.edit.html' }
+            query:   { controller: 'ProposalController',     templateUrl: 'modules/common/back.html' },
+            content: { controller: 'ProposalEditController', templateUrl: 'modules/Proposals/proposals.edit.html' }
           },
           resolve: {
+            isCreation: function() { return true; },
             slot: function(Schedule,$stateParams) { return Schedule.getSlot($stateParams.slotId); },
-            currentProposal: function(Proposals) { return Proposals.current(); }
+            proposal: function(Proposals) {
+              return _.defaults(Proposals.current(), { coauthors: [], status: 'pending' });
+            }
           }
         });
     });
@@ -102,26 +120,28 @@
 
       $scope.proposals = proposals;
     })
+
     .controller("ProposalShowController", function($scope, $state, proposal, invites, tracks, Proposals, focusOn) {
       $scope.proposal = proposal;
       $scope.invites = invites;
-      $scope.tracks = tracks;
-
-      $scope.changeTrackOfProposal = function(newTrackId) {
-        return Proposals.changeTrackOfProposal(proposal.id, newTrackId)
-                        .then($state.reload);
-      };
     })
-    .controller("ProposalCreateController", function($scope, $state, ngDialog,
-                                                     Validator, FormErrors, Config, Accounts, Schedule, Proposals,
-                                                     currentProposal, tracks, slot, focusOn) {
-      $scope.slot = slot;
-      $scope.tracks = tracks;
-      $scope.languages = Config.PROPOSAL_LANGUAGES;
-      $scope.levels = Config.PROPOSAL_LEVELS;
 
-      $scope.proposal = _.defaults(currentProposal, { coauthors: [], status: 'pending' });
-      $scope.$watch('proposal', Proposals.localSave);
+    .controller("ProposalEditController", function($scope, $state, $q, ngDialog, isCreation,
+                                                   Validator, FormErrors, Config, Accounts, Schedule, Proposals,
+                                                   proposal, tracks, slot, focusOn) {
+
+      $scope.slot = slot;
+      $scope.levels = Config.PROPOSAL_LEVELS;
+      $scope.tracks = tracks;
+      $scope.proposal = proposal;
+      $scope.languages = Config.PROPOSAL_LANGUAGES;
+
+      if (isCreation) {
+        $scope.$watch('proposal', Proposals.localSave);
+      } else {
+        $scope.proposal.owner_id = proposal.owner.id;
+        $scope.proposal.track_id = proposal.track.id;
+      }
 
       focusOn('proposal.title',200);
 
@@ -131,6 +151,7 @@
         focusOn('proposal.full', 100);
       };
       $scope.pushCoauthor = function(person) {
+        person.account_id = person.id;
         $scope.proposal.coauthors.push(person);
         focusOn('coauthor', 100);
       };
@@ -147,12 +168,11 @@
       $scope.submitAll = function() {
         Validator.validate($scope.proposal, 'proposals/admin_create')
                  .then(Proposals.cleanUp)
-                 .then(Proposals.createOne)
+                 .then(Proposals.saveObject)
                  .then(Proposals.pipeStatusToProposal($scope.proposal.status))
                  .then(Proposals.pipeCoauthorsToProposal($scope.proposal.coauthors))
                  .then(updateProposal)
-                 .then(Schedule.pushTalkToSlot(slot))
-                 .then(Schedule.pipeStatusToSlot($scope.slot.status))
+                 .then(updateSlot)
                  .then(Proposals.localForget)
                  .then(moveToDetailsPage)
                  .catch(FormErrors.set);
@@ -160,6 +180,13 @@
       function updateProposal(proposal) {
         $scope.proposal.id = proposal.id;
         return proposal;
+      }
+      function updateSlot(proposal) {
+        var slot = $scope.slot;
+        if (!slot) { return proposal; }
+        return $q.when(proposal)
+                 .then(Schedule.pushTalkToSlot(slot))
+                 .then(Schedule.pipeStatusToSlot(slot.status));
       }
       function moveToDetailsPage() {
         if (!$scope.proposal.id) { return; }
@@ -192,8 +219,6 @@
         });
 
       };
-
-
 
       function noData(data) {
           if (_(data.value).isString()) { return true; }

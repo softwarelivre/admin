@@ -16,6 +16,9 @@
     <div class="status {{proposal.status}}">
       {{ proposal.status }}
     </div>
+    <div class="actions">
+      <a ui-sref="proposals.edit({id:proposal.id})">editar</a>
+    </div>
   </header>
 
   <table class="data">
@@ -36,10 +39,6 @@
         </div>
       </td>
     </tr>
-    <tr class="full">
-      <th translate>descrição</th>
-      <td class="pre-wrap">{{ proposal.full }}</td>
-    </tr>
     <tr class="language">
       <th translate>língua</th>
       <td>{{ proposal.language }}</td>
@@ -51,15 +50,6 @@
     <tr class="created">
       <th translate>criado em...</th>
       <td>{{ proposal.created }}</td>
-    </tr>
-    <tr class="change_track">
-      <th translate>trocar para trilha...</th>
-      <td>
-        <select ng-model="newTrackId" ng-options="t.id as t.name_pt for t in tracks">
-          <option class="empty" value="" translate>escolha nova trilha</option>
-        </select>
-        <button ng-click="changeTrackOfProposal(newTrackId)" ng-show="newTrackId" translate>executar troca!</button>
-      </td>
     </tr>
     <tr class="slots">
       <th translate>agendamentos</th>
@@ -73,6 +63,10 @@
           <span class="status">{{ slot.status }}</span>
         </div>
       </td>
+    </tr>
+    <tr class="full">
+      <th translate>descrição</th>
+      <td class="pre-wrap">{{ proposal.full }}</td>
     </tr>
 
   </table>
