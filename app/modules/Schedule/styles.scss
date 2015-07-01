@@ -162,10 +162,16 @@ main.schedule.schedule-grid {
         background-position: bottom right;
 
         label { display: none; }
-        &.duration-60  { width: 1 * $slotWidth - 0.3rem; }
-        &.duration-120 { width: 2 * $slotWidth - 0.3rem; }
-        &.duration-180 { width: 3 * $slotWidth - 0.3rem; }
-        &.duration-240 { width: 4 * $slotWidth - 0.3rem; }
+        &.duration-60  { width:  1 * $slotWidth - 0.3rem; }
+        &.duration-120 { width:  2 * $slotWidth - 0.3rem; }
+        &.duration-180 { width:  3 * $slotWidth - 0.3rem; }
+        &.duration-240 { width:  4 * $slotWidth - 0.3rem; }
+        &.duration-300 { width:  5 * $slotWidth - 0.3rem; }
+        &.duration-360 { width:  6 * $slotWidth - 0.3rem; }
+        &.duration-420 { width:  7 * $slotWidth - 0.3rem; }
+        &.duration-480 { width:  8 * $slotWidth - 0.3rem; }
+        &.duration-520 { width:  9 * $slotWidth - 0.3rem; }
+        &.duration-600 { width: 10 * $slotWidth - 0.3rem; }
 
         .info, .actions, .status { display: none; }
         .icons {
