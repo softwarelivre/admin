@@ -26,6 +26,7 @@
       'segue.admin.tournaments',
       'segue.admin.calls',
       'segue.admin.notifications',
+      'segue.admin.promocodes',
       'segue.admin.schedule',
     ])
     .controller('AdminController', function($scope, $state, Auth, Config) {

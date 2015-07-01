@@ -1,0 +1,38 @@
+<h3 ng-hide="promocodes.length == 0">
+  total de códigos encontrados: {{ promocodes.length }}
+</h3>
+<div class="actions">
+  <button ui-sref="promocodes.create">criar novo código...</button>
+</div>
+<table class="result" ng-hide="promocodes.length == 0">
+  <col class="id" />
+  <col class="hash_code" />
+  <col class="discount" />
+  <col class="description" />
+  <col class="product" />
+  <col class="status" />
+  <thead>
+    <tr>
+      <th translate>id</th>
+      <th translate>hash</th>
+      <th translate>desconto</th>
+      <th translate>descrição</th>
+      <th translate>produto</th>
+      <th translate>usado por...</th>
+    </tr>
+  </thead>
+  <tr ng-repeat="promocode in promocodes | orderBy:'description'">
+    <td class="id">{{ promocode.id }}</td>
+    <td class="hash_code">{{ promocode.hash_code }}</td>
+    <td class="discount">{{ promocode.discount * 100 }}%</td>
+    <td class="description">{{ promocode.description }}</td>
+    <td class="product">{{ promocode.product.description }}</td>
+    <td class="status">
+      <span ng-show="promocode.spent_with" class="id">{{ promocode.spent_with.id }}</span>
+      <span ng-show="promocode.spent_with" class="name">{{ promocode.spent_with.name }}</span>
+      <span ng-hide="promocode.spent_with" class="available">
+        disponível
+      </span>
+    </td>
+  </tr>
+</table>
