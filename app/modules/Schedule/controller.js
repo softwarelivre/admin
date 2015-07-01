@@ -76,12 +76,12 @@
                                                    Schedule, Config,
                                                    day, days, hours, rooms, focusOn) {
 
-      var socket = io(Config.API_HOST+":9001");
-      socket.on("sync-room", function(room) {
-        $scope.reloadRoom(room);
-      });
+      // var socket = io(Config.API_HOST+":9001");
+      // socket.on("sync-room", function(room) {
+      //   $scope.reloadRoom(room);
+      // });
       function emitSignal(room) {
-        socket.emit("room", room);
+      //  socket.emit("room", room);
       }
 
       $scope.days = days;
