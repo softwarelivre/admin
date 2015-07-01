@@ -33,6 +33,9 @@
       self.setTalkForSlot = function(slotId, talkId) {
         return slots.one(slotId).post('talk', { proposal_id: talkId });
       };
+      self.stretchSlot = function(slotId) {
+        return slots.one(slotId).post('stretch');
+      };
 
       self.pushTalkToSlot = function(slot) {
         return function(talk) {

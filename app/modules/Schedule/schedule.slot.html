@@ -1,6 +1,6 @@
-<div class="slot {{slot.status}} hour-{{ slot.hour }}"
+<div class="slot {{slot.status}} hour-{{ slot.hour }} duration-{{slot.duration}}"
       ng-class="{zoomed: slot.id == zoomedId}"
-      ng-click="zoomOnSlot(slot)"
+      ng-click="zoomOnSlot(room,$index)"
       ng-repeat="slot in slotsOfRoom[room.id]">
 
   <div class="info">
@@ -44,6 +44,8 @@
     <button ng-hide="slot.talk"    ng-click="chooseTalkForSlot(slot, $event)">escolher palestra</button>
     <button ng-hide="slot.talk"    ng-click="createTalkForSlot(slot, $event)">criar nova palestra...</button>
     <button ng-show="slot.talk"    ng-click="emptySlot(slot, $event)">esvaziar slot</button>
+
+    <button ng-show="slot.can_be_stretched" ng-click="stretchSlot(slot, $event)">esticar slot (+1h)</button>
 
     <button ng-show="slot.talk && slot.status != 'confirmed'" ng-click="setStatusOfSlot(slot, 'confirmed')">marcar como confirmado</button>
   </div>

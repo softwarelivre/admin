@@ -107,9 +107,20 @@
         $scope.zoomedId = null;
       };
 
-      $scope.zoomOnSlot = function(slot) {
+      $scope.zoomOnSlot = function(room, index) {
+        var slot = $scope.slotsOfRoom[room.id][index];
         $scope.zoomedId = slot.id;
-        focusOn('slot.annotation');
+
+        Schedule.getSlot(slot.id).then(function(updated) {
+          $scope.slotsOfRoom[room.id][index].can_be_stretched = updated.can_be_stretched;
+        });
+      };
+
+      $scope.stretchSlot = function(slot) {
+        Schedule.stretchSlot(slot.id)
+                .then(_.partial(emitSignal, slot.room))
+                .then(_.partial($scope.reloadRoom, slot.room))
+                .then($scope.resetZoom);
       };
 
       $scope.blockSlot = function(slot) {

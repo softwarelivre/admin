@@ -154,8 +154,7 @@ main.schedule.schedule-grid {
       position: relative;
       height: $slotHeight;
       .slot {
-        width: $slotWidth;
-        height: $slotHeight;
+        height: $slotHeight * 0.95;
         position: absolute;
         outline: 1px solid gray;
         background-color: lightgray;
@@ -163,6 +162,10 @@ main.schedule.schedule-grid {
         background-position: bottom right;
 
         label { display: none; }
+        &.duration-60  { width: 1 * $slotWidth - 0.3rem; }
+        &.duration-120 { width: 2 * $slotWidth - 0.3rem; }
+        &.duration-180 { width: 3 * $slotWidth - 0.3rem; }
+        &.duration-240 { width: 4 * $slotWidth - 0.3rem; }
 
         .info, .actions, .status { display: none; }
         .icons {
@@ -176,7 +179,7 @@ main.schedule.schedule-grid {
           @include ellipsis;
           padding-left: 3px;
           height: 1.2em;
-          width: $slotWidth;
+          width: 98%;
           font-size: small;
           color: gray;
           background: lightgray;
@@ -185,7 +188,7 @@ main.schedule.schedule-grid {
           @include box-text;
           padding-left: 3px;
           height: 2.4em;
-          width: $slotWidth * 0.9;
+          width: 85%;
           font-size: small;
           color: black;
           .id { display: none; }
@@ -194,7 +197,7 @@ main.schedule.schedule-grid {
           @include box-text;
           padding-left: 3px;
           height: 1.1em;
-          width: $slotWidth;
+          width: 98%;
           font-size: small;
           color: gray;
         }
