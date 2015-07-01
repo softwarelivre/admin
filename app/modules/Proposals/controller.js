@@ -69,14 +69,14 @@
         .state('proposals.create', {
           url: '/create',
           views: {
-            query:   { controller: 'ProposalController',       templateUrl: 'modules/common/back.html' },
+            query:   { controller: 'ProposalController',     templateUrl: 'modules/common/back.html' },
             content: { controller: 'ProposalEditController', templateUrl: 'modules/Proposals/proposals.edit.html' }
           },
           resolve: {
             isCreation: function() { return true; },
             slot: function() { return null; },
             proposal: function(Proposals) {
-              return _.defaults(Proposals.current(), { coauthors: [], status: 'confirmed' });
+              return { coauthors: [], status: 'confirmed' };
             }
           }
         })
@@ -90,7 +90,7 @@
             isCreation: function() { return true; },
             slot: function(Schedule,$stateParams) { return Schedule.getSlot($stateParams.slotId); },
             proposal: function(Proposals) {
-              return _.defaults(Proposals.current(), { coauthors: [], status: 'confirmed' });
+              return { coauthors: [], status: 'confirmed' };
             }
           }
         });
