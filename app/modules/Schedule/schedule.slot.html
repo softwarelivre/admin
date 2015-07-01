@@ -8,7 +8,7 @@
     <span class="room"><b>sala:</b> {{ slot.room.name }}</span>
     <span class="hour"><b>horário:</b> {{ slot.begins | time_locale }}</span>
     <span class="duration"><b>duração</b> {{ slot.duration }}min</span>
-    <span class="close" ng-click="resetZoom($event)">&times;</span>
+    <button class="close" ng-click="resetZoom($event)">&times;</button>
   </div>
 
   <div ng-show="slot.talk" class="track">
