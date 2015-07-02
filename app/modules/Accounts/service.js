@@ -20,6 +20,11 @@
       self.get = function(id) {
         return accounts.one(id).get();
       };
+      self.getByPurchase = function(purchaseId) {
+        return accounts.getList({ purchase_id: purchaseId }).then(function(results) {
+          return results[0];
+        });
+      };
 
       self.createOne = function(account) {
         console.log(account.id);

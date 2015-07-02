@@ -3,6 +3,10 @@
 
   <img gravatar-src="account.email" gravatar-size="100">
   <header>
+    <div class="identifier">
+      {{ account.identifier.category }} -
+      {{ account.identifier.id }}
+    </div>
     <div class="name">
       {{ account.name }}
       <a ui-sref="accounts.edit({id:account.id})">editar</a>

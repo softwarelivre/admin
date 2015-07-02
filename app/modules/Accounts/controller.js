@@ -40,6 +40,18 @@
             proposals: function(account) { return account.follow('proposals'); }
           }
         })
+        .state('accounts.by_purchase', {
+          url: '/by-purchase/:id',
+          views: {
+            query:   { controller: 'AccountController',     templateUrl: 'modules/common/back.html' },
+            content: { controller: 'AccountShowController', templateUrl: 'modules/Accounts/accounts.detail.html' }
+          },
+          resolve: {
+            account: function(Accounts, $stateParams) { return Accounts.getByPurchase($stateParams.id); },
+            purchases: function(account) { return account.follow('purchases'); },
+            proposals: function(account) { return account.follow('proposals'); }
+          }
+        })
         .state('accounts.edit', {
           url: '/edit/:id',
           views: {

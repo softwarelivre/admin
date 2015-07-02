@@ -17,10 +17,13 @@ main.accounts {
     position: absolute;
     margin-top: 50px;
 
-    col.name     { width: 30rem; }
+    col.id       { width:  3rem; }
+    col.category { width:  4rem; }
+    col.status   { width:  4rem; }
+    col.name     { width: 20rem; }
     col.email    { width: 15rem; }
-    col.document { width: 8rem; }
-    col.city     { width: 15rem; }
+    col.document { width:  7rem; }
+    col.city     { width:  7rem; }
 
     thead {
       th {
@@ -35,6 +38,15 @@ main.accounts {
 
       td {
         padding: 0.5em 0.1em;
+
+        &.id, &.category, &.status {
+          text-align: center;
+        }
+
+        &.status-paid    { background-color: green;     color: white; }
+        &.status-pending { background-color: lightpink; color: black; }
+
+        &.city { width: 7rem; @include ellipsis; }
       }
 
     }
@@ -59,6 +71,13 @@ main.accounts {
       float: left;
     }
     header {
+      .identifier {
+        float: right;
+        font-size: 300%;
+        background: gray;
+        color: white;
+        padding: 1rem;
+      }
       .name, .email, .badges {
         padding: 0.2em;
       }
