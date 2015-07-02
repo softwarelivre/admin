@@ -3,9 +3,12 @@
 
   <img gravatar-src="account.email" gravatar-size="100">
   <header>
-    <div class="identifier">
-      {{ account.identifier.category }} -
-      {{ account.identifier.id }}
+    <div class="identifier status-{{account.identifier.status}}">
+      <span class="label">
+        {{ account.identifier.category }} -
+        {{ account.identifier.id }}
+      </span>
+      <span class="status">{{ account.identifier.status }}</span>
     </div>
     <div class="name">
       {{ account.name }}

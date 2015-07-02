@@ -45,6 +45,7 @@ main.accounts {
 
         &.status-paid    { background-color: green;     color: white; }
         &.status-pending { background-color: lightpink; color: black; }
+        &.status-stale   { background-color: maroon;    color: white; }
 
         &.city { width: 7rem; @include ellipsis; }
       }
@@ -71,13 +72,7 @@ main.accounts {
       float: left;
     }
     header {
-      .identifier {
-        float: right;
-        font-size: 300%;
-        background: gray;
-        color: white;
-        padding: 1rem;
-      }
+
       .name, .email, .badges {
         padding: 0.2em;
       }
@@ -98,6 +93,25 @@ main.accounts {
     }
   }
 
+  .identifier {
+    float: right;
+    background: gray;
+    padding: 1rem;
+
+    &.status-paid    { background-color: green;     color: white; }
+    &.status-pending { background-color: lightpink; color: black; }
+    &.status-stale   { background-color: maroon;    color: white; }
+
+    .label {
+      display: block;
+      font-size: 300%;
+    }
+
+    .status {
+      text-align: center;
+      display: block;
+    }
+  }
 }
 
 [ui-sref] {
