@@ -36,6 +36,9 @@
       self.stretchSlot = function(slotId) {
         return slots.one(slotId).post('stretch');
       };
+      self.unstretchSlot = function(slotId) {
+        return slots.one(slotId).post('unstretch');
+      };
 
       self.pushTalkToSlot = function(slot) {
         return function(talk) {

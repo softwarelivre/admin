@@ -112,12 +112,20 @@
         $scope.zoomedId = slot.id;
 
         Schedule.getSlot(slot.id).then(function(updated) {
-          $scope.slotsOfRoom[room.id][index].can_be_stretched = updated.can_be_stretched;
+          $scope.slotsOfRoom[room.id][index].can_be_stretched   = updated.can_be_stretched;
+          $scope.slotsOfRoom[room.id][index].can_be_unstretched = updated.can_be_unstretched;
         });
       };
 
       $scope.stretchSlot = function(slot) {
         Schedule.stretchSlot(slot.id)
+                .then(_.partial(emitSignal, slot.room))
+                .then(_.partial($scope.reloadRoom, slot.room))
+                .then($scope.resetZoom);
+      };
+
+      $scope.unstretchSlot = function(slot) {
+        Schedule.unstretchSlot(slot.id)
                 .then(_.partial(emitSignal, slot.room))
                 .then(_.partial($scope.reloadRoom, slot.room))
                 .then($scope.resetZoom);

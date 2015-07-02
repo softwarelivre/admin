@@ -45,7 +45,8 @@
     <button ng-hide="slot.talk"    ng-click="createTalkForSlot(slot, $event)">criar nova palestra...</button>
     <button ng-show="slot.talk"    ng-click="emptySlot(slot, $event)">esvaziar slot</button>
 
-    <button ng-show="slot.can_be_stretched" ng-click="stretchSlot(slot, $event)">esticar slot (+1h)</button>
+    <button ng-show="slot.can_be_stretched"   ng-click="stretchSlot(slot, $event)">esticar slot (+1h)</button>
+    <button ng-show="slot.can_be_unstretched" ng-click="unstretchSlot(slot, $event)">desesticar slot (-1h)</button>
 
     <button ng-show="slot.talk && slot.status != 'confirmed'" ng-click="setStatusOfSlot(slot, 'confirmed')">marcar como confirmado</button>
   </div>
