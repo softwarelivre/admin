@@ -17,6 +17,7 @@
     <input type="email" required minlength="5" maxsize="80" ng-readonly="lockEmail" ng-model="account.email"/>
     <i class="fa fa-check only-expanded"></i>
     <span form-error="email.object_required" translate>por favor, informe o endereço de e-mail</span>
+    <span form-error="email.invalid_type" translate>por favor, informe o endereço de e-mail</span>
     <span form-error="email.already_in_use" translate>
       este endereço de e-mail já está registrado
       no sistema, por favor escolha outro
@@ -29,7 +30,7 @@
     </label>
     <input type="text" required minlength="5" maxsize="80" change-signal="country:changed" ng-model="account.country"/>
     <i class="fa fa-check"></i>
-    <span form-error="country.object_required" translate>por favor, informe o país</span>
+    <span form-error="country.*" translate>por favor, informe o país</span>
   </p>
 
   <p>
@@ -39,7 +40,16 @@
     </label>
     <input type="text" required minlength="5" maxsize="15" ng-model="account.document"/>
     <i class="fa fa-check"></i>
-    <span form-error="document.object_required" translate>favor informar o número do documento</span>
+    <span form-error="document.*" translate>favor informar o número do documento</span>
+  </p>
+
+  <p class="only-expanded">
+    <label>
+      <span translate>empresa / universidade</span>
+      <small translate>(ou qualquer outra instituição)</small>
+    </label>
+    <input type="text" required minlength="3" maxlength="30" ng-model="account.organization"/>
+    <i class="fa fa-check"></i>
   </p>
 
   <p class="only-expanded">
@@ -52,7 +62,8 @@
 
   <aside class="action">
     <button ng-click="submit()" translate>
-      criar conta
+      <span ng-show="isCreation">criar conta</span>
+      <span ng-hide="isCreation">salvar conta</span>
     </button>
   </aside>
 </form>

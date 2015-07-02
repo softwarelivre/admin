@@ -37,18 +37,34 @@
             proposals: function(account) { return account.follow('proposals'); }
           }
         })
+        .state('accounts.edit', {
+          url: '/edit/:id',
+          views: {
+            query:   { controller: 'AccountController',     templateUrl: 'modules/common/back.html' },
+            content: { controller: 'AccountEditController', templateUrl: 'modules/Accounts/accounts.edit.html' }
+          },
+          resolve: {
+            account: function(Accounts, $stateParams) { return Accounts.get($stateParams.id); },
+            isCreation: function()  { return false; }
+          }
+        })
+
         .state('accounts.create', {
           url: '/create/:id',
           views: {
-            query:   { controller: 'AccountController',       templateUrl: 'modules/common/back.html' },
-            content: { controller: 'AccountCreateController', templateUrl: 'modules/Accounts/accounts.create.html' }
+            query:   { controller: 'AccountController',     templateUrl: 'modules/common/back.html' },
+            content: { controller: 'AccountEditController', templateUrl: 'modules/Accounts/accounts.edit.html' }
           },
-          resolve: { }
+          resolve: {
+            account: function() { return {}; },
+            isCreation: function()  { return true; }
+          }
         });
     });
 
   angular
     .module("segue.admin.accounts.controller", [
+      'segue.admin.errors',
       'segue.admin.accounts.service'
     ])
     .controller("AccountController", function($scope, $state, Accounts, focusOn) {
@@ -82,13 +98,17 @@
         delete $scope.paymentsOf[purchaseId];
       };
     })
-    .controller("AccountCreateController", function($scope, $state, Validator, FormErrors, Accounts, focusOn) {
-      $scope.account = {};
+    .controller("AccountEditController", function($scope, $state, Validator, FormErrors, Accounts,
+                                                  account, isCreation, focusOn) {
+      $scope.account = account;
+      $scope.isCreation = isCreation;
       focusOn("account.name", 200);
 
       $scope.submit = function() {
-        Validator.validate($scope.account, "accounts/admin_create")
-                 .then(Accounts.createOne)
+        var schema = (isCreation)? 'accounts/admin_create':'accounts/admin_edit';
+        var saveFn = (isCreation)? Accounts.createOne : Accounts.saveOne;
+        Validator.validate($scope.account, schema)
+                 .then(saveFn)
                  .then(moveToNextState)
                  .catch(FormErrors.set);
       };
@@ -99,5 +119,20 @@
           $state.go('accounts.detail', { id: account.id });
         }
       }
+    })
+    .service("AccountCreateModal", function(ngDialog) {
+      var options = {
+        controller: 'AccountEditController',
+        template: 'modules/Accounts/accounts.edit.html',
+        className: 'ngdialog-theme-default dialog-account-create',
+        resolve: {
+          account: function() { return {}; },
+          isCreation: function() { return true; }
+        }
+      };
+      console.log(options);
+      return function() {
+        return ngDialog.open(options);
+      };
     });
 })();

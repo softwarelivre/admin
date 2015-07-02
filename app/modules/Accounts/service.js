@@ -22,7 +22,11 @@
       };
 
       self.createOne = function(account) {
+        console.log(account.id);
         return accounts.post(account);
+      };
+      self.saveOne = function(account) {
+        return account.save();
       };
 
       return self;

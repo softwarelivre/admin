@@ -126,9 +126,9 @@
       $scope.invites = invites;
     })
 
-    .controller("ProposalEditController", function($scope, $state, $q, ngDialog, isCreation,
+    .controller("ProposalEditController", function($scope, $state, $q, isCreation,
                                                    Validator, FormErrors, Config, Accounts, Schedule, Proposals,
-                                                   proposal, tracks, slot, focusOn) {
+                                                   AccountCreateModal, proposal, tracks, slot, focusOn) {
 
       $scope.slot = slot;
       $scope.levels = Config.PROPOSAL_LEVELS;
@@ -194,26 +194,14 @@
       }
 
       $scope.createOwner = function(slot) {
-        var options = {
-          controller: 'AccountCreateController',
-          template: 'modules/Accounts/accounts.create.html',
-          className: 'ngdialog-theme-default dialog-account-create',
-        };
-        var dialog = ngDialog.open(options);
-        dialog.closePromise.then(function(data) {
+        AccountCreateModal().closePromise.then(function(data) {
           if (noData(data)) { return; }
           $scope.setOwner(data.value);
         });
 
       };
       $scope.createCoauthor = function(slot) {
-        var options = {
-          controller: 'AccountCreateController',
-          template: 'modules/Accounts/accounts.create.html',
-          className: 'ngdialog-theme-default dialog-account-create',
-        };
-        var dialog = ngDialog.open(options);
-        dialog.closePromise.then(function(data) {
+        AccountCreateModal().closePromise.then(function(data) {
           if (noData(data)) { return; }
           $scope.pushCoauthor(data.value);
         });
