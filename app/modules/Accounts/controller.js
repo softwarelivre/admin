@@ -19,10 +19,13 @@
           }
         })
         .state('accounts.list', {
-          url: '/list',
+          url: '/list/:query',
           views: {
             query:   { controller: 'AccountListController', templateUrl: 'modules/Accounts/accounts.query.html' },
             content: { controller: 'AccountListController', templateUrl: 'modules/Accounts/accounts.list.html' }
+          },
+          resolve: {
+            accounts: function(Accounts, $stateParams) { return Accounts.lookup({ needle: $stateParams.query }); },
           }
         })
         .state('accounts.detail', {
@@ -67,18 +70,16 @@
       'segue.admin.errors',
       'segue.admin.accounts.service'
     ])
-    .controller("AccountController", function($scope, $state, Accounts, focusOn) {
+    .controller("AccountListController", function($scope, $state, accounts, focusOn) {
       $scope.enforceAuth();
-
-      $scope.accounts = [];
-      $scope.query = { needle: '' };
+      $scope.accounts = accounts;
+      $scope.query = { needle: $state.params.query };
       $scope.doSearch = function() {
-        Accounts.lookup($scope.query).then(function(data) {
-          $scope.accounts = data;
-        });
+        $state.go("accounts.list", { query: $scope.query.needle });
       };
+      focusOn("query.needle");
     })
-    .controller("AccountListController", function($scope, $state, Accounts, focusOn) {
+    .controller("AccountController", function($scope, $state, Accounts, focusOn) {
       focusOn('query.needle');
     })
     .controller("AccountShowController", function($scope, $state, account, purchases, proposals, focusOn) {

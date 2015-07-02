@@ -29,7 +29,9 @@
     <td class="product">{{ promocode.product.description }}</td>
     <td class="status">
       <span ng-show="promocode.spent_with" class="id">{{ promocode.spent_with.id }}</span>
-      <span ng-show="promocode.spent_with" class="name">{{ promocode.spent_with.name }}</span>
+      <span ng-show="promocode.spent_with" class="name">
+        <a ui-sref="accounts.list({ query: promocode.spent_with.name })">{{ promocode.spent_with.name }}</a>
+      </span>
       <span ng-hide="promocode.spent_with" class="available">
         disponível
       </span>
