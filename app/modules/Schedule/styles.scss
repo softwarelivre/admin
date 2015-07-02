@@ -321,21 +321,22 @@ main.schedule.schedule-grid {
       border-right: 1px solid black;
       padding-left: 3px;
     }
-    td.id     { width: 3vw;  max-width: 3vw;  }
+    td.id     { width:  3vw; max-width:  3vw; }
     td.title  { width: 40vw; max-width: 40vw; }
-    td.author { width: 20vw; max-width: 20vw; }
-    td.status { width: 10vw; max-width: 10vw;  }
-    td.action { width: 10vw; max-width: 10vw; border: 0px; }
+    td.author { width: 10vw; max-width: 10vw; }
+    td.status { width:  8vw; max-width:  8vw; }
+    td.action { width: 12vw; max-width: 12vw; }
 
     tr {
       &.proposal  { color: gray; }
-      &.pending   { color: orange; }
+      &.pending   { color: maroon; }
       &.confirmed { color: black; }
       &.declined  { color: red; }
 
       .id { color: gray; font-size: small; }
       .title { @include ellipsis; }
       .author { @include ellipsis; }
+      .extra { font-size: xx-small; display: inline;}
 
     }
   }

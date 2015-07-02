@@ -24,7 +24,7 @@
   <tr ng-repeat="promocode in promocodes | orderBy:'description'">
     <td class="id">{{ promocode.id }}</td>
     <td class="hash_code">{{ promocode.hash_code }}</td>
-    <td class="discount">{{ promocode.discount * 100 }}%</td>
+    <td class="discount">{{ promocode.discount | number }}%</td>
     <td class="description">{{ promocode.description }}</td>
     <td class="product">{{ promocode.product.description }}</td>
     <td class="status">
