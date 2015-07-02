@@ -3,10 +3,14 @@
 
   <img gravatar-src="account.email" gravatar-size="100">
   <header>
-    <div class="name">{{ account.name }}</div>
+    <div class="name">
+      {{ account.name }}
+      <a ui-sref="accounts.edit({id:account.id})">editar</a>
+    </div>
     <div class="email">{{ account.email }}</div>
 
     <div class="badges">
+      <span class="admin"     ng-show="account.role == 'admin'"           translate>admin</span>
       <span class="paid"      ng-show="account.has_valid_purchases"       translate>pago</span>
       <span class="leader"    ng-show="account.links.caravans.count == 1" translate>líder</span>
       <span class="proposals" ng-show="account.links.proposals.count > 0"
@@ -14,7 +18,6 @@
                 {{ account.links.proposals.count }} proposta
       </span>
     </div>
-    <a ui-sref="accounts.edit({id:account.id})">editar</a>
   </header>
 
   <table class="personal">

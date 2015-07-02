@@ -12,10 +12,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="account in accounts" ui-sref="accounts.detail({id: account.id})">
+    <tr ng-repeat="account in accounts">
       <td>
-        {{ account.name }}
+        <a ui-sref="accounts.detail({id: account.id})">{{ account.name }}</a>
         <span class="badges">
+          <span class="admin"     ng-show="account.role == 'admin'"           translate>admin</span>
           <span class="paid"      ng-show="account.has_valid_purchases"       translate>pago</span>
           <span class="leader"    ng-show="account.links.caravans.count == 1" translate>líder</span>
           <span class="proposals" ng-show="account.links.proposals.count > 0"

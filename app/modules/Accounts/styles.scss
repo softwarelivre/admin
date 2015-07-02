@@ -46,6 +46,7 @@ main.accounts {
     border-radius: 5px;
     font-size: small;
 
+    &.admin     { background: red;       color: white; }
     &.paid      { background: green;     color: white; }
     &.leader    { background: lightpink; color: black; }
     &.proposals { background: orange;    color: black; }
