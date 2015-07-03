@@ -21,9 +21,7 @@
         return accounts.one(id).get();
       };
       self.getByPurchase = function(purchaseId) {
-        return accounts.getList({ purchase_id: purchaseId }).then(function(results) {
-          return results[0];
-        });
+        return accounts.one('holder-of').one(purchaseId).get();
       };
 
       self.createOne = function(account) {

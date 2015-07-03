@@ -33,8 +33,9 @@ main.promocodes-list {
     col.hash_code   { width: 7rem; }
     col.discount    { width: 3rem; }
     col.description { width: 18rem; }
-    col.product     { width: 17rem; }
-    col.status      { width: 20rem; }
+    col.product     { width: 12rem; }
+    col.status      { width: 15rem; }
+    col.creator     { width: 10rem; }
 
     thead {
       th {

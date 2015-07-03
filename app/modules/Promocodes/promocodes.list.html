@@ -11,6 +11,7 @@
   <col class="description" />
   <col class="product" />
   <col class="status" />
+  <col class="creator" />
   <thead>
     <tr>
       <th translate>id</th>
@@ -19,6 +20,7 @@
       <th translate>descrição</th>
       <th translate>produto</th>
       <th translate>usado por...</th>
+      <th translate>criador</th>
     </tr>
   </thead>
   <tr ng-repeat="promocode in promocodes | orderBy:'description'">
@@ -30,11 +32,14 @@
     <td class="status">
       <span ng-show="promocode.spent_with" class="id">{{ promocode.spent_with.id }}</span>
       <span ng-show="promocode.spent_with" class="name">
-        <a ui-sref="accounts.list({ query: promocode.spent_with.name })">{{ promocode.spent_with.name }}</a>
+        <a ui-sref="accounts.by_purchase({ id: promocode.spent_with.id })">{{ promocode.spent_with.name }}</a>
       </span>
       <span ng-hide="promocode.spent_with" class="available">
         disponível
       </span>
+    </td>
+    <td class="creator">
+      {{ promocode.creator }}
     </td>
   </tr>
 </table>
