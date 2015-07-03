@@ -65,7 +65,7 @@
 
       self.login = function(email, password) {
         LocalSession.destroy();
-        return session.post({ email: email, password: password })
+        return session.post({ email: email, password: password, acceptable_roles: ['admin'] })
                       .then(LocalSession.create);
       };
       self.credentials = function() {
