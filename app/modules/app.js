@@ -14,6 +14,7 @@
       'ngToast',
       'restangular',
       'angular-loading-bar',
+      'ui.bootstrap',
 
       'segue.admin.errors',
       'segue.admin.filters',
