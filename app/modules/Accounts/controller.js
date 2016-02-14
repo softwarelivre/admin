@@ -95,6 +95,7 @@
       focusOn('query.needle');
     })
     .controller("AccountShowController", function($scope, $state, account, purchases, proposals, focusOn) {
+      $scope.enforceAuth();
       $scope.account = account;
       $scope.purchases = purchases;
       $scope.proposals = proposals;
@@ -113,6 +114,7 @@
     })
     .controller("AccountEditController", function($scope, $state, Validator, FormErrors, Accounts,
                                                   account, isCreation, focusOn) {
+      $scope.enforceAuth();
       $scope.account = account;
       $scope.isCreation = isCreation;
       focusOn("account.name", 200);
