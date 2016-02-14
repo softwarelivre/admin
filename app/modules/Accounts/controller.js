@@ -31,7 +31,7 @@
         .state('accounts.detail', {
           url: '/detail/:id',
           views: {
-            query:   { controller: 'AccountController',     templateUrl: 'modules/common/back.html' },
+            query:   {},
             content: { controller: 'AccountShowController', templateUrl: 'modules/Accounts/accounts.detail.html' }
           },
           resolve: {
@@ -43,7 +43,7 @@
         .state('accounts.by_purchase', {
           url: '/by-purchase/:id',
           views: {
-            query:   { controller: 'AccountController',     templateUrl: 'modules/common/back.html' },
+            query:   {},
             content: { controller: 'AccountShowController', templateUrl: 'modules/Accounts/accounts.detail.html' }
           },
           resolve: {
@@ -55,7 +55,7 @@
         .state('accounts.edit', {
           url: '/edit/:id',
           views: {
-            query:   { controller: 'AccountController',     templateUrl: 'modules/common/back.html' },
+            query:   {},
             content: { controller: 'AccountEditController', templateUrl: 'modules/Accounts/accounts.edit.html' }
           },
           resolve: {
@@ -67,7 +67,7 @@
         .state('accounts.create', {
           url: '/create/:id',
           views: {
-            query:   { controller: 'AccountController',     templateUrl: 'modules/common/back.html' },
+            query:   { },
             content: { controller: 'AccountEditController', templateUrl: 'modules/Accounts/accounts.edit.html' }
           },
           resolve: {
