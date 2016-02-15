@@ -2,7 +2,9 @@
   "use strict";
 
   angular
-    .module('segue.admin.filters', [ ])
+    .module('segue.admin.filters', [
+        'segue.admin.humanized'
+    ])
     .filter('dateFromTimestamp', function() {
       return function(input) {
         var year  = input.substring(0,4);
