@@ -31,6 +31,24 @@
       self.saveOne = function(account) {
         return account.save();
       };
+      self.getDisabilityTypes = function() {
+        return [ 'none', 'physical', 'hearing', 'visual', 'mental'];
+      };
+      self.getOccupationTypes = function() {
+        return [
+          'student', 'private_employee', 'public_employee', 'businessman', 'freelancer'
+        ]
+      };
+      self.getEducationTypes = function() {
+        return [
+          'post_graduation_stricto',
+          'post_graduation_lato',
+          'graduation',
+          'graduation_incomplete',
+          'secondary',
+          'secondary_incomplete',
+        ];
+      };
 
       return self;
     });
