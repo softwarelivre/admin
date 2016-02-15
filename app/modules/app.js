@@ -15,6 +15,7 @@
       'restangular',
       'angular-loading-bar',
       'ui.bootstrap',
+      'ui.mask',
 
       'segue.admin.errors',
       'segue.admin.filters',
