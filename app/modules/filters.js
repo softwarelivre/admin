@@ -41,5 +41,16 @@
         }
         return 'R$ ' + formatCurrency(parseFloat(input));
       };
+    })
+    .filter('humanize', function(HumanizedStrings) {
+      return function(input) {
+        return HumanizedStrings[input] || input;
+      };
+    })
+    .filter('document', function() {
+      return function(input) {
+        if (!input) { return; }
+        return input.replace(/(\d\d\d)/g,"$1.").replace(/.(\d\d)$/,"-$1");
+      };
     });
 })();
