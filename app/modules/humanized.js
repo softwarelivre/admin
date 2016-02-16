@@ -15,7 +15,7 @@
        'proponent':         'proponente',
        'proponent-student': 'proponente estudante',
        'speaker':           'palestrante',
-       'student':           'estudante',
+       'student':           'Estudante',
 
         // disability types
         'none':     'Não',
