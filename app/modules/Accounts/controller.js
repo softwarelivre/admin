@@ -31,7 +31,6 @@
         .state('accounts.detail', {
           url: '/detail/:id',
           views: {
-            query:   {},
             content: { controller: 'AccountShowController', templateUrl: 'modules/Accounts/accounts.detail.html' }
           },
           resolve: {
@@ -43,7 +42,6 @@
         .state('accounts.by_purchase', {
           url: '/by-purchase/:id',
           views: {
-            query:   {},
             content: { controller: 'AccountShowController', templateUrl: 'modules/Accounts/accounts.detail.html' }
           },
           resolve: {
@@ -55,26 +53,30 @@
         .state('accounts.edit', {
           url: '/edit/:id',
           views: {
-            query:   {},
             content: { controller: 'AccountEditController', templateUrl: 'modules/Accounts/accounts.edit.html' }
           },
           resolve: {
             account: function(Accounts, $stateParams) { return Accounts.get($stateParams.id); },
-            isCreation: function()  { return false; }
           }
         })
 
         .state('accounts.create', {
-          url: '/create/:id',
+          url: '/create',
           views: {
-            query:   { },
-            content: { controller: 'AccountEditController', templateUrl: 'modules/Accounts/accounts.edit.html' }
+            content: { controller: 'AccountCreateController', templateUrl: 'modules/Accounts/accounts.create.html' }
+          }
+        })
+        .state('accounts.upload', {
+          url: '/upload',
+          views: {
+            content: { controller: 'AccountUploadController', templateUrl: 'modules/Accounts/teste.html' }
           },
           resolve: {
             account: function() { return {}; },
             isCreation: function()  { return true; }
           }
         });
+
     });
 
   angular
@@ -94,6 +96,36 @@
     .controller("AccountController", function($scope, $state, Accounts, focusOn) {
       focusOn('query.needle');
     })
+    .controller("AccountUploadController", function($scope, $state, Accounts, focusOn, Config, Upload) {
+
+      $scope.calculateTheTotalAmount = function(payments) {
+        var total = 0;
+        _.each(payments, function(payments) {
+            total += payments.amount? payments.amount: payments.entry.amount
+        });
+        return total;
+      };
+
+      $scope.uploadUsingHttp = function(file) {
+          file.upload = Upload.upload({
+            url: Config.API_HOST + Config.API_PATH + '/'+ 'purchases/'+'csv',
+            headers: {
+              'Content-Type': file.type,
+            },
+            data: {file: file}
+          });
+
+          file.upload.then(function (response) {
+            $scope.payments = response.data.payments;
+          }, function (response) {
+              $scope.uploadError = true
+          });
+
+          file.upload.progress(function (evt) {
+            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+          });
+      }
+    })
     .controller("AccountShowController", function($scope, $state, account, purchases, proposals, focusOn) {
       $scope.enforceAuth();
       $scope.account = account;
@@ -112,20 +144,66 @@
         delete $scope.paymentsOf[purchaseId];
       };
     })
-    .controller("AccountEditController", function($scope, $state, Validator, FormErrors, Accounts,
-                                                  account, isCreation, focusOn) {
+    .controller("AccountCreateController", function($scope, $state,
+                                                    FormErrors, Accounts, focusOn) {
       $scope.enforceAuth();
-      $scope.account = account;
-      $scope.isCreation = isCreation;
-      focusOn("account.name", 200);
+
+      $scope.type = 'person'
+      $scope.account = {
+          sex: 'M',
+          membership: false,
+          disability: 'none'
+      };
+
+      $scope.disabilityTypes =  Accounts.getDisabilityTypes();
+      $scope.occupationTypes = Accounts.getOccupationTypes();
+      $scope.educationTypes = Accounts.getEducationTypes();
+
+      focusOn("account.name", 500);
 
       $scope.submit = function() {
-        var schema = (isCreation)? 'accounts/admin_create':'accounts/admin_edit';
-        var saveFn = (isCreation)? Accounts.createOne : Accounts.saveOne;
-        Validator.validate($scope.account, schema)
-                 .then(saveFn)
-                 .then(moveToNextState)
-                 .catch(FormErrors.set);
+          Accounts.createOne($scope.account)
+                  .then(moveToNextState)
+                  .catch(FormErrors.setError);
+
+      };
+      function moveToNextState(account) {
+        if ($scope.closeThisDialog) {
+          $scope.closeThisDialog(account);
+        } else {
+          $state.go('accounts.detail', { id: account.id });
+        }
+      }
+    })
+    .controller("AccountEditController", function($scope, $state, FormErrors, Accounts,
+                                                  account, focusOn) {
+      $scope.enforceAuth();
+      $scope.account = account;
+
+      $scope.lockType = true;
+
+
+      if(account.role == 'corporate') {
+        $scope.account.cnpj = account.document;
+        $scope.type = 'corporate'
+      }
+      else if(account.role == 'foreign') {
+          $scope.account.passport = account.document;
+          $scope.type = 'foreign';
+      } else {
+          $scope.account.cpf = account.document;
+          $scope.type = 'person'
+      }
+      focusOn("account.name", 200);
+
+      $scope.disabilityTypes =  Accounts.getDisabilityTypes();
+      $scope.occupationTypes = Accounts.getOccupationTypes();
+      $scope.educationTypes = Accounts.getEducationTypes();
+
+      $scope.submit = function() {
+        Accounts.saveOne($scope.account)
+                .then(moveToNextState)
+                .catch(FormErrors.setError);
       };
       function moveToNextState(account) {
         if ($scope.closeThisDialog) {
@@ -140,12 +218,7 @@
         controller: 'AccountEditController',
         template: 'modules/Accounts/accounts.edit.html',
         className: 'ngdialog-theme-default dialog-account-create',
-        resolve: {
-          account: function() { return {}; },
-          isCreation: function() { return true; }
-        }
       };
-      console.log(options);
       return function() {
         return ngDialog.open(options);
       };

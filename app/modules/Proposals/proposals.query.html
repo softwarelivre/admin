@@ -1,6 +1,20 @@
-<form class="query">
-  <input type="text"
-         ng-model="query.needle" focusable
-         ui-keypress="{ 'enter': 'doSearch()' }"
-  />
+<h2 class="page-header">Buscar atividade</h2>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li class="active">Atividades</li>
+</ol>
+
+<form class="form">
+
+  <div class="form-group">
+    <label>
+      Por título ou situação:
+    </label>
+    <input type="text"
+           class="form-control"
+           ng-model="query.needle"
+           ui-keypress="{ 'enter': 'doSearch()' }" />
+  </div>
+
 </form>

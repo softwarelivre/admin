@@ -1,20 +1,14 @@
-<table class="result" ng-show="accounts.length">
-  <col class="id"/>
-  <col class="category"/>
-  <col class="status"/>
-  <col class="name"/>
-  <col class="email"/>
-  <col class="document"/>
-  <col class="city"/>
+<table class="table table-striped table-responsive" ng-show="accounts.length">
   <thead>
     <tr>
-      <th translate class="id">id</th>
-      <th translate class="category">categoria</th>
-      <th translate class="status">situação</th>
-      <th translate class="name">nome</th>
-      <th translate class="email">e-mail</th>
-      <th translate class="document">documento</th>
-      <th translate class="city">cidade</th>
+      <th translate class="id">Código da compra</th>
+      <th translate class="category">Categoria</th>
+      <th translate class="status">Situação</th>
+      <th translate class="name">Nome</th>
+      <th translate class="name">Role</th>
+      <th translate class="email">E-mail</th>
+      <th translate class="document">Documento</th>
+      <th translate class="city">Cidade</th>
     </tr>
   </thead>
   <tbody>
@@ -24,10 +18,12 @@
       <td class="status status-{{account.identifier.status}}">{{ account.identifier.status }}</td>
       <td>
         <a ui-sref="accounts.detail({id: account.id})">{{ account.name }}</a>
+      </td>
+      <td>
         <span class="badges">
-          <span class="admin"     ng-show="account.role == 'admin'"           translate>admin</span>
-          <span class="leader"    ng-show="account.links.caravans.count == 1" translate>líder</span>
-          <span class="proposals" ng-show="account.links.proposals.count > 0"
+          <span class="label label-danger"     ng-show="account.role == 'admin'"           translate>admin</span>
+          <span class="label label-warning"    ng-show="account.links.caravans.count == 1" translate>líder</span>
+          <span class="label label-info" ng-show="account.links.proposals.count > 0"
                 translate translate-n="account.links.proposals.count" translate-plural="{{$count}} propostas">
                 {{ account.links.proposals.count }} proposta
           </span>
@@ -39,4 +35,5 @@
     </tr>
   </tbody>
 </table>
+
 

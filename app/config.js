@@ -4,7 +4,7 @@
   angular
     .module('segue.admin')
     .constant('Config', {
-      API_HOST: 'http://192.168.33.91',
+      API_HOST: 'http://backend.segue.org',
       API_PATH: '/api',
       PROPOSAL_LANGUAGES: [
         { abbr: 'pt', name: 'português' },
@@ -13,7 +13,7 @@
       ],
       PROPOSAL_LEVELS: [ "beginner", "advanced" ],
       TIMEZONE: '-0300',
-      EVENT_DAYS: ["2015-07-08","2015-07-09","2015-07-10","2015-07-11"],
+      EVENT_DAYS: ["2016-07-13","2016-07-14","2015-07-15","2015-06-16"],
       HOURS: [ 9, 10,11,12,13,14,15,16,17,18,19 ]
     });
 

@@ -1,0 +1,21 @@
+<h2 class="page-header">Cadastrar atividade</h2>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a ui-sref="proposal.list">Atividades</a></li>
+  <li class="active">
+    <span>Criar</span>
+  </li>
+</ol>
+
+<form novalidate id="proposal_form" name="proposal_form" class="form">
+
+    <div ng-include="'modules/Proposals/proposals.fieldset.html'"></div>
+
+    <div class="text-center">
+        <button class="btn btn-md btn-primary" ng-click="submitAll()" >
+            <span translate>Criar atividade</span>
+        </button>
+    </div>
+
+</form>

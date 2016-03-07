@@ -1,0 +1,21 @@
+<h2 class="page-header">Criar conta</h2>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a ui-sref="accounts.list">Contas</a></li>
+  <li class="active">
+    <span>Criar</span>
+  </li>
+</ol>
+
+<form novalidate id="account_form" name="account_form" class="form">
+
+    <ng-include src="'modules/Accounts/accounts.fieldset.html'"></ng-include>
+
+    <div class="text-center">
+        <button class="btn btn-md btn-primary" ng-click="submit()" >
+            <span translate>Criar conta</span>
+        </button>
+    </div>
+
+</form>

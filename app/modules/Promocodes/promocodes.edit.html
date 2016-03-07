@@ -1,47 +1,75 @@
-<form novalidate id="account_form" name="account_form" class="lines">
-  <p>
-    <label class="notip">
-      <span translate>descrição</span>
-    </label>
-    <input placeholder="descrição obrigatória" type="text"
-           required focusable minlength="5" maxlength="80" ng-model="promocode.description"/>
-    <span form-error="description.object_required" translate>por favor, descreva o código promocional</span>
-  </p>
+<h2 class="page-header">
+    <span ng-show="state.name == 'promocodes.create'">Criar código promocional</span>
+    <span ng-show="state.name == 'promocodes.edit'">Editar dados</span>
+</h2>
 
-  <p>
-    <label class="notip" translate>produto habilitado</label>
-    <select ng-model="promocode.product_id" ng-options="p.id as p.description for p in products">
-      <option class="empty" value="" ng-hide="promocode.product_id" translate>escolha um produto</option>
-    </select>
-    <span form-error="product_id.object_required" translate>por favor, selectione um produto</span>
-    <span form-error="product_id.invalid_type" translate>por favor, informe um produto válido</span>
-  </p>
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a ui-sref="promocodes.list">Códigos promocionais</a></li>
+  <li class="active">
+      <span ng-show="state.name == 'promocodes.create'">Criar</span>
+      <span ng-show="state.name == 'promocodes.edit'">Editar</span>
+  </li>
+</ol>
+
+<form novalidate id="account_form" name="account_form" class="form">
+
+    <fieldset>
+      <legend>Código promocional</legend>
+
+      <div class="form-group has-feedback">
+          <label class="required">
+            <span translate>Descrição:</span>
+          </label>
+          <input type="text"
+                 maxlength="80"
+                 ng-model="promocode.description"
+                 class="form-control"/>
+      </div>
+
+      <div class="form-group has-feedback">
+          <label class="required">
+            <span translate>Produto habilitado:</span>
+          </label>
+          <select ng-model="promocode.product_id"
+                  ng-options="p.id as p.description for p in products"
+                  class="form-control">
+            <option value="" ng-hide="promocode.product_id" translate>Escolha um produto</option>
+          </select>
+      </div>
+
+      <div class="form-group has-feedback">
+          <label class="required">
+            <span translate>Quantidade:</span>
+          </label>
+          <input type="number"
+                 placeholder="padrão: 1"
+                 min="1" max="100"
+                 class="form-control"
+                 ng-model="promocode.quantity">
+      </div>
+
+      <div class="form-group has-feedback">
+        <label>
+          <span translate>Desconto:</span>
+        </label>
+        <input type="number"
+               placeholder="padrão: 100%"
+               class="form-control"
+               ng-model="promocode.discount" min="0" max="100">
+      </div>
+
+  </fieldset>
 
 
-
-  <p>
-    <label class="notip">
-      <span translate>quantidade</span>
-    </label>
-    <input class="short" placeholder="padrão: 1" type="number"
-           ng-model="promocode.quantity" min="1" max="100" required>
-    <i class="fa fa-check"></i>
-    <span form-error="quantity.object_required" translate>por favor, informe a quantidade</span>
-  </p>
-
-  <p>
-    <label class="notip">
-      <span translate>desconto</span>
-    </label>
-    <input class="short" placeholder="padrão: 100%" type="number"
-           ng-model="promocode.discount" min="0" max="100" required>
-    <i class="fa fa-check"></i>
-    <span form-error="quantity.object_required" translate>por favor, informe a porcentagem do desconto</span>
-  </p>
-
-  <aside class="action">
-    <button ng-click="submit()" translate>
-      criar código
+  <div class="text-center">
+    <button
+            class="btn btn-primary"
+            ng-click="submit()" translate>
+      Criar código
     </button>
-  </aside>
+  </div>
+
+
+
 </form>

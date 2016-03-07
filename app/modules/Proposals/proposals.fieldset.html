@@ -1,0 +1,221 @@
+
+  <legend translate class="text-primary">Informações da atividade</legend>
+
+  <div class="row">
+
+    <div class="col-sm-6">
+    <div class="form-group has-feedback">
+      <label class="required">
+        <span translate>Tipo da atividade:</span>
+      </label>
+      <label class="radio-inline">
+        <input type="radio" value="talk" name="type" ng-model="proposal.type" translate>Palestra
+      </label>
+      <label class="radio-inline">
+        <input type="radio" value="workshop" name="type" ng-model="proposal.type" translate>Oficina
+      </label>
+      <span field-error="type"></span>
+    </div>
+
+    <div class="form-group has-feedback">
+      <label  class="required">
+        <span translate>Título da atividade:</span>
+        <small class="text-muted"translate>(de 5 até 80 caracteres)</small>
+      </label>
+      <input type="text"
+             maxlength="80"
+             class="form-control"
+             ng-model="proposal.title"/>
+      <span field-error="title"></span>
+    </div>
+
+    <div class="form-group  has-feedback">
+      <label  class="required">
+        <span translate>Trilha:</span>
+      </label>
+      <select class="form-control"
+              if-locale="pt"
+              ng-model="proposal.track_id" ng-options="t.id as t.name_pt for t in tracks">
+        <option value="" ng-hide="proposal.track_id" translate>Escolha uma trilha</option>
+      </select>
+      <span field-error="track_id"></span>
+    </div>
+
+  </div>
+
+  <div class="col-sm-6">
+
+  <div class="form-group has-feedback">
+    <label class="required">
+      <span translate>Língua:</span>
+    </label>
+    <label ng-repeat="lang in languages"
+             class="radio-inline">
+      <input id="lang_{{lang.abbr}}"
+             type="radio"
+             value="{{ lang.abbr }}"
+             ng-model="proposal.language" /> {{ lang.name | translate }}
+    </label>
+    <span field-error="language"></span>
+  </div>
+
+  <div class="form-group has-feedback" >
+    <label class="required">
+      <span translate>Nível da atividade:</span>
+    </label>
+    <label  ng-repeat="level in levels"
+            class="radio-inline"
+            for="level_{{level}}">
+       <input id="level_{{level}}"
+              type="radio"
+              value="{{ level }}"
+              ng-model="proposal.level" /> {{ level | humanize }}
+    </label>
+    <span field-error="level"></span>
+  </div>
+
+    <div class="form-group has-feedback" ng-show="proposal.type == 'workshop'">
+      <label class="required">
+        <span translate>Carga horária ideal:</span>
+      </label>
+      <label class="radio-inline">
+        <input type="radio" value="1.00" name="expected_duration" ng-model="proposal.expected_duration" translate>1h
+      </label>
+      <label class="radio-inline">
+        <input type="radio" value="2.00" name="expected_duration" ng-model="proposal.expected_duration" translate>2h
+      </label>
+      <label class="radio-inline">
+        <input type="radio" value="3.00" name="expected_duration" ng-model="proposal.expected_duration" translate>3h
+      </label>
+      <label class="radio-inline">
+        <input type="radio" value="4.00" name="expected_duration" ng-model="proposal.expected_duration" translate>4h
+      </label>
+      <span field-error="expected_duration"></span>
+   </div>
+
+   <div>
+      <label class="required">
+        <span translate>Situação:</span>
+      </label>
+      <label for="call_status_pending" class="radio-inline">
+        <input type="radio" id="call_status_pending" value="pending" ng-model="proposal.status" />
+        Pendente
+      </label>
+      <label for="call_status_declined" class="radio-inline">
+        <input type="radio" id="call_status_declined" value="declined" ng-model="proposal.status" />
+        Declinado
+      </label>
+      <label for="call_status_confirmed" class="radio-inline">
+          <input type="radio" id="call_status_confirmed" value="confirmed" ng-model="proposal.status" />
+          Confirmado
+      </label>
+    </div>
+
+   <div  ng-if="slot">
+      <label translate>Situação horário</label>
+      <div ng-show="slot.id">
+        <label for="slot_status_dirty" class="radio-inline">
+          <input type="radio" id="slot_status_dirty" value="dirty" ng-model="slot.status" />
+          Segurar notificação
+        </label>
+        <label for="slot_status_declined" class="radio-inline">
+          <input type="radio" id="slot_status_declined" value="declined" ng-model="slot.status" />
+          Declinado
+        </label>
+        <label for="slot_status_declined" class="radio-inline">
+          <input type="radio" id="slot_status_confirmed" value="confirmed" ng-model="slot.status" />
+          Confirmado
+        </label>
+      </div>
+   </div>
+
+
+  </div>
+  </div>
+
+  <legend translate class="text-primary">Autores</legend>
+  <div class="row">
+    <div class="form-group has-feedback col-sm-8">
+      <label class="required">
+        <span translate>Autor principal:</span>
+      </label>
+
+      <p ng-show="proposal.owner">
+        <strong>{{proposal.owner.id}}</strong>
+        {{ proposal.owner.name }}
+        <span class="text-muted">{{ proposal.owner.email }}</span>
+        <button class="btn btn-sm btn-default"
+                ng-click="removeOwner()">Trocar autor</button>
+      </p>
+      <span field-error="owner_id"></span>
+
+      <account-lookup on-selected="setOwner" ng-if="!proposal.owner"></account-lookup>
+    </div>
+  </div>
+
+  <div class="row">
+     <div class="form-group has-feedback col-sm-8">
+      <label>
+        <span translate>Co-Autores:</span>
+      </label>
+
+      <p ng-repeat="coauthor in proposal.coauthors">
+        <strong>{{coauthor.account_id}}</strong>
+        <a ui-sref="accounts.detail({ id: person.account_id })" target="_blank">{{ coauthor.name }}</a>
+        <span class="text-muted">{{ coauthor.email }}</span>
+        <button role="button"
+           class="btn btn-default btn-sm pull-right"
+           ng-click="removeCoauthor($index)">Remover</button>
+        <div class="clearfix"></div>
+      </p>
+
+      <account-lookup focus-label="coauthor" on-selected="pushCoauthor" on-register="createCoauthor" />
+    </div>
+
+
+    </div>
+  </div>
+
+<legend translate class="text-primary">Descrição e restrições</legend>
+<div class="row">
+  <div class="col-sm-12">
+
+    <div class="form-group has-feedback">
+      <label  class="required">
+        <span translate>Descrição da atividade:</span>
+        <small translate class="text-muted">(até 2000 caracteres)</small>
+      </label>
+      <textarea rows="5"
+                maxlength="2000"
+                ng-model="proposal.full"
+                class="form-control"></textarea>
+      <span field-error="full"></span>
+    </div>
+
+    <div class="form-group has-feedback" ng-show="proposal.type == 'workshop'">
+      <label>
+        <span translate>Descreva a infra-estrutura necessária para sua oficina:</span>
+        <small translate class="text-muted">(até 500 caracteres)</small>
+      </label>
+      <textarea maxlength="500"
+                ng-model="proposal.demands"
+                class="form-control"></textarea>
+      <span field-error="demands"></span>
+    </div>
+
+    <div class="form-group has-feedback">
+      <label>
+        <span translate>Se você tiver alguma restrição de dia e/ou horário para apresentar a sua atividade, favor informar abaixo:</span>
+        <small translate class="text-muted">(até 500 caracteres)</small>
+      </label>
+      <textarea maxlength="500"
+                ng-model="proposal.restrictions"
+                class="form-control"></textarea>
+      <span field-error="restrictions"></span>
+    </div>
+
+  </div>
+  </div>
+ </div>
+
+

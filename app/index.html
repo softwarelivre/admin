@@ -19,19 +19,39 @@
     <script src='config.js'></script>
   </head>
   <body ng-controller="AdminController" class="{{ topState }}">
-    <header class="noprint {{ topState }}" ui-view="header">
-    </header>
 
-    <toast translate></toast>
+    <toast></toast>
 
-    <aside class="{{ topState }} {{ subState }}">
-      <logged-as></logged-as>
-    </aside>
+    <!--FIX CHANGE ID-->
+    <div id="wrapper">
 
-    <main class="{{ topState }} {{ subState }}" ui-view="main">
-    </main>
+      <header class="noprint {{ topState }}" ui-view="header">
+      </header>
 
-    <footer class="noprint">
-      {{ state.name }}
+      <!--FIX CSS -->
+      <div id="page-wrapper" class="page-content">
+        <div class="container-fluid">
+          <main  class="{{ topState }} {{ subState }}" ui-view="main">
+          </main>
+        </div>
+      </div>
+
+    <!--
+    <footer>
+      <div class="container-fluid footer">
+        <div class="pull-left">
+            <strong translate>Problemas?</strong>&nbsp;
+              <a href="mailto:financeiro@espacodeprojetos.com.br?subject=[BUG] Notificação&body=Descreva seu problema:">
+                financeiro@espacodeprojetos.com.br
+              </a>
+            </span>
+        </div>
+        <div class="pull-right">
+          <span> {{ state.name }} </span>
+        </div>
+      </div>
     </footer>
+    -->
+    </div>
+
   </body>

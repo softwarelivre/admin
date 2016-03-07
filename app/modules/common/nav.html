@@ -1,4 +1,105 @@
-<a ui-sref="home">
-  <img class="logo" ng-click="home()" src="/images/logo-fisl-small.png"/>
-  <h1>segue - admin</h1>
-</a>
+
+
+<nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Segue</a>
+    </div>
+
+            <!-- Top Menu Items -->
+      <ul class="nav navbar-nav navbar-right top-nav" ng-controller="SessionController">
+        <li uib-dropdown class="dropdown">
+          <a uib-dropdown-toggle role="button" href="#">{{credentials.email}}
+              <i class="fa fa-caret-down"> </i>
+          </a>
+          <ul uib-dropdown-menu class="dropdown-menu">
+            <li class="dropdown">
+              <a class="logout-text" href="" ng-click="logout()" translate>Sair</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+
+    <!-- Sidebar Menu Items  -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+            <li>
+                <a  ng-click="accountMenu=!accountMenu"
+                    href="#"  role="button" translate>
+                    Contas<i class="fa fa-fw fa-caret-down"></i>
+                </a>
+                <ul ng-show="accountMenu">
+                    <li>
+                        <a ui-sref="accounts.create">Criar nova</a>
+                    </li>
+                    <li>
+                        <a ui-sref="accounts.list">Buscar</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a  ng-click="financialMenu=!financialMenu"
+                    href="#"  role="button" translate>
+                    Financeiro<i class="fa fa-fw fa-caret-down"></i>
+                </a>
+                <ul ng-show="financialMenu">
+                    <li>
+                        <a ui-sref="financial.process_boletos">Processar boletos</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a  ng-click="promocodeMenu=!promocodeMenu"
+                    href="#"  role="button" translate>
+                    Códigos promocionais<i class="fa fa-fw fa-caret-down"></i>
+                </a>
+                <ul ng-show="promocodeMenu">
+                    <li>
+                        <a ui-sref="promocodes.create">Criar novo</a>
+                    </li>
+                    <li>
+                        <a ui-sref="promocodes.list">Buscar</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a  ng-click="proposals=!proposals"
+                    href="#"  role="button" translate>
+                    Atividades<i class="fa fa-fw fa-caret-down"></i>
+                </a>
+                <ul ng-show="proposals">
+                    <li>
+                        <a ui-sref="proposals.create">Criar atividade</a>
+                    </li>
+                    <li>
+                        <a ui-sref="proposals.search">Buscar atividade</a>
+                    </li>
+                    <li>
+                        <a ui-sref="notifications">Confirmações de atividade</a>
+                    </li>
+
+                </ul>
+            </li>
+
+
+            <li>
+                <a ui-sref="tournaments.list">Listar torneios</a>
+            </li>
+
+            <li>
+                <a ui-sref="schedule.days">Grade de horários</a>
+            </li>
+
+        </ul>
+    </div>
+
+</nav>

@@ -1,0 +1,180 @@
+<h2 class="page-header">Processar boletos</h2>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a ui-sref="accounts.list">Compra</a></li>
+  <li class="active">Processar Boletos</li>
+</ol>
+
+<div class="alert alert-danger" ng-show="uploadError">
+  Ocorreu um erro ao processar o arquivo
+</div>
+
+<form name="form" class="form">
+  <fieldset>
+    <legend>Processar arquivo bbt</legend>
+    <div class="form-group">
+
+      <input name="file"
+             type="file"
+             ng-model="file"
+             ngf-select
+             ngf-max-files="1"
+             ngf-validate="{size: {max: '1MB'}" />
+    </div>
+
+    <button class="btn btn-primary"
+            ng-click="uploadUsingHttp(file)">Enviar arquivo</button>
+
+    <div class="alert alert-success" ng-show="scope.payments">
+      <span>Upload realizado com sucesso</span>
+    </div>
+
+  </fieldset>
+</form>
+
+<br>
+
+<div ng-show="payments">
+
+<legend class="text-primary" translate>Pagamentos com concretizados</legend>
+<table class="table table-striped table-responsive" ng-show="payments.good.length > 0">
+  <thead>
+    <th translate>Nome do cliente:</th>
+    <th translate>E-email</th>
+    <th translate>Telefone</th>
+    <th translate>Produto</th>
+    <th translate>Valor do produto</th>
+    <th translate>Data de Vencimento</th>
+    <th translate>Nosso número</th>
+    <th translate>Data do Pagamento</th>
+    <th translate>Valor pago</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="pay in payments.good">
+      <td>{{ pay.purchase.customer.name }}</td>
+      <td>{{ pay.purchase.customer.email }}</td>
+      <td>{{ pay.purchase.customer.phone }}</td>
+      <td>{{ pay.purchase.product.description }}</td>
+      <td>{{ pay.purchase.amount }}</td>
+      <td>{{ pay.payment.due_date }}</td>
+      <td>{{ pay.entry.our_number }}</td>
+      <td>{{ pay.entry.payment_date }}</td>
+      <td>{{ pay.entry.amount }}</td>
+    </tr>
+    <tr>
+      <td colspan="9">
+        <strong>Total:&nbsp;{{ calculateTheTotalAmount(payments.good) }}</strong>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p ng-show="payments.good.length == 0">
+  Nenhum pagamento concretizado
+</p>
+
+
+<legend class="text-primary" translate>Pagamentos não reconhecidos</legend>
+<table class="table table-striped table-responsive" ng-show="payments.unknown.length > 0">
+  <thead>
+    <th translate>Nosso Número</th>
+    <th translate>Valor</th>
+    <th>Data de Pagamento</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="payment in payments.unknown">
+      <td>{{ payment.our_number }}</td>
+      <td>{{ payment.payment_date }}</td>
+      <td>{{ payment.amount }}</td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <strong>
+          Total:&nbsp; {{ calculateTheTotalAmount(payments.unknown) }}</td>
+        </strong>
+    </tr>
+  </tbody>
+</table>
+<p ng-show="payments.unknown.length == 0">
+  Nenhum pagamento não reconhecido
+</p>
+
+<legend class="text-primary" translate>Pagamentos atrasados</legend>
+<table class="table table-striped table-responsive" ng-show="payments.late.length > 0">
+  <thead>
+    <th translate>Nome do cliente:</th>
+    <th translate>E-email</th>
+    <th translate>Telefone</th>
+    <th translate>Produto</th>
+    <th translate>Valor do produto</th>
+    <th translate>Data de Vencimento</th>
+    <th translate>Nosso número</th>
+    <th translate>Data do Pagamento</th>
+    <th translate>Valor pago</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="pay in payments.late">
+      <td>{{ pay.purchase.customer.name }}</td>
+      <td>{{ pay.purchase.customer.email }}</td>
+      <td>{{ pay.purchase.customer.phone }}</td>
+      <td>{{ pay.purchase.product.description }}</td>
+      <td>{{ pay.purchase.amount }}</td>
+      <td>{{ pay.payment.due_date }}</td>
+      <td>{{ pay.entry.our_number }}</td>
+      <td>{{ pay.entry.payment_date }}</td>
+      <td>{{ pay.entry.amount }}</td>
+    </tr>
+    <tr>
+      <td colspan="9">
+        <strong>
+          Total:&nbsp;{{ calculateTheTotalAmount(payments.late) }}</td>
+        </strong>
+    </tr>
+  </tbody>
+</table>
+<p ng-show="payments.late.length == 0">
+  Nenhum pagamento não atrasado
+</p>
+
+<legend class="text-primary" translate>Pagamentos com problemas</legend>
+<table class="table table-striped table-responsive" ng-show="payments.bad.length > 0">
+  <thead>
+    <th translate>Nome do cliente:</th>
+    <th translate>E-email</th>
+    <th translate>Telefone</th>
+    <th translate>Produto</th>
+    <th translate>Valor do produto</th>
+    <th translate>Data vencimento</th>
+    <th translate>Número da compra</th>
+    <th translate>Nosso número</th>
+    <th translate>Problema</th>
+    <th translate>Data do Pagamento</th>
+    <th translate>Valor pago</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="pay in payments.bad">
+      <td>{{ pay.purchase.customer.name }}</td>
+      <td>{{ pay.purchase.customer.email }}</td>
+      <td>{{ pay.purchase.customer.phone }}</td>
+      <td>{{ pay.purchase.product.description }}</td>
+      <td>{{ pay.purchase.amount }}</td>
+      <td>{{ pay.payment.due_date }}</td>
+      <td>{{ pay.purchase.id }}</td>
+      <td>{{ pay.entry.our_number }}</td>
+      <td>{{ pay.error.errors }}</td>
+      <td>{{ pay.entry.payment_date }}</td>
+      <td>{{ pay.entry.amount }}</td>
+    </tr>
+    <tr>
+    <tr>
+      <strong>
+        <td colspan="9">Total:&nbsp;{{ calculateTheTotalAmount(payments.bad) }}</td>
+      </strong>
+    </tr>
+  </tbody>
+</table>
+<p ng-show="payments.bad.length == 0">
+  Nenhum pagamento com problema
+</p>
+
+</div>

@@ -1,10 +1,4 @@
-<table class="purchases" ng-hide="purchases.length == 0">
-  <col class="id" />
-  <col class="status" />
-  <col class="category" />
-  <col class="price" />
-  <col class="buyer" />
-  <col class="created" />
+<table class="table table-responsive" ng-hide="purchases.length == 0">
   <thead>
     <tr>
       <th translate>id</th>
@@ -30,40 +24,40 @@
       <a ng-show="purchase.links.payments.count" ng-click="showPaymentsOf(purchase)" translate>(detalhes)</a>
     </td>
   </tr>
-  <tr class="details" ng-repeat-end ng-show="paymentsOf[purchase.id]">
-    <td colspan="6">
-      <table class="payments">
-        <col class="id"/>
-        <col class="type"/>
-        <col class="status"/>
-        <col class="amount"/>
-        <col class="our_number"/>
-        <col class="due_date"/>
-        <col class="reference"/>
-        <tr>
-          <th translate>id</th>
-          <th translate>tipo</th>
-          <th translate>situação</th>
-          <th translate>valor</th>
-          <th translate>nosso número</th>
-          <th translate>vencimento</th>
-          <th translate>referência</th>
-        </tr>
-        <tr class="payment" ng-repeat="payment in paymentsOf[purchase.id]">
-          <td>{{ payment.id }}</td>
-          <td>{{ payment.type }}</td>
-          <td>{{ payment.status }}</td>
-          <td>{{ payment.amount }}</td>
-          <td>{{ payment.our_number }}</td>
-          <td>{{ payment.due_date }}</td>
-          <td>
-            {{ payment.reference }}
-            <a ng-show="payment.document_hash" target="_blank"
-              href="{{CONFIG.API_HOST}}/api/documents/boleto-{{ payment.document_hash}}.pdf">cópia
-            </a>
-          </td>
-        </tr>
-      </table>
+  <tr ng-repeat-end ng-show="paymentsOf[purchase.id]">
+    <td colspan="7">
+
+      <div class="panel panel-info">
+        <div class="panel-heading">Pagamentos</div>
+
+        <table class="table table-condensed table-responsive">
+          <tr>
+            <th translate>id</th>
+            <th translate>tipo</th>
+            <th translate>situação</th>
+            <th translate>valor</th>
+            <th translate>nosso número</th>
+            <th translate>vencimento</th>
+            <th translate>referência</th>
+          </tr>
+          <tr class="payment" ng-repeat="payment in paymentsOf[purchase.id]">
+            <td>{{ payment.id }}</td>
+            <td>{{ payment.type }}</td>
+            <td>{{ payment.status }}</td>
+            <td>{{ payment.amount }}</td>
+            <td>{{ payment.our_number }}</td>
+            <td>{{ payment.due_date }}</td>
+            <td>
+              {{ payment.reference }}
+              <a ng-show="payment.document_hash" target="_blank"
+                href="{{CONFIG.API_HOST}}/api/documents/boleto-{{ payment.document_hash}}.pdf">cópia
+              </a>
+            </td>
+          </tr>
+        </table>
+
+        </div>
+      </div>
     </td>
 
   </tr>

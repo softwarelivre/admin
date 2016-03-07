@@ -1,60 +1,80 @@
+<h2 class="page-header">Visualizar dados</h2>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a ui-sref="accounts.list">Atividades</a></li>
+  <li class="active">Visualizar</li>
+</ol>
+
+
 <fieldset class="detail">
-  <legend>dados palestra</legend>
-
-  <header>
-    <div class="id">{{ proposal.id }}</div>
-    <div class="title">{{ proposal.title }}</div>
-    <div class="track">
-      <span class="area">{{ proposal.track.track }}</span>
-      <span class="zone">{{ proposal.track.zone }}</span>
-    </div>
-    <div class="tags">
-      <span ng-repeat="tag in proposal.tags" class="tag {{tag}}">
-        {{ tag }}
-      </span>
-    </div>
-    <div class="status {{proposal.status}}">
-      {{ proposal.status }}
-    </div>
-    <div class="actions">
-      <a ui-sref="proposals.edit({id:proposal.id})">editar</a>
-    </div>
-  </header>
-
-  <table class="data">
-    <tr class="owner">
-      <th translate>autor</th>
-      <td>
-        <a ui-sref="accounts.detail({id: proposal.owner.id})">{{ proposal.owner.name }}</a>
-      </td>
-    </tr>
-    <tr class="coauthors">
-      <th translate>co-autores</th>
-      <td class="coauthors">
-        <span class="info" ng-show="invites.length == 0">sem co-autores</span>
-        <div class="coauthor" ng-repeat="invite in invites">
+  <legend>Dados atividade</legend>
+  <div class="row">
+    <div class="col-sm-6">
+    <table class="table table-borderless table-responsive">
+      <tbody>
+        <tr>
+          <th translate>Código:</th>
+          <td>{{ proposal.id }}</td>
+        </tr>
+        <tr>
+          <th translate>Título:</th>
+          <td>{{ proposal.title}}</td>
+        </tr>
+       <tr>
+          <th translate>Área:</th>
+          <td>{{ proposal.track.zone  }}</td>
+       </tr>
+       <tr>
+          <th translate>Trilha:</th>
+          <td>{{ proposal.track.track  }}</td>
+       </tr>
+       <tr>
+          <th translate>Status:</th>
+          <td>{{ proposal.status }}</td>
+       </tr>
+       <tr>
+         <th translate>Autor:</th>
+         <td><a ui-sref="accounts.detail({id: proposal.owner.id})">{{ proposal.owner.name }}</a></td>
+       </tr>
+       <tr class="coauthors">
+        <th translate>Co-autores</th>
+        <td class="coauthors">
+        <span ng-show="invites.length == 0">Sem co-autores</span>
+        <div ng-repeat="invite in invites">
           <a ui-sref="accounts.detail({id: invite.account_id})">{{ invite.name }}</a>
-          &lt;{{invite.email}}&gt;
-          ({{ invite.status }})
+          <p class="text-muted">{{invite.email}}</p>
+          <p>({{ invite.status }})</p>
         </div>
       </td>
-    </tr>
-    <tr class="language">
-      <th translate>língua</th>
-      <td>{{ proposal.language }}</td>
-    </tr>
-    <tr class="level">
-      <th translate>nível</th>
-      <td>{{ proposal.level }}</td>
-    </tr>
-    <tr class="created">
-      <th translate>criado em...</th>
-      <td>{{ proposal.created }}</td>
-    </tr>
-    <tr class="slots">
-      <th translate>agendamentos</th>
+      </tr>
+       <tr>
+        <th translate>Língua</th>
+        <td>{{ proposal.language }}</td>
+       </tr>
+       <tr>
+        <th translate>Nível</th>
+        <td>{{ proposal.level }}</td>
+       </tr>
+       <tr>
+        <th translate>Criado em...</th>
+        <td>{{ proposal.created }}</td>
+       </tr>
+       <tr>
+        <th translate>Descrição</th>
+        <td >{{ proposal.full }}</td>
+      </tr>
+      <tr>
+        <th>Tags:</th>
+        <td>
+          <span ng-repeat="tag in proposal.tags" class="tag {{tag}}">
+            {{ tag }}
+          </span>
+        </td>
+      </tr>
+      <th translate>Agendamentos:</th>
       <td>
-        <p ng-hide="proposal.slots">não possui</p>
+        <span ng-hide="proposal.slots.length == 0">Não possui</span>
         <div ng-repeat="slot in proposal.slots">
           dia
           <b>{{ slot.begins | date_locale }}</b> às
@@ -63,11 +83,13 @@
           <span class="status">{{ slot.status }}</span>
         </div>
       </td>
-    </tr>
-    <tr class="full">
-      <th translate>descrição</th>
-      <td class="pre-wrap">{{ proposal.full }}</td>
-    </tr>
+      </tr>
+      </tbody>
+     </table>
 
-  </table>
-</fieldset>
+    <a role="button" class="btn btn-primary" ui-sref="proposals.edit({id:proposal.id})">Editar</a>
+
+
+    <div class="tags">
+
+    </div>

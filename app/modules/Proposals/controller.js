@@ -46,7 +46,6 @@
         .state('proposals.detail', {
           url: '/detail/:id',
           views: {
-            query:   { controller: 'ProposalController',     templateUrl: 'modules/common/back.html' },
             content: { controller: 'ProposalShowController', templateUrl: 'modules/Proposals/proposals.detail.html' }
           },
           resolve: {
@@ -57,7 +56,6 @@
         .state('proposals.edit', {
           url: '/edit/:id',
           views: {
-            query:   { controller: 'ProposalController',     templateUrl: 'modules/common/back.html' },
             content: { controller: 'ProposalEditController', templateUrl: 'modules/Proposals/proposals.edit.html' }
           },
           resolve: {
@@ -69,8 +67,7 @@
         .state('proposals.create', {
           url: '/create',
           views: {
-            query:   { controller: 'ProposalController',     templateUrl: 'modules/common/back.html' },
-            content: { controller: 'ProposalEditController', templateUrl: 'modules/Proposals/proposals.edit.html' }
+            content: { controller: 'ProposalEditController', templateUrl: 'modules/Proposals/proposals.create.html' }
           },
           resolve: {
             isCreation: function() { return true; },
@@ -107,6 +104,12 @@
       $scope.doSearch = function() {
         Proposals.lookup($scope.query).then(function(data) {
           $scope.proposals = data;
+        });
+      };
+      $scope.doSearchProposal = function(name) {
+        Proposals.lookup($scope.query).then(function(data) {
+          console.log(data);
+          return data;
         });
       };
     })
@@ -166,16 +169,15 @@
       };
 
       $scope.submitAll = function() {
-        Validator.validate($scope.proposal, 'proposals/admin_create')
-                 .then(Proposals.cleanUp)
-                 .then(Proposals.saveObject)
+        proposal = Proposals.cleanUp($scope.proposal)
+        Proposals.saveObject(proposal)
                  .then(Proposals.pipeStatusToProposal($scope.proposal.status))
                  .then(Proposals.pipeCoauthorsToProposal($scope.proposal.coauthors))
                  .then(updateProposal)
                  .then(updateSlot)
                  .then(Proposals.localForget)
                  .then(moveToDetailsPage)
-                 .catch(FormErrors.set);
+                 .catch(FormErrors.setError);
       };
       function updateProposal(proposal) {
         $scope.proposal.id = proposal.id;

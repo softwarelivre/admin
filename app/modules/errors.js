@@ -14,12 +14,22 @@
       self.setOne = function(field, label) {
         var path = field + "." + label;
         $rootScope.$broadcast('errors:set', path);
-        console.log(path);
       };
-
+      self.setError = function(raw) {
+        console.log(raw)
+            $rootScope.$broadcast('errors:clear');
+            var error = (raw.data)? raw.data.error:raw;
+            _.each(_.keys(error.errors), function(field) {
+                var fieldError = {
+                    'field': field,
+                    'msgs': error.errors[field]
+                }
+                $rootScope.$broadcast('errors:set', fieldError);
+          });
+      };
       self.set = function(raw) {
         $rootScope.$broadcast('errors:clear');
-        var errors = (raw.data)? raw.data.errors:raw;
+        var errors = (raw.data)? raw.data.error:raw;
         _.each(errors, function(error) {
           var paramKey = (error.params)?   error.params.key               : null;
           var dataPath = (error.dataPath)? error.dataPath.replace('/','') : null;
@@ -52,5 +62,27 @@
           }
         });
       };
-    });
+    })
+    .directive('fieldError', function($timeout) {
+      return function(scope, elem, attr) {
+        var myError = attr.fieldError
+
+        scope.$on('errors:clear', function(e, error) {
+            formGroup = elem.parent();
+            formGroup.removeClass("has-error");
+            elem.addClass("ng-hide");
+            elem.empty();
+        });
+        scope.$on('errors:set', function(e, error) {
+          if (error.field == myError) {
+            formGroup = elem.parent();
+            formGroup.addClass("has-error");
+            _.each(error.msgs, function(msg) {
+                elem.append('<p class="help-block">'+ msg + '</p>');
+            });
+            elem.removeClass("ng-hide");
+          }
+        });
+      };
+    })
 })();

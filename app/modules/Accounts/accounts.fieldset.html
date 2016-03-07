@@ -1,0 +1,400 @@
+  <fieldset>
+    <legend translate class="text-primary">Dados de acesso</legend>
+
+      <div class="row">
+        <div class="form-group has-feedback col-sm-6">
+            <label class="required">
+              <span>E-mail:</span>
+            </label>
+            <input type="email"
+                  maxsize="80"
+                  ng-model="account.email"
+                  class="form-control"/>
+            <span field-error="email"></span>
+        </div>
+
+        <div class="form-group has-feedback col-sm-6" ng-hide="account.id">
+            <label class="required">
+              <span>Confirmar e-mail:</span>
+            </label>
+            <input type="email"
+                  maxsize="80"
+                  ng-model="account.email_confirm"
+                  class="form-control"/>
+            <span field-error="email_confirm"></span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group has-feedback col-sm-6">
+            <label class="required">
+              <span translate>Senha:</span>
+              <small class="text-muted" translate>Mínimo 8 caracteres</small>
+            </label>
+            <input type="password"
+                   maxsize="20"
+                   ng-model="account.password"
+                   class="form-control"/>
+            <span field-error="password"></span>
+        </div>
+        <div class="form-group has-feedback col-sm-6">
+            <label class="required">
+              <span translate>Confirmar senha:</span>
+              <small class="text-muted" translate>Mínimo 8 caracteres</small>
+            </label>
+            <input type="password"
+                   maxsize="20"
+                   ng-model="account.password_confirm"
+                   class="form-control"/>
+            <span field-error="password_confirm"></span>
+        </div>
+      </div>
+
+  </fieldset>
+
+<fieldset ng-disabled="lockType">
+      <legend class="text-primary" translate>Tipo da conta </legend>
+
+      <div class="row">
+        <div class="form-group has-feedback col-sm-12">
+          <label class="required">
+            <span translate>Tipo da conta:</span>
+          </label>
+          <label class="radio-inline">
+            <input type="radio"
+                   value="person"
+                   ng-model="$parent.type"><span translate>Pessoal</span>
+          </label>
+          <label class="radio-inline">
+            <input type="radio"
+                   value="corporate"
+                   ng-model="$parent.type"><span translate>Empresarial</span>
+          </label>
+          <label class="radio-inline">
+            <input type="radio"
+                   value="foreign"
+                   ng-model="$parent.type"><span translate>Estrangeiro</span>
+          </label>
+          <span field-error="type"></span>
+        </div>
+      </div>
+    </fieldset>
+
+
+  <fieldset>
+      <legend translate class="text-primary">Dados pessoais</legend>
+
+      <div class="row">
+        <div class="form-group has-feedback col-sm-6">
+          <label class="required">
+            <span translate>Nome completo:</span>
+          </label>
+          <input type="text"
+                 placeholder="{{ 'Nome completo' || translate }}"
+                 maxsize="80"
+                 ng-model="account.name"
+                 class="form-control"/>
+          <span field-error="name"></span>
+        </div>
+
+        <div class="form-group  has-feedback col-sm-6">
+          <label class="required">
+             <span translate> Nome para o crachá:</span>
+          </label>
+          <input type="text"
+                 maxsize="80"
+                 ng-model="account.badge_name"
+                 class="form-control"/>
+          <span field-error="badge_name"></span>
+        </div>
+      </div>
+
+    <div class="row">
+      <div class="form-group has-feedback col-sm-6" ng-show="type == 'person'">
+        <label class="required">
+          <span class="required" translate>CPF:</span>
+          <small class="text-muted" translate>Somente números</small>
+        </label>
+        <input type="text"
+               ng-model="account.cpf"
+               mask="999.999.999-99" clean="true"
+               class="form-control"/>
+        <span field-error="cpf"></span>
+      </div>
+
+      <div class="form-group has-feedback col-sm-6" ng-show="type == 'corporate'">
+        <label class="required">
+          <span class="required" translate>CNPJ:</span>
+          <small class="text-muted" translate>Somente números</small>
+        </label>
+        <input type="text"
+               placeholder=""
+               ng-model="account.cnpj"
+               mask="99.999.999/9999-99" clean="true"
+               class="form-control"/>
+        <span field-error="cnpj"></span>
+      </div>
+
+      <div class="form-group has-feedback col-sm-6" ng-show="type == 'foreign'">
+        <label class="required">
+          <span translate>Passaporte:</span>
+          <small class="text-muted" translate>(Somente letras e números)</small>
+        </label>
+        <input type="text"
+               ng-model="signup.passport"
+               maxlength="32"
+               class="form-control"/>
+        <span field-error="passport"></span>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="form-group has-feedback col-sm-6">
+        <label class="required">
+          <span>Data de nascimento:</span>
+        </label>
+        <input type="text"
+               mask="39/19/9999"
+               ng-model="account.born_date"
+               class="form-control"/>
+        <span field-error="born_date"></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group has-feedback col-sm-6">
+        <label class="required">
+          <span translate>Sexo:</span>
+        </label>
+        <label class="radio-inline">
+          <input type="radio" value="M" name="sex" ng-model="account.sex" translate>Masculino
+        </label>
+        <label class="radio-inline">
+          <input type="radio" value="F" name="sex" ng-model="account.sex" translate>Feminino
+        </label>
+        <span field-error="sex"></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group has-feedback col-sm-6" ng-show="type != 'foreign'">
+        <label class="required">
+          <span translate>Telefone:</span>
+          <small class="text-muted" translate>Inclua o código de área</small>
+        </label>
+        <input type="phone"
+               class="form-control"
+               ng-model="account.phone"
+               mask="(99) 9?999-9999"
+               clean="true" />
+        <span field-error="phone"></span>
+      </div>
+
+      <div class="form-group has-feedback col-sm-6" ng-show="type == 'foreign'">
+        <label class="required">
+          <span translate>Telefone:</span>
+          <small class="text-muted" translate>Inclua o código do país e o código de área</small>
+        </label>
+        <input type="phone"
+               class="form-control"
+               ng-model="account.phone"
+               mask="+99 99 9?9999-9999"
+               clean="true" />
+        <span field-error="phone"></span>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="form-group has-feedback col-sm-6">
+        <label class="required">
+          <span translate>Ocupação:</span>
+        </label>
+        <select name="occupation"
+                ng-model="account.occupation"
+                class="form-control"
+                ng-options="occupation as occupation | humanize for occupation in occupationTypes">
+            <option value="" translate>Selecione uma opção</option>
+        </select>
+        <span field-error="occupation"></span>
+      </div>
+
+      <div class="form-group has-feedback col-sm-6">
+        <label class="required">
+          <span translate>Formação:</span>
+        </label>
+        <select name="education"
+                ng-model="account.education"
+                class="form-control"
+                ng-options="education as education | humanize for education in educationTypes">
+            <option value="" translate>Selecione uma opção</option>
+        </select>
+        <span field-error="education"></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group has-feedback col-sm-6">
+        <label class="required">
+          <span translate>Você é portador de alguma defiência:</span>
+        </label>
+        <select name="disability"
+                ng-model="account.disability"
+                class="form-control"
+                ng-options="disability as disability | humanize for disability in disabilityTypes">
+        </select>
+        <span field-error="disability"></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group has-feedback col-sm-12" ng-show="account.disability != 'none'">
+        <label>
+          <span translate>Detalhes:</span>
+          <small class="text-muted" translate>Até 400 caracteres</small>
+        </label>
+        <textarea maxlength="400"
+                  class="form-control"
+                  ng-model="account.disability_info"></textarea>
+        <span field-error="disability_info"></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group has-feedback col-sm-12">
+        <label>
+          <span translate>Resumo:</span>
+          <small class="text-muted" translate>Até 400 caracteres</small>
+        </label>
+        <textarea maxlength="400"
+                  class="form-control"
+                  ng-model="account.resume"></textarea>
+        <span field-error="resume"></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group has-feedback col-sm-6" >
+        <label class="required">
+          <span translate>É sócio da ASL</span>
+        </label>
+        <select ng-model="account.membership" class="form-control ng-pristine ng-valid ng-touched" name="membership">
+          <option translate="" ng-checked="!account.membership" value="false" checked="checked"><span class="ng-scope">Não</span></option>
+          <option translate="" ng-checked="account.membership" value="true"><span class="ng-scope">Sim</span></option>
+        </select>
+        <span field-error="membership"></span>
+      </div>
+    </div>
+
+    </fieldset>
+
+    <fieldset>
+      <legend translate class="text-primary">Dados do endereço</legend>
+
+      <div class="row">
+        <div class="form-group has-feedback col-sm-6">
+          <label class="required">
+            <span translate>Código Postal:</span>
+            <small class="text-muted" translate>Somente números</small>
+          </label>
+          <input type="text"
+                 ng-model="account.address_zipcode"
+                 mask="9" repeat="15"  restrict="reject"
+                 class="form-control"/>
+          <span field-error="address_zipcode"></span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group has-feedback col-sm-6">
+          <label class="required">
+            <span translate>País:</span>
+          </label>
+          <input type="text"
+                 name="country"
+                 maxlength="20"
+                 placeholder="Brasil"
+                 ng-model="account.country"
+                 class="form-control" />
+          <span field-error="country"></span>
+        </div>
+
+        <div class="form-group has-feedback col-sm-2">
+          <label class="required">
+            <span translate>Estado:</span>
+            <small class="text-muted" translate>Sigla</small>
+          </label>
+          <input type="text"
+                 maxlength="2"
+                 placeholder="RS"
+                 ng-model="account.address_state"
+                 class="form-control text-uppercase"/>
+          <span field-error="address_state"></span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group has-feedback col-sm-6">
+          <label class="required">
+            <span translate>Cidade:</span>
+          </label>
+          <input type="text"
+                 maxsize="80"
+                 ng-model="account.city"
+                 class="form-control"/>
+          <span field-error="city"></span>
+        </div>
+
+        <div class="form-group has-feedback col-sm-6">
+          <label class="required">
+            <span translate>Bairro:</span>
+          </label>
+          <input type="text"
+                 maxlength="20"
+                 ng-model="account.address_neighborhood"
+                 class="form-control" />
+          <span field-error="address_neighborhood"></span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group has-feedback col-sm-6">
+          <label class="required">
+            <span translate>Endereço:</span>
+          </label>
+          <input type="text"
+                 maxlength="80"
+                 ng-model="account.address_street"
+                 class="form-control" />
+          <span field-error="address_street"></span>
+        </div>
+
+        <div class="form-group has-feedback col-sm-3">
+          <label class="required">
+            <span translate>Número:</span>
+          </label>
+          <input type="text"
+                maxlength="20"
+                ng-model="account.address_number"
+                class="form-control" />
+          <span field-error="address_number"></span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group has-feedback col-sm-6">
+          <label>
+            <span translate>Complemento:</span>
+          </label>
+          <input type="text"
+                 maxlength="20"
+                 ng-model="account.address_extra"
+                 placeholder="{{ 'Apartamento, Casa, Condomínio ...' | translate }}"
+                 class="form-control" />
+          <span field-error="address_extra"></span>
+        </div>
+      </div>
+
+   </fieldset>
+

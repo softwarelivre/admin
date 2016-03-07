@@ -31,5 +31,11 @@
       };
 
       focusOn('login.email');
+    })
+    .controller("SessionController", function($scope, Auth) {
+      $scope.credentials = Auth.glue($scope,'credentials');
+      $scope.logout  = Auth.logout;
+
+
     });
 })();

@@ -21,7 +21,7 @@
         .state('promocodes.list', {
           url: '/list/:query',
           views: {
-            query:   { controller: 'PromocodeListController', templateUrl: 'modules/Promocodes/promocodes.query.html' },
+            query:   { },
             content: { controller: 'PromocodeListController', templateUrl: 'modules/Promocodes/promocodes.list.html' }
           },
           resolve: {
@@ -33,7 +33,7 @@
         .state('promocodes.create', {
           url: '/create',
           views: {
-            query:   { controller: 'PromocodeCreateController', templateUrl: 'modules/common/back.html' },
+            query:   { },
             content: { controller: 'PromocodeCreateController', templateUrl: 'modules/Promocodes/promocodes.edit.html' }
           },
           resolve: {

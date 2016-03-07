@@ -1,24 +1,17 @@
 <div class="account-lookup" ng-if="!owner">
-  <input ng-model="query.needle" focusable
-         placeholder="buscar por nome/email"
-         ng-model-options="{ debounce: 300 }"
-         ui-keydown="{ 'down':       'moveDown()',
-                       'up':         'moveUp()',
-                       'enter':      'select()',
-                       'ctrl-enter': 'register()' }"
-         ng-focus="focus()"
-         ng-change="perform()"
-         ng-blur="blur()" />
 
-  <ul class="results" ng-if="display">
-    <li ng-repeat="entry in result"
-        ng-class="classes($index)">
-        {{ entry.name }}
-        ({{ entry.email }})
-    </li>
+   <input type="text"
+          placeholder="Buscar por nome/email"
+          class="form-control"
+          ng-model="query.needle"
+          ng-model-options="{ debounce: 300 }"
+          typeahead-no-results="noResults"
+          typeahead-on-select='select($item)'
+          uib-typeahead="entry as (entry.name +' '+entry.email) for entry in perform()">
 
-    <li ng-hide="lookup.coauthors.result.length">
-      <a ng-click="lookup.coauthors.register()">cadastrar pessoa (ctrl+enter)</a>
-    </li>
+    <div ng-hide="noResults" class="help-block">
+         <a ui-sref="accounts.create" target="_blank">Cadastrar pessoa</a>
+    </div>
+
   </ul>
 </div>

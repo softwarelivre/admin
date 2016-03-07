@@ -1,17 +1,29 @@
-<h3 ng-hide="promocodes.length == 0">
-  total de códigos encontrados: {{ promocodes.length }}
-</h3>
-<div class="actions">
-  <button ui-sref="promocodes.create">criar novo código...</button>
-</div>
-<table class="result" ng-hide="promocodes.length == 0">
-  <col class="id" />
-  <col class="hash_code" />
-  <col class="discount" />
-  <col class="description" />
-  <col class="product" />
-  <col class="status" />
-  <col class="creator" />
+<h2 class="page-header" translate>Buscar código promocional</h2>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li class="active" translate>Códigos promocionais</li>
+</ol>
+
+<form class="form">
+  <label>
+    <span translate>Hash ou descrição:</span>
+  </label>
+  <input type="text"
+         class="form-control"
+         ng-model="query.needle" focusable
+         ui-keypress="{ 'enter': 'doSearch()' }"/>
+</form>
+
+<hr>
+
+<h4 ng-hide="promocodes.length == 0" translate>
+  Total de códigos encontrados: {{ promocodes.length }}
+</h4>
+
+<hr>
+
+<table class="table table-responsive table-striped" ng-hide="promocodes.length == 0">
   <thead>
     <tr>
       <th translate>id</th>

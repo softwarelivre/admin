@@ -15,7 +15,8 @@
       'restangular',
       'angular-loading-bar',
       'ui.bootstrap',
-      'ui.mask',
+      'ngMask',
+      'ngFileUpload',
 
       'segue.admin.errors',
       'segue.admin.filters',
@@ -30,6 +31,7 @@
       'segue.admin.notifications',
       'segue.admin.promocodes',
       'segue.admin.schedule',
+      'segue.admin.financial',
     ])
     .controller('AdminController', function($scope, $state, Auth, Config) {
       $scope.$on('$stateChangeSuccess', function(event, newState) {

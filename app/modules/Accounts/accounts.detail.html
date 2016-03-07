@@ -1,74 +1,93 @@
-<fieldset class="detail">
-  <legend>dados participante</legend>
+<h2 class="page-header">Visualizar dados</h2>
 
-  <img gravatar-src="account.email" gravatar-size="100">
-  <header>
-    <div class="identifier status-{{account.identifier.status}}">
-      <span class="label">
-        {{ account.identifier.category }} -
-        {{ account.identifier.id }}
-      </span>
-      <span class="status">{{ account.identifier.status }}</span>
-    </div>
-    <div class="name">
-      {{ account.name }}
-      <a ui-sref="accounts.edit({id:account.id})">editar</a>
-    </div>
-    <div class="email">{{ account.email }}</div>
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a ui-sref="accounts.list">Contas</a></li>
+  <li class="active">Visualizar</li>
+</ol>
 
-    <div class="badges">
-      <span class="admin"     ng-show="account.role == 'admin'"           translate>admin</span>
-      <span class="paid"      ng-show="account.has_valid_purchases"       translate>pago</span>
-      <span class="leader"    ng-show="account.links.caravans.count == 1" translate>líder</span>
-      <span class="proposals" ng-show="account.links.proposals.count > 0"
-            translate translate-n="account.links.proposals.count" translate-plural="{{$count}} propostas">
-                {{ account.links.proposals.count }} proposta
-      </span>
-    </div>
-  </header>
+<fieldset>
+  <legend >Dados da conta</legend>
 
-  <table class="personal">
-    <col class="key"/>
-    <col class="value"/>
-    <col class="large"/>
+  <div class="row">
+
+  <div class="col-sm-6">
+  <table class="table table-borderless table-responsive">
+    <tbody>
     <tr>
-      <th translate>criado em...</th>
-      <td>{{ account.created }}</td>
-      <th translate>mini-curriculo</th>
+      <th translate>Nome:</th>
+      <td>{{ account.name }}</td>
+    </tr>
+     <tr>
+      <th translate>E-mail:</th>
+      <td>{{ account.email }}</td>
     </tr>
     <tr>
-      <th translate>documento</th>
+      <th translate>Documento:</th>
       <td>{{ account.document }}</td>
-      <td class="resume pre-wrap" rowspan="4">{{ account.resume }}</td>
     </tr>
     <tr>
-      <th translate>cidade / país</th>
+      <th translate>Cidade / País:</th>
       <td>{{ account.city }} / {{ account.country }}</td>
     </tr>
     <tr>
-      <th translate>organização</th>
-      <td>{{ account.organization }}</td>
-    </tr>
-    <tr>
-      <th translate>telefone</th>
+      <th translate>Telefone:</th>
       <td>{{ account.phone }}</td>
     </tr>
+    </tbody>
   </table>
+  </div>
+
+
+  <div class="col-sm-6" >
+    <!-- NOT WORKING
+    <div ng-show="account.identifier">
+      <h4>
+        <span class="label label-default">
+          {{ account.identifier.category }} - {{ account.identifier.id }}
+        </span>
+        <span ng-class="account.identifier.status == 'paid'?'label label-success':'label label-warning'">
+          {{ account.identifier.status }}
+        </span>
+      </h4>
+      <h4>
+        <span class="label label-danger"     ng-show="account.role == 'admin'"     translate>admin</span>
+      </h4>
+      <h4>
+        <span class="label label-success" ng-show="account.has_valid_purchases" translate>pago</span>
+      </h4>
+      <h4>
+        <span class="label label-warning"    ng-show="account.links.caravans.count == 1" translate>líder</span>
+      </h4>
+      <h4>
+        <span class="label label-info" ng-show="account.links.proposals.count > 0"
+            translate translate-n="account.links.proposals.count" translate-plural="{{$count}} propostas">
+                {{ account.links.proposals.count }} proposta
+        </span>
+      </h4>
+    </div> -->
+  </div>
+
+  </div>
+
+  <a class="btn btn-primary" ui-sref="accounts.edit({id:account.id})">editar</a>
 </fieldset>
 
-<fieldset>
-  <legend>ingressos deste participante</legend>
 
-  <div class="info" ng-show="purchases.length == 0">
+<fieldset>
+  <legend>Ingressos deste participante</legend>
+
+  <div class="alert alert-info" ng-show="purchases.length == 0">
     Não foi possível localizar nenhum ingresso (pago ou não-pago) para este participante.
   </div>
   <ng-include src="'modules/Purchases/purchases.list.html'"></ng-include>
 </fieldset>
 
-<fieldset>
-  <legend>propostas deste participante</legend>
 
-  <div class="info" ng-show="proposals.length == 0">
+<fieldset>
+  <legend>Propostas deste participante</legend>
+
+  <div class="alert alert-info" ng-show="proposals.length == 0">
     Não foi possível localizar nenhuma proposta (aceita ou não-aceita) para este participante.
   </div>
   <ng-include src="'modules/Proposals/proposals.list.html'"></ng-include>
