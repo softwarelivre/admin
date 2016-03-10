@@ -73,7 +73,7 @@
             isCreation: function() { return true; },
             slot: function() { return null; },
             proposal: function(Proposals) {
-              return { coauthors: [], status: 'confirmed' };
+              return { coauthors: [], status: 'pending' };
             }
           }
         })
