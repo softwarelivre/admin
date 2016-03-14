@@ -275,6 +275,20 @@
     </div>
 
     <div class="row">
+      <div class="form-group has-feedback col-sm-12">
+        <label class="required">
+          <span translate>Minicurrículo:</span>
+          <small class="text-muted" translate>(O preenchimento deste campo é obrigatório apenas se você for participar da submissão de palestras, máximo 400 caracteres)</small>
+        </label>
+        <textarea rows="4"
+                  maxlength="400"
+                  ng-model="signup.resume"
+                  class="form-control"></textarea>
+        <span field-error="resume"></span>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="form-group has-feedback col-sm-6" >
         <label class="required">
           <span translate>É sócio da ASL</span>
