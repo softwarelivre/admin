@@ -34,13 +34,9 @@
           }
         })
         .state('proposals.list', {
-          url: '/list/:trackId',
+          url: '/list',
           views: {
-            query:   { controller: 'ProposalListController', templateUrl: 'modules/Proposals/proposals.tracks.html' },
-            content: { controller: 'ProposalListController', templateUrl: 'modules/Proposals/proposals.list.html' }
-          },
-          resolve: {
-            proposals: function(Proposals, $stateParams) { return Proposals.getByTrack($stateParams.trackId); }
+            content: { controller: 'ProposalListController', templateUrl: 'modules/Proposals/proposals.tracks.html' }
           }
         })
         .state('proposals.detail', {
@@ -117,11 +113,20 @@
       $scope.filterType = 'search';
       focusOn('query.needle');
     })
-    .controller("ProposalListController", function($scope, $state, tracksByZone, proposals, focusOn) {
+    .controller("ProposalListController", function($scope, $state, Proposals, tracksByZone) {
       $scope.filterType = 'group';
       $scope.tracksByZone = tracksByZone;
+      $scope.proposals = [];
+      $scope.selectedZone = {};
+      $scope.selectedTrack = {};
 
-      $scope.proposals = proposals;
+      $scope.search = function() {
+        if( $scope.selectedTrack ) {
+          Proposals.getByTrack($scope.selectedTrack.id).then(function(data) {
+            $scope.proposals = data;
+          });
+        }
+      }
     })
 
     .controller("ProposalShowController", function($scope, $state, proposal, invites, tracks, Proposals, focusOn) {

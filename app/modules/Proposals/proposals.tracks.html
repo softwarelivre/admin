@@ -1,13 +1,35 @@
-<ul class="zones">
-  <li class="header">
-    trilhas
-  </li>
-  <li ng-repeat="(zone, tracks) in tracksByZone">
-    {{ zone }}
-    <ul class="tracks">
-      <li ng-repeat="track in tracks">
-        <a ui-sref="proposals.list({trackId: track.id})">{{ track.area }}</a>
-      </li>
-    </ul>
-  </li>
-</ul>
+<h2 class="page-header">Lista de atividades</h2>
+
+<div class="row">
+    <div class="form-group col-sm-4">
+      <label>Trilha:</label>
+       <select id="zone"
+               ng-model="selectedZone"
+               ng-options="key for (key , value) in tracksByZone"
+               class="form-control">
+           <option value="" selected="selected">Selecione uma opção</option>
+       </select>
+    </div>
+    <div class="form-group col-sm-4">
+       <label>Área:</label>
+       <select id="track"
+               ng-model="selectedTrack"
+               ng-options="track as track.area for track in selectedZone"
+               class="form-control">
+           <option value="" selected="selected">Selecione uma opção</option>
+       </select>
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <button role="btn"
+           class="btn btn-primary"
+           ng-click="search()">Buscar</button>
+    </div>
+</div>
+
+
+<div ng-include="'modules/Proposals/proposals.list.html'"></div>
