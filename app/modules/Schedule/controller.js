@@ -34,8 +34,7 @@
         .state('schedule.grid', {
           url: '/grid/:day',
           views: {
-            "header@": { controller: 'ScheduleGridController', templateUrl: 'modules/Schedule/schedule.days.html' },
-            "main@":   { controller: 'ScheduleGridController', templateUrl: 'modules/Schedule/schedule.grid.html' }
+             "main@":   { controller: 'ScheduleGridController', templateUrl: 'modules/Schedule/schedule.view.html' }
           },
           resolve: {
             day: function($stateParams) { return $stateParams.day; },
@@ -75,10 +74,11 @@
                                                    Schedule, Config,
                                                    day, days, hours, rooms, focusOn) {
 
-      var socket = io(Config.API_HOST+":9001");
-       socket.on("sync-room", function(room) {
-        $scope.reloadRoom(room);
-      });
+      //var socket = io(Config.API_HOST+":9001");
+      // socket.on("sync-room", function(room) {
+      //  $scope.reloadRoom(room);
+      //});
+
       function emitSignal(room) {
        socket.emit("room", room);
       }

@@ -1,14 +1,31 @@
-<div class="hours-row" fixed-vertical>
+<!--
+<div class="hours-row" >
   <div class="hour hour-{{hour}}" ng-repeat="hour in hours">{{ hour }}:00</div>
 </div>
+-->
 
-<div class="room-column" fixed-horizontal>
-  <header ng-repeat="room in rooms">
-    <img src="images/loading.gif" ng-hide="slotsOfRoom[room.id]"/>
-    <div class="name">{{ room.name }}</div>
-    <div class="capacity">{{ room.capacity }} pessoas</div>
-    <a ng-click="reloadRoom(room)" class="reload">recarregar</div>
-  </header>
+<div class="container-fluid">
+
+  <div class="col-sm-3" ng-repeat="room in rooms">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Sala
+      </div>
+
+      <div class="panel-body">
+        <p><strong>Nome:</strong>{{ room.name }}</p>
+        <p><strong>Capacidade:</strong>{{ room.capacity }}</p>
+        <div class="text-center">
+          <button class="btn btn-primary btn-sm"
+                ng-click="reloadRoom(room)" class="reload">Recarregar</button>
+          <div>
+            <img src="images/loading.gif" ng-hide="slotsOfRoom[room.id]"/>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <div class="slots">

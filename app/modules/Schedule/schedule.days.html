@@ -1,22 +1,49 @@
-<h2 class="page-header">Grade:</h2>
-<div class="days">
-  <div class="day" ng-repeat="day in days">
-    <button ng-class="{ current: day == currentDay }"
-            ui-sref="schedule.grid({day: day})">{{ day }}</button>
-    <div class="situation">
-      <b>situação:</b><br/>
-      - ocupado e bloqueado:                  {{ situation.slots[day].used_blocked }}<br/>
-      - ocupado e não-bloqueado:              {{ situation.slots[day].used_non_blocked }}<br/>
-      - não-ocupado e bloqueado:              {{ situation.slots[day].free_blocked }}<br/>
-      - não-ocupado e não bloqueado (livres): <b>{{ situation.slots[day].free_non_blocked }}</b><br/>
+<h2 class="page-header">Grade de horários:</h2>
+<div class="container-fluid">
+
+  <div class="col-sm-6" ng-repeat="day in days">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-calendar"></i>
+        <button class="btn btn-sm btn-default"  ui-sref="schedule.grid({day: day})">{{day}}</button>
+      </div>
+      <div class="panel-body">
+          <table class="table table-hover table-hover table-borderless">
+            <tbody>
+              <tr>
+                <td>Ocupado e bloqueado</td>
+                <th>{{ situation.slots[day].used_blocked }}</th>
+              </tr>
+              <tr>
+                <td>Ocupado e não-bloqueado:</td>
+                <th>{{ situation.slots[day].used_non_blocked }}</th>
+              </tr>
+              <tr>
+                <td>Não-ocupado e bloqueado:</td>
+                <th>{{ situation.slots[day].free_blocked }}</th>
+              </tr>
+              <tr>
+                <td>Não-ocupado e não bloqueado (livres):</td>
+                <td>{{ situation.slots[day].free_non_blocked }}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
     </div>
   </div>
-  <div class="sum">total de livres: {{ sum_free_non_blocked }}</div>
 </div>
-<div class="proposals">
-  <div class="situation">
-    <b>palestras confirmadas:</b><br/>
-    já alocadas={{ situation.proposals.slotted }}<br/>
-    alocação pendente={{ situation.proposals.pending }}
+
+<div class="row">
+  <div class="container-fluid">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        Resumo
+      </div>
+      <div class="panel-body">
+        <p><strong>Total de slots livres:</strong> {{ sum_free_non_blocked }}</p>
+        <p><strong>Palestras confirmadas já alocadas:</strong> {{ situation.proposals.slotted }}</p>
+        <p><strong>Palestras confirmadas com alocação pendente:</strong> {{ situation.proposals.pending }}</p>
+      </div>
+    </div>
   </div>
 </div>
