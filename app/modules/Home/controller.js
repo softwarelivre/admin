@@ -19,7 +19,8 @@
 
   angular
     .module('segue.admin.home.controller', [])
-    .controller('HomeController', function($rootScope, $scope, $state, $window, Auth) {
+    .controller('HomeController', function($rootScope, $scope, Auth) {
       $scope.enforceAuth();
+      $scope.credentials = Auth.glue($scope, 'credentials');
     });
 })();

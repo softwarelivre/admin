@@ -14,9 +14,11 @@
     </div>
 
             <!-- Top Menu Items -->
-      <ul class="nav navbar-nav navbar-right top-nav" ng-controller="SessionController">
-        <li uib-dropdown class="dropdown">
-          <a uib-dropdown-toggle role="button" href="#">{{credentials.email}}
+      <ul class="nav navbar-nav navbar-right top-nav"
+          ng-controller="SessionController">
+        <li uib-dropdown class="dropdown" ng-show="credentials">
+          <a uib-dropdown-toggle role="button" href="#">
+              {{credentials.email}}
               <i class="fa fa-caret-down"> </i>
           </a>
           <ul uib-dropdown-menu class="dropdown-menu">
@@ -29,8 +31,8 @@
 
 
     <!-- Sidebar Menu Items  -->
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav">
+    <div class="collapse navbar-collapse navbar-ex1-collapse" ng-controller="HomeController">
+        <ul class="nav navbar-nav side-nav" ng-show="credentials">
             <li>
                 <a  ng-click="accountMenu=!accountMenu"
                     href="#"  role="button" translate>
@@ -84,6 +86,9 @@
                         <a ui-sref="proposals.search">Buscar atividade</a>
                     </li>
                     <li>
+                        <a ui-sref="proposals.list">Lista de atividade</a>
+                    </li>
+                    <li>
                         <a ui-sref="notifications">Confirmações de atividade</a>
                     </li>
 
@@ -98,7 +103,6 @@
             <li>
                 <a ui-sref="schedule.days">Grade de horários</a>
             </li>
-
         </ul>
     </div>
 
