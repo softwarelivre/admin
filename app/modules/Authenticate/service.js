@@ -46,7 +46,7 @@
       var session = Restangular.service('sessions');
 
       Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
-        if (response.status === 400) {
+        if (response.status === 400 || response.status === 403) {
           var str_error_message = '<span>' + response.data.error.message + '</span>';
           ngToast.create({
             content: $sce.trustAsHtml(str_error_message),
