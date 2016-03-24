@@ -26,7 +26,7 @@
 
         // status
         'paid': 'Pago',
-        'peding': 'Pendente',
+        'pending': 'Pendente',
 
         // ocupation types
         //'student': 'Estudante',
