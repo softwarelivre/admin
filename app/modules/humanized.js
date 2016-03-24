@@ -24,6 +24,10 @@
         'visual':   'Visual',
         'mental':   'Mental',
 
+        // status
+        'paid': 'Pago',
+        'peding': 'Pendente',
+
         // ocupation types
         //'student': 'Estudante',
         'private_employee': 'Funcionário',
@@ -37,6 +41,11 @@
         'graduation': 'Ensino Superior Completo',
         'graduation_incomplete': 'Ensino Superior Incompleto',
         'secondary': 'Ensino Médio Completo',
-        'secondary_incomplete': 'Ensino Médio Incompleto'
+        'secondary_incomplete': 'Ensino Médio Incompleto',
+
+        // proposal types
+        'workshop': 'oficina',
+        'talk': 'palestra'
+
     });
 })();
