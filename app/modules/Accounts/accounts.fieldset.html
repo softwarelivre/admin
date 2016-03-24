@@ -263,26 +263,13 @@
 
     <div class="row">
       <div class="form-group has-feedback col-sm-12">
-        <label>
-          <span translate>Resumo:</span>
-          <small class="text-muted" translate>Até 400 caracteres</small>
-        </label>
-        <textarea maxlength="400"
-                  class="form-control"
-                  ng-model="account.resume"></textarea>
-        <span field-error="resume"></span>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="form-group has-feedback col-sm-12">
         <label class="required">
           <span translate>Minicurrículo:</span>
           <small class="text-muted" translate>(O preenchimento deste campo é obrigatório apenas se você for participar da submissão de palestras, máximo 400 caracteres)</small>
         </label>
         <textarea rows="4"
                   maxlength="400"
-                  ng-model="signup.resume"
+                  ng-model="account.resume"
                   class="form-control"></textarea>
         <span field-error="resume"></span>
       </div>
@@ -343,7 +330,7 @@
                  maxlength="2"
                  placeholder="RS"
                  ng-model="account.address_state"
-                 class="form-control text-uppercase"/>
+                 class="form-control"/>
           <span field-error="address_state"></span>
         </div>
       </div>
