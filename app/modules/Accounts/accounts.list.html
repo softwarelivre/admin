@@ -14,8 +14,8 @@
   <tbody>
     <tr ng-repeat="account in accounts">
       <td class="id">{{ account.identifier.id }}</td>
-      <td class="category">{{ account.identifier.category }}</td>
-      <td class="status status-{{account.identifier.status}}">{{ account.identifier.status }}</td>
+      <td class="category">{{ account.identifier.category | humanize }}</td>
+      <td class="status status-{{account.identifier.status}}">{{ account.identifier.status | humanize }}</td>
       <td>
         <a ui-sref="accounts.detail({id: account.id})">{{ account.name }}</a>
       </td>
