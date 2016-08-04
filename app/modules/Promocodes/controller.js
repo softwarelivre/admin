@@ -59,13 +59,17 @@
       $scope.promocode = {};
       $scope.products  = products;
 
+      $scope.products = products.filter(function(product) {
+          return product.category == 'promocode';
+      });
+
+
       focusOn("promocode.name", 200);
 
       $scope.submit = function() {
-        Validator.validate($scope.promocode, "purchases/create_promocode")
-                 .then(Promocodes.createOne)
+        Promocodes.createOne($scope.promocode)
                  .then(returnToListingPage)
-                 .catch(FormErrors.set);
+                 .catch(FormErrors.setError);
       };
       function returnToListingPage(promocodes) {
         $state.go('promocodes.list', { query: $scope.promocode.description });

@@ -22,7 +22,7 @@
             "main@": { controller: 'TournamentListController', templateUrl: 'modules/Tournaments/tournaments.list.html' }
           },
           resolve: {
-            tournaments: function(Tournaments, $stateParams) { return Tournaments.all(); }
+            tournaments: function(Tournaments, $stateParams) { return Tournaments.all() }
           }
         })
         .state('tournaments.detail', {
@@ -42,6 +42,7 @@
           resolve: {
             tournament: function(Tournaments, $stateParams) { return Tournaments.get($stateParams.id); },
             standings:  function(Tournaments, $stateParams) { return Tournaments.standings($stateParams.id); },
+            tracksByZone: function(Tracks) { return Tracks.tracksByZone() },
           }
         });
     });
@@ -54,8 +55,32 @@
     .controller("TournamentShowController", function($scope, $state, tournament) {
       $scope.tournament = tournament;
     })
-    .controller("TournamentStandingsController", function($scope, $state, tournament, standings) {
+    .controller("TournamentStandingsController", function($scope, $state, $stateParams, 
+                                                          Proposals, Tournaments,
+                                                          tracksByZone, tournament, standings) {
+      $scope.types = Proposals.types();
+      $scope.tracksByZone = tracksByZone;
       $scope.tournament = tournament;
       $scope.standings = standings;
+      $scope.selectedType = '';
+
+      function byType(proposal) {
+        if(!$scope.proposal_type) { return true }
+        else {return proposal.type == $scope.proposal_type;};
+      }
+
+      function byTrack(proposal) {
+        if(!$scope.proposal_track) { return true }
+        else {return proposal.track_id == $scope.proposal_track.id;};
+      }
+
+      $scope.getStandings = function() {
+        return $scope.standings.filter(byType).filter(byTrack);
+      }
+
+      $scope.onZoneChange = function() {
+        $scope.proposal_track = '';
+      }
+
     });
 })();

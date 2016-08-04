@@ -10,12 +10,16 @@
 <fieldset class="detail">
   <legend>Dados atividade</legend>
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-12">
     <table class="table table-borderless table-responsive">
       <tbody>
         <tr>
           <th translate>Código:</th>
           <td>{{ proposal.id }}</td>
+        </tr>
+        <tr>
+          <th translate>Tipo da atividade:</th>
+          <td>{{ proposal.type | humanize }}</td>
         </tr>
         <tr>
           <th translate>Título:</th>
@@ -31,7 +35,7 @@
        </tr>
        <tr>
           <th translate>Status:</th>
-          <td>{{ proposal.status }}</td>
+          <td>{{ proposal.status  | humanize }}</td>
        </tr>
        <tr>
          <th translate>Autor:</th>
@@ -64,11 +68,23 @@
         <th translate>Descrição</th>
         <td >{{ proposal.full }}</td>
       </tr>
+      <tr ng-show="proposal.type == 'workshop'">
+          <th translate>Necessidades</th>
+          <td>{{proposal.demands}}</td>
+      </tr>
+      <tr ng-show="proposal.type == 'workshop'">
+          <th translate>Carga horária:</th>
+          <td>{{proposal.expected_duration}}</td>
+      </tr>
+      <tr>
+          <th translate>Restrições:</th>
+          <td> {{proposal.restrictions}}</td>
+      </tr>
       <tr>
         <th>Tags:</th>
         <td>
           <span ng-repeat="tag in proposal.tags" class="tag {{tag}}">
-            {{ tag }}
+            <span class="label label-default">{{ tag }}</span>
           </span>
         </td>
       </tr>
@@ -76,11 +92,11 @@
       <td>
         <span ng-hide="proposal.slots.length == 0">Não possui</span>
         <div ng-repeat="slot in proposal.slots">
-          dia
+          Dia
           <b>{{ slot.begins | date_locale }}</b> às
           <b>{{ slot.begins | time_locale }}</b>
           (sala <b> {{ slot.room }}</b>)
-          <span class="status">{{ slot.status }}</span>
+          <span>{{ slot.status }}</span>
         </div>
       </td>
       </tr>
@@ -88,8 +104,3 @@
      </table>
 
     <a role="button" class="btn btn-primary" ui-sref="proposals.edit({id:proposal.id})">Editar</a>
-
-
-    <div class="tags">
-
-    </div>

@@ -7,14 +7,87 @@
 
 <form class="form">
 
-  <div class="form-group">
-    <label>
-      Por título ou situação:
-    </label>
-    <input type="text"
-           class="form-control"
-           ng-model="query.needle"
-           ui-keypress="{ 'enter': 'doSearch()' }" />
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Título:</label>
+        <input type="text"
+               class="form-control"
+               ng-model="query.title" />
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Autor:</label>
+        <input type="text"
+               class="form-control"
+               ng-model="query.author_name"/>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Situação:</label>
+        <select class="form-control"
+                ng-options="key as value for (key,value) in status"
+                ng-model="query.status">
+          <option value="">Selecione uma opção</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label>Alocada:</label>
+          <select class="form-control"
+                  ng-model="query.slotted">
+            <option value="">Selecione uma opção</option>
+            <option value="true">Sim</option>
+            <option value="false">Não</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label>Tipo:</label>
+            <select
+                class="form-control"
+                ng-options="key as value for (key,value) in types"
+                ng-model="query.type">
+              <option value="">Selecione uma opção</option>
+            </select>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label>Trilha:</label>
+          <select class="form-control"
+                  ng-options="track.id as track.name_pt for track in tracks"
+                  ng-model="query.track_id">
+            <option value="">Selecione uma opção</option>
+          </select>
+        </div>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <button type="text"
+               class="btn btn-primary"
+               ng-click="doSearch()" >Buscar</button>
+      </div>
+    </div>
   </div>
 
 </form>
+
+
+<div ng-include="'modules/Proposals/proposals.list.html'"></div>

@@ -17,6 +17,9 @@
       'ui.bootstrap',
       'ngMask',
       'ngFileUpload',
+      'angularMoment',
+      'ngCsv',
+
 
       'segue.admin.errors',
       'segue.admin.filters',
@@ -29,7 +32,9 @@
       'segue.admin.tournaments',
       'segue.admin.calls',
       'segue.admin.notifications',
+      'segue.admin.purchase',
       'segue.admin.promocodes',
+      'segue.admin.product',
       'segue.admin.schedule',
       'segue.admin.financial',
     ])

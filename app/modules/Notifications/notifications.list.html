@@ -1,46 +1,43 @@
-<header>
-  mostrar:
+<h2 class="page-header">Notificações</h2>
+
+<div>
+  <strong>Mostrar:</strong>
   [
   <a ui-sref="notifications({ kind: 'call', statusName: 'confirmed'})">só confirmadas</a> |
   <a ui-sref="notifications({ kind: 'call', statusName: 'pending'}  )">só pendentes</a>   |
-  <a ui-sref="notifications({ kind: 'call', statusName: 'declined'} )">só declinadas</a>
+  <a ui-sref="notifications({ kind: 'call', statusName: 'declined'} )">só declinadas</a>  |
+  <a ui-sref="notifications({ kind: 'call', statusName: 'expired'} )">só expiradas</a>
   ]
+</div>
 
-</header>
-
-<div class="summary" ng-show="statusName">
-  mostrando <b>{{ notifications.length }}</b> notificações
+<p class="" ng-show="statusName">
+  Mostrando <b>{{ notifications.length }}</b> notificações
   do tipo <b>{{ kind }}</b> com status <b>{{ statusName }}</b>
-</div>
-<div class="instructions" ng-hide="statusName">
-  selecione um status acima
-</div>
+</p>
 
-<table class="notifications" ng-hide="notifications.length == 0">
-  <col class="id" />
-  <col class="status" />
-  <col class="sent" />
-  <col class="title" />
-  <col class="authors" />
+<p class="instructions" ng-hide="statusName">
+  selecione um status acima
+</p>
+
+<hr>
+
+<table class="table table-striped table-condensed" ng-hide="notifications.length == 0">
   <thead>
     <tr>
-      <th translate>id</th>
-      <th translate>status</th>
-      <th translate>envio/prazo</th>
+      <th translate>Id</th>
+      <th translate>Status</th>
+      <th translate>Envio/prazo</th>
       <th translate class="title">
-          título
+          <span>Título</span>
           <small>
               [
               <a ng-click="setCurrentFilter()">todos</a>|
-              <a ng-click="setCurrentFilter('none')">não-alocados</a>     ({{ count.none      }}) |
-              <a ng-click="setCurrentFilter('dirty')">não-notificados</a> ({{ count.dirty     }}) |
-              <a ng-click="setCurrentFilter('pending')">pendentes</a>     ({{ count.pending   }}) |
-              <a ng-click="setCurrentFilter('declined')">declinados</a>   ({{ count.declined  }}) |
-              <a ng-click="setCurrentFilter('confirmed')">confirmados</a> ({{ count.confirmed }})
+              <a ng-click="setCurrentFilter('none')">não-alocados</a>({{ count.none }}) |
+              <a ng-click="setCurrentFilter('confirmed')">alocados</a>({{count.confirmed}})   
               ]
           </small>
       </th>
-      <th translate>autor</th>
+      <th translate>Autor</th>
     </tr>
   </thead>
   <tr class="master" ng-repeat="notification in notifications | orderBy:'proposal' | filterByStatus:currentFilter">

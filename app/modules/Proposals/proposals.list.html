@@ -4,7 +4,7 @@
 <h3 ng-hide="proposals.length == 0">
   {{ proposals.length }} propostas encontradas...
 </h3>
-<table class="table table-striped table-responsive" ng-hide="proposals.length == 0">
+<table class="table table-striped table-condensed" ng-hide="proposals.length == 0">
   <thead>
     <tr>
       <th translate>id</th>
@@ -13,6 +13,7 @@
       <th translate>trilha</th>
       <th translate>título</th>
       <th translate>autores</th>
+      <th translate>Slot</th>
     </tr>
   </thead>
   <tr class="master" ng-repeat="proposal in proposals | orderBy:'id'">
@@ -43,5 +44,19 @@
         </a>
       </div>
     </td>
+    <td>
+       <span ng-show="!proposal.slotted">
+         -
+      </span>
+      <span ng-show="proposal.slotted">
+        <div ng-repeat="slot in proposal.slots">
+          Sala <b> {{ slot.room }}</b> <br>
+          Dia <b>{{ slot.begins | date_locale }}</b> <br>
+          Horário <b>{{ slot.begins | time_locale }}</b>
+        </div>
+      </span>
+    </td>
+
+
   </tr>
 </table>

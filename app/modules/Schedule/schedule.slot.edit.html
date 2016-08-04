@@ -1,0 +1,108 @@
+<div class="modal-header">
+  <div class="container-fluid">
+      <div class="col-sm-4">
+        <span><strong>{{ slot.id }}</strong> - </span>
+        <span><strong>Sala:</strong> <span ng-bind="slot.room.name"></span></span>
+      </div>
+      <div class="col-sm-4">
+         <span><strong>Horário:</strong> {{ slot.begins | time_locale }}</span>
+      </div>
+      <div class="col-sm-4">
+          <span><strong>Duração</strong> {{ slot.duration }} min</span>
+      </div>
+  </div>
+</div>
+<div class="modal-body">
+
+  <form class="form" name="form" novalidate>
+
+  <div class="form-group">
+    <label>Título:</label>
+    <span ng-hide="talk.id">
+       <input type="text"
+          placeholder="Buscar palestra"
+          class="form-control"
+          ng-model="query.title"
+          ng-model-options="{ debounce: 250 }"
+          typeahead-min-length="3"
+          typeahead-no-results="noResults"
+          typeahead-on-select='onSelectTalk($item)'
+          uib-typeahead="entry as (entry.title) for entry in performSearch($viewValue)">
+    </span>
+    <span ng-show="talk.id">{{ talk.title }}</span>
+  </div>
+
+  <div ng-show="talk">
+      <div class="form-group">
+        <label>Autor principal:</label>
+        <span ng-show="talk">{{ talk.owner }}</span>
+      </div>
+
+      <div class="form-group" ng-show="talk" class="track">
+        <label>Trilha:</label>
+        {{ talk.track }}
+      </div>
+
+      <div class="form-group">
+        <label>Horário aceito?</label>
+        <span ng-show="slot.status == 'dirty'">Notificação ainda não enviada</span>
+        <span ng-show="slot.status == 'pending'">Aguardando confirmação</span>
+        <span ng-show="slot.status == 'confirmed'">Confirmado</span>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label>Anotações:</label>
+  <!--  <span>{{ slot.annotation }}</span>-->
+    <textarea placeholder="Observações sobre esse slot..." focusable
+              ng-model="slot.annotation"
+              class="form-control">
+    </textarea>
+  </div>
+
+  </form>
+</div>
+<div class="modal-footer">
+
+  <div class="row-fluid">
+  <div class="btn-group">
+    <button class="btn btn-default"
+            ng-click="saveAnnotation()"
+            uib-tooltip="Salvar anotações"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+
+    <button class="btn btn-default"
+            ng-hide="slot.blocked"
+            ng-click="blockSlot()"
+            uib-tooltip="Bloquear"><i class="fa fa-lock" aria-hidden="true"></i></button>
+
+    <button class="btn btn-default"
+            ng-show="slot.blocked"
+            ng-click="unblockSlot()"
+            uib-tooltip="Desbloquear"><i class="fa fa-unlock" aria-hidden="true"></i></button>
+
+   <button class="btn btn-default" ng-hide="slot.talk.id"
+           ng-click="chooseTalkForSlot()"
+           uib-tooltip="Selecionar palestra"><i class="fa fa-newspaper-o" aria-hidden="true"></i></button>
+
+    <button class="btn btn-default" ng-show="slot.talk.id"
+            ng-click="emptySlot(slot, $event)"
+            uib-tooltip="Esvaziar slot"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+
+    <button class="btn btn-default"
+            ng-show="slot.talk.id && slot.status != 'confirmed'"
+            ng-click="setStatusOfSlot('confirmed')"
+            uib-tooltip="Marcar como confirmado"><i class="fa fa-check" aria-hidden="true"></i></button>
+
+    <button class="btn btn-default"
+            ng-show="slot.can_be_stretched"
+            ng-click="stretchSlot()"
+            uib-tooltip="Esticar slot (+20min)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+    <button class="btn btn-default"
+            ng-show="slot.can_be_unstretched"
+            ng-click="unstretchSlot()"
+            uib-tooltip="Desesticar slot (-20min)"><i class="fa fa-minus" aria-hidden="true"></i></button>
+  </div>
+</div>
+
+</div>

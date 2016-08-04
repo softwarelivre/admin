@@ -30,37 +30,79 @@
           url: '/track/:trackId',
           views: {
             query:   { controller: 'CallController', templateUrl: 'modules/Calls/calls.tracks.html' },
-            content: { controller: 'CallController', templateUrl: 'modules/Calls/calls.list.html' }
+            content: {  }
           },
           resolve: {
-            track:   function(Tracks, $stateParams) { return Tracks.one($stateParams.trackId).get(); },
-            ranking: function(Calls, $stateParams)  { return Calls.get($stateParams.tournamentId, $stateParams.trackId); }
+            ranking:  function(Calls, $stateParams) { 
+              return  Calls.getByTournament($stateParams.tournamentId); 
+            },
           }
         });
     });
 
   angular
     .module("segue.admin.calls.controller", [ ])
-    .controller("CallController", function($scope, $state, Proposals, ranking, tournament, track, tracks) {
+    .controller("CallController", function($scope, $state, $stateParams, 
+                                           Calls, Proposals, 
+                                           tournament, tracks, ranking) {
       $scope.ranking = ranking;
       $scope.tournament = tournament;
       $scope.tracksByZone = tracks;
-      $scope.track = track;
-      $scope.marked = _.filter($scope.ranking, isMarked).length;
+      $scope.selectedType = '';
+      $scope.types = Proposals.types();
+ 
 
-      function isMarked(ranked) {
-        return _(ranked.tags).contains('marked');
+      function byStatus(ranked) {
+        if(!$scope.selectedStatus) {return true}
+        else {return ranked.status == $scope.selectedStatus};
       }
 
-      function reload() {
-        $state.reload();
+      function byType(ranked) {
+        if(!$scope.selectedType) { return true }
+        else {return ranked.type == $scope.selectedType};
       }
 
-      $scope.tagAs = function(proposalId, tagName) {
-        Proposals.addTagToProposal(proposalId, tagName).then(reload);
+      function byTrack(ranked) {
+        if(!$scope.selectedTrack) { return true }
+        else {return ranked.track_id == $scope.selectedTrack.id;};
+      }
+
+      $scope.isMarked = function(ranked) {
+        return _(ranked.tags).contains('marked-3');
+      }
+
+      $scope.tagAs = function(proposal, tagName) {
+        Proposals.addTagToProposal(proposal.id, tagName).then(
+            function(response) {
+              proposal.tags.push(tagName);
+            },
+            function(error) {}
+          );
       };
-      $scope.untag = function(proposalId, tagName) {
-        Proposals.removeTagFromProposal(proposalId, tagName).then(reload);
+
+      $scope.untag = function(proposal, tagName) {
+        Proposals.removeTagFromProposal(proposal.id, tagName).then(
+            function(response) {
+              idx = proposal.tags.indexOf(tagName);
+              if(idx > -1) { 
+                proposal.tags.splice(idx, 1);
+              }
+            },
+            function(error) {}
+          );
       };
+
+      $scope.totalMarked = function() {
+        return $scope.getRanking().filter($scope.isMarked).length
+      }
+
+      $scope.getRanking = function() {
+        return $scope.ranking.filter(byType).filter(byTrack).filter(byStatus);
+      }
+
+      $scope.onZoneChange = function() {
+        $scope.selectedTrack = '';
+      }
+
     });
 })();

@@ -1,0 +1,43 @@
+<table class="table table-condensed table-striped table-responsive" ng-show="purchases.length">
+  <thead>
+    <tr>
+      <th translate class="id">Código da compra</th>
+      <th translate class="category">Produto</th>
+      <th translate class="status">Situação</th>
+      <th translate class="name">Nome do comprador</th>
+      <th>Arquivo enviado</th>
+      <th>Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="purchase in purchases">
+      <td>{{ purchase.id }}</td>
+      <td>{{ purchase.product.description }}</td>
+      <td>{{ purchase.status | humanize }}</td>
+      <td>
+       <a ui-sref="accounts.detail({id:purchase.customer_id})">{{ purchase.customer_name}}</a>
+      </td>
+      <td>
+        <span ng-show="purchase.buyer.document_file_hash">
+          <a target="_blank" href="{{CONFIG.API_HOST}}/api/documents/buyer-document-{{purchase.buyer.document_file_hash}}.pdf">
+            {{purchase.buyer.document_file_hash}}
+          </a>
+        </span>
+        <span ng-hide="purchase.buyer.document_file_hash">
+          -
+        </span>
+      </td>
+      <td  ng-switch on="purchase.status">
+        <span ng-switch-when="student_document_in_analysis">
+          <button class="btn btn-primary" ng-click="confirmStudentDocument($index)">Confirmar</button>
+        </span>
+        <span ng-switch-when="gov_document_in_analysis">
+          <button class="btn btn-primary" ng-click="confirmGovDocument($index)">Confirmar</button>
+        </span>
+        <span ng-switch-default>
+          -
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>

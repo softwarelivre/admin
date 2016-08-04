@@ -24,9 +24,18 @@
         'visual':   'Visual',
         'mental':   'Mental',
 
+        //proposal status
+        'confirmed': 'Confirmado',
+        'declined': 'Rejeitado',
+
         // status
         'paid': 'Pago',
         'pending': 'Pendente',
+
+        //purchase status
+        'student_document_in_analysis':'Vínculo estudantil aguardando análise',
+        'gov_document_submission_pending':'Aguardando submissão da nota de empenho',
+        'gov_document_in_analysis': 'Nota de empenho aguardando análise',
 
         // ocupation types
         //'student': 'Estudante',

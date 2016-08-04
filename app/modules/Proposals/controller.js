@@ -29,8 +29,7 @@
         .state('proposals.search', {
           url: '/search',
           views: {
-            query:   { controller: 'ProposalSearchController', templateUrl: 'modules/Proposals/proposals.query.html' },
-            content: { controller: 'ProposalSearchController', templateUrl: 'modules/Proposals/proposals.list.html' }
+            content: { controller: 'ProposalSearchController', templateUrl: 'modules/Proposals/proposals.query.html' }
           }
         })
         .state('proposals.list', {
@@ -93,7 +92,7 @@
     .module("segue.admin.proposals.controller", [
       'segue.admin.proposals.service'
     ])
-    .controller("ProposalController", function($scope, $state, Proposals, focusOn) {
+    .controller("ProposalController", function($scope, $state, Proposals) {
       $scope.enforceAuth();
       $scope.proposals = [];
       $scope.query = { needle: '', limit: 20 };
@@ -104,14 +103,24 @@
       };
       $scope.doSearchProposal = function(name) {
         Proposals.lookup($scope.query).then(function(data) {
-          console.log(data);
           return data;
         });
       };
     })
-    .controller("ProposalSearchController", function($scope, $state, focusOn) {
-      $scope.filterType = 'search';
-      focusOn('query.needle');
+    .controller("ProposalSearchController", function($scope, Proposals, tracks) {
+      $scope.query = {};
+      $scope.proposals = [];
+
+      $scope.tracks = tracks;
+      $scope.types = Proposals.types();
+      $scope.status = Proposals.status();
+
+      $scope.doSearch = function() {
+        Proposals.lookup($scope.query).then(function(data) {
+          $scope.proposals = data;
+        });
+      };
+
     })
     .controller("ProposalListController", function($scope, $state, Proposals, tracksByZone) {
       $scope.filterType = 'group';
@@ -144,8 +153,14 @@
       $scope.proposal = proposal;
       $scope.languages = Config.PROPOSAL_LANGUAGES;
 
+      $scope.pending_invites = _.filter($scope.invites, function(invite){
+        return invite.status == 'pending';
+      });
+
+      $scope.invitesToRemove = [];
+
       if (isCreation) {
-        $scope.$watch('proposal', Proposals.localSave);
+        //$scope.$watch('proposal', Proposals.localSave);
       } else {
         $scope.proposal.owner_id = proposal.owner.id;
         $scope.proposal.track_id = proposal.track.id;
@@ -180,6 +195,7 @@
                  .then(Proposals.pipeCoauthorsToProposal($scope.proposal.coauthors))
                  .then(updateProposal)
                  .then(updateSlot)
+                 .then(removeInvites)
                  .then(Proposals.localForget)
                  .then(moveToDetailsPage)
                  .catch(FormErrors.setError);
@@ -200,6 +216,12 @@
         $state.go('proposals.detail', { id: $scope.proposal.id });
       }
 
+      function removeInvites() {
+        angular.forEach($scope.invitesToRemove, function (invite) {
+          Proposals.removeInviteFromProposal($scope.proposal.id, invite.id);
+        });
+      }
+
       $scope.createOwner = function(slot) {
         AccountCreateModal().closePromise.then(function(data) {
           if (noData(data)) { return; }
@@ -213,6 +235,10 @@
           $scope.pushCoauthor(data.value);
         });
 
+      };
+      $scope.markInviteToRemove = function (index) {
+        $scope.invitesToRemove.push($scope.invites[index]);
+        $scope.pending_invites.splice(index, 1);
       };
 
       function noData(data) {

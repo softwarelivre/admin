@@ -21,8 +21,8 @@
         .state('accounts.list', {
           url: '/list/:query',
           views: {
-            query:   { controller: 'AccountListController', templateUrl: 'modules/Accounts/accounts.query.html' },
-            content: { controller: 'AccountListController', templateUrl: 'modules/Accounts/accounts.list.html' }
+            query:   {  },
+            content: { controller: 'AccountListController', templateUrl: 'modules/Accounts/accounts.query.html' }
           },
           resolve: {
             accounts: function(Accounts, $stateParams) { return Accounts.lookup({ needle: $stateParams.query }); },
@@ -84,13 +84,20 @@
       'segue.admin.errors',
       'segue.admin.accounts.service'
     ])
-    .controller("AccountListController", function($scope, $state, accounts, focusOn) {
+    .controller("AccountListController", function($scope, $state, accounts, focusOn, Accounts) {
       $scope.enforceAuth();
-      $scope.accounts = accounts;
-      $scope.query = { needle: $state.params.query };
+      $scope.accounts = [];
+      $scope.query = {};
       $scope.doSearch = function() {
-        $state.go("accounts.list", { query: $scope.query.needle });
+          Accounts.lookup($scope.query).then(function(data) {
+            $scope.accounts = data;
+          });
       };
+
+      $scope.isAdmin = function(account) {
+        return Accounts.isAdmin(account);
+      }
+
       focusOn("query.needle");
     })
     .controller("AccountController", function($scope, $state, Accounts, focusOn) {
@@ -183,17 +190,18 @@
       $scope.lockType = true;
 
 
-      if(account.role == 'corporate') {
+      if(Accounts.isCorporate(account)) {
         $scope.account.cnpj = account.document;
         $scope.type = 'corporate'
       }
-      else if(account.role == 'foreign') {
+      else if(Accounts.isForeign(account)) {
           $scope.account.passport = account.document;
           $scope.type = 'foreign';
       } else {
           $scope.account.cpf = account.document;
           $scope.type = 'person'
       }
+
       focusOn("account.name", 200);
 
       $scope.disabilityTypes =  Accounts.getDisabilityTypes();

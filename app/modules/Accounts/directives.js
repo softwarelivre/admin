@@ -17,14 +17,18 @@
       };
     })
     .controller("AccountLookupController", function($scope, Accounts) {
-      $scope.query = { needle: '' };
+      $scope.query = {};
 
+      
       $scope.select = function(item) {
         $scope.onSelected(item);
       };
 
-      $scope.perform = function() {
-        return Accounts.lookup($scope.query).then(function(data) {
+      $scope.perform = function(value) {
+        var query = {
+          name: value
+        };
+        return Accounts.lookup(query).then(function(data) {
           return data;
         });
       }

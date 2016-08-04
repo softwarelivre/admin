@@ -1,3 +1,61 @@
+<h2 class="page-header">Listagem de chamadas do torneio <span ng-bind="tournament.id"></span></h2>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a ui-sref="tournaments.list">Torneios</a></li>
+  <li  class="active">Chamadas</li>
+</ol>
+
+<hr>
+
+<div class="row">
+    <div class="form-group col-sm-3">
+      <label>Tipo:</label>
+       <select id="zone"
+               ng-model="selectedType"
+               ng-options="key as value for (key,value) in types"
+               class="form-control">
+           <option value="" selected="selected">Selecione uma opção</option>
+       </select>
+    </div>
+    <div class="form-group col-sm-3">
+      <label>Trilha:</label>
+       <select id="zone"
+               ng-model="selectedZone"
+               ng-options="key for (key , value) in tracksByZone"
+               ng-click="onZoneChange()"
+               class="form-control">
+           <option value="" selected="selected">Selecione uma opção</option>
+       </select>
+    </div>
+    <div class="form-group col-sm-3">
+       <label>Área:</label>
+       <select id="track"
+               ng-model="selectedTrack"
+               ng-options="track as track.area for track in selectedZone"
+               class="form-control">
+           <option value="" selected="selected">Selecione uma opção</option>
+       </select>
+    </div>
+    <div class="form-group col-sm-3">
+       <label>Status:</label>
+       <select id="track"
+               ng-model="selectedStatus" class="form-control">
+           <option value="" selected="selected">Selecione uma opção</option>
+           <option value="confirmed" selected="selected">Confirmado</option>
+           <option value="pending" selected="selected">Pendente</option>
+           <option value="declined" selected="selected">Rejeitado</option>
+       </select>
+    </div>
+
+</div>
+
+
+<hr>
+
+<div ng-include="'modules/Calls/calls.list.html'"></div>
+
+<!--
 <ul class="zones">
   <li class="header">
     trilhas
@@ -11,3 +69,4 @@
     </ul>
   </li>
 </ul>
+-->

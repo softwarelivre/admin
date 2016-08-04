@@ -1,26 +1,33 @@
-<table class="tournaments" ng-hide="tournaments.length == 0">
+<h2 class="page-header">Visualizar torneios</h2>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a ui-sref="tournaments.list">Torneios</a></li>
+</ol>
+
+<table class="table table-striped table-condensed" ng-hide="tournaments.length == 0">
   <col class="id" />
   <col class="selection" />
   <col class="status" />
   <col class="round" />
   <thead>
     <tr>
-      <th translate>id</th>
-      <th translate>seleção</th>
-      <th translate>status</th>
-      <th translate>rodada</th>
-      <th translate>informações</th>
+      <th translate>Id</th>
+      <th translate>Seleção</th>
+      <th translate>Status</th>
+      <th translate>Rodada</th>
+      <th translate>Informações</th>
     </tr>
   </thead>
-  <tr class="master" ng-repeat="tournament in tournaments | orderBy:'id'">
-    <td class="id">{{ tournament.id }}</td>
-    <td class="selection">{{ tournament.selection }}</td>
-    <td class="status">{{ tournament.status }}</td>
-    <td class="round">{{ tournament.round }}</td>
-    <td class="info">
-      <a ui-sref="tournaments.detail({id: tournament.id})">rodadas</a>
-      <a ui-sref="tournaments.standings({id: tournament.id})">classificação</a>
-      <a ui-sref="calls.list({tournamentId: tournament.id})">convocação</a>
+  <tr ng-repeat="tournament in tournaments | orderBy:'id'">
+    <td >{{ tournament.id }}</td>
+    <td >{{ tournament.selection }}</td>
+    <td >{{ tournament.status }}</td>
+    <td >{{ tournament.round }}</td>
+    <td>
+      <a  ui-sref="tournaments.detail({id: tournament.id})">Rodadas</a>
+      <a  ui-sref="tournaments.standings({id: tournament.id})">Classificação</a>
+      <a  ui-sref="calls.list({tournamentId: tournament.id})">Convocação</a>
     </td>
   </tr>
 </table>

@@ -15,6 +15,12 @@
         return calls.one(tournamentId).one(trackId).getList();
       };
 
+      self.getByTournament = function(tournamentId) {
+        if (!tournamentId) { return []; }
+        return calls.one(tournamentId).getList();
+      };
+
+
       return self;
     });
 })();

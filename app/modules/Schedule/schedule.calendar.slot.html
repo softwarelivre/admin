@@ -1,0 +1,58 @@
+<div class="modal-header">
+            <h3 class="modal-title">Editar slot</h3>
+</div>
+<div class="modal-body">
+
+  <div class="info">
+    <span class="id">{{ slot.id }}</span>
+    <span class="room"><b>sala:</b> {{ slot.room.name }}</span>
+    <span class="hour"><b>horário:</b> {{ slot.begins | time_locale }}</span>
+    <span class="duration"><b>duração</b> {{ slot.duration }}min</span>
+    <button class="close" ng-click="resetZoom($event)">&times;</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track">
+    <label>trilha:</label>
+    {{ slot.talk.track }}
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="id">
+      <a ui-sref="proposals.detail({id: slot.talk.id})" target="blank_">
+        {{ slot.talk.id }}
+      </a>
+    </span>
+    <span class="empty"  ng-hide="slot.talk">sem palestra designada</span>
+    <span class="filled" ng-show="slot.talk">{{ slot.talk.title }}</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span ng-show="slot.talk">{{ slot.talk.owner }}</span>
+  </div>
+
+
+   <div class="author">
+    <label>autor principal:</label>
+    <span ng-show="slot.talk">{{ slot.talk.owner }}</span>
+  </div>
+
+  <div class="status">
+    <label>horário aceito?</label>
+    <span ng-show="slot.status == 'dirty'">Notificação ainda não enviada</span>
+    <span ng-show="slot.status == 'pending'">Aguardando confirmação</span>
+    <span ng-show="slot.status == 'confirmed'">Confirmado</span>
+  </div>
+
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-hide="slot.blocked" ng-click="blockSlot(slot)">Bloquear</button>
+    <button class="btn btn-default" ng-show="slot.blocked" ng-click="unblockSlot(slot)">Desbloquear</button>
+    <button class="btn btn-default" ng-hide="slot.talk"    ng-click="chooseTalkForSlot(slot, $event)">Escolher palestra</button>
+    <button class="btn btn-default" ng-hide="slot.talk"    ng-click="createTalkForSlot(slot, $event)">Criar nova palestra...</button>
+    <button class="btn btn-default" ng-show="slot.talk"    ng-click="emptySlot(slot, $event)">Esvaziar slot</button>
+    <button class="btn btn-default" ng-show="slot.can_be_stretched"   ng-click="stretchSlot(slot, $event)">Esticar slot (+1h)</button>
+    <button class="btn btn-default" ng-show="slot.can_be_unstretched" ng-click="unstretchSlot(slot, $event)">Desesticar slot (-1h)</button>
+    <button class="btn btn-default" ng-show="slot.talk && slot.status != 'confirmed'" ng-click="setStatusOfSlot(slot, 'confirmed')">Marcar como confirmado</button>
+</div>

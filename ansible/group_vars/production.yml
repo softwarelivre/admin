@@ -1,7 +1,10 @@
-webhost: admin.fisl16.softwarelivre.org
+
+project_dir: "/home/ricardo/Solis/admin"
+
+webhost: admin.segue.com.br
 webport: 80
 sitename: admin
-master_host: fisl16.softwarelivre.org
-api_host: http://segue-api.fisl16.softwarelivre.org
+master_host: segue.com.br
+api_host: http://backend.segue.com.br
 api_path: /api
 app_path: /var/www/admin.{{ master_host }}

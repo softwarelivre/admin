@@ -31,10 +31,23 @@
       var proposals = Restangular.service('admin/proposals');
 
       self.lookup = function(query) {
-        if (query.needle.length > 3) {
-          return proposals.getList({ q: query.needle, limit: query.limit });
+        return proposals.getList(query);
+      };
+      
+      self.types = function () {
+        return {
+          'talk': 'Palestra',
+          'workshop': 'Oficina',
         }
-        return $q.when([]);
+      };
+
+      self.status = function () {
+        return {
+          'accepted': 'Aceito',
+          'confirmed': 'Confirmado',
+          'declined': 'Rejeitada',
+          'pending': 'Pendente',
+        }
       };
 
       self.get = function(id) {
@@ -60,6 +73,9 @@
       };
       self.removeTagFromProposal = function(proposalId, tagName) {
         return proposals.one(proposalId).one('tags').one(tagName).remove();
+      };
+      self.removeInviteFromProposal = function(proposalId, inviteId) {
+        return proposals.one(proposalId).one('invite').one(inviteId.toString()).remove();
       };
       self.current = function() {
         return $localStorage.savedProposal || {};

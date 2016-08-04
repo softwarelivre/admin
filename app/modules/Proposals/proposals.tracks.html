@@ -15,21 +15,11 @@
        <select id="track"
                ng-model="selectedTrack"
                ng-options="track as track.area for track in selectedZone"
-               class="form-control">
+               class="form-control"
+               ng-change="search()">
            <option value="" selected="selected">Selecione uma opção</option>
        </select>
     </div>
-
 </div>
-
-
-<div class="row">
-    <div class="col-sm-12">
-        <button role="btn"
-           class="btn btn-primary"
-           ng-click="search()">Buscar</button>
-    </div>
-</div>
-
 
 <div ng-include="'modules/Proposals/proposals.list.html'"></div>

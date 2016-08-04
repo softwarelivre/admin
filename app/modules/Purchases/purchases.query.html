@@ -1,0 +1,69 @@
+<h2 class="page-header">Buscar vendas</h2>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li class="active">Vendas</li>
+</ol>
+
+<form class="form">
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Nome:</label>
+        <input type="text"
+               class="form-control"
+               ng-model="query.customer_name"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Código da compra:</label>
+        <input
+                type="text"
+                class="form-control"
+                ng-model="query.id"/>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Produto:</label>
+        <select
+                class="form-control"
+                ng-options="product.id as product.description for product in products"
+                ng-model="query.product_id">
+          <option value="">Selecione uma opção</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Status:</label>
+        <select
+                class="form-control"
+                ng-options="key as value for (key,value) in statusList"
+                ng-model="query.status">
+          <option value="">Selecione uma opção</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <button type="text"
+               class="btn btn-primary"
+               ng-click="doSearch()" >Buscar</button>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+<div ng-include="'modules/Purchases/purchases.query.result.html'"></div>

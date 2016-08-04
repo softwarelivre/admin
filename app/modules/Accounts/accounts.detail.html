@@ -12,7 +12,7 @@
   <div class="row">
 
   <div class="col-sm-12">
-  <table class="table table-borderless table-responsive">
+  <table class="table table-borderless">
     <tbody>
     <tr>
       <th translate>Nome:</th>
@@ -42,35 +42,6 @@
   </table>
   </div>
 
-
-  <div class="col-sm-6" >
-    <!-- NOT WORKING
-    <div ng-show="account.identifier">
-      <h4>
-        <span class="label label-default">
-          {{ account.identifier.category }} - {{ account.identifier.id }}
-        </span>
-        <span ng-class="account.identifier.status == 'paid'?'label label-success':'label label-warning'">
-          {{ account.identifier.status }}
-        </span>
-      </h4>
-      <h4>
-        <span class="label label-danger"     ng-show="account.role == 'admin'"     translate>admin</span>
-      </h4>
-      <h4>
-        <span class="label label-success" ng-show="account.has_valid_purchases" translate>pago</span>
-      </h4>
-      <h4>
-        <span class="label label-warning"    ng-show="account.links.caravans.count == 1" translate>líder</span>
-      </h4>
-      <h4>
-        <span class="label label-info" ng-show="account.links.proposals.count > 0"
-            translate translate-n="account.links.proposals.count" translate-plural="{{$count}} propostas">
-                {{ account.links.proposals.count }} proposta
-        </span>
-      </h4>
-    </div> -->
-  </div>
 
   </div>
 

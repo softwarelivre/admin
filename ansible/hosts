@@ -1,2 +1,2 @@
 [production]
-admin.fisl16.softwarelivre.org ansible_ssh_port=2222 ansible_ssh_user=segue
+200.132.1.66 ansible_ssh_port=2222 ansible_ssh_user=solis ansible_ssh_private_key_file=/home/ricardo/Solis/id_rsa

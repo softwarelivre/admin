@@ -9,7 +9,7 @@
             <input type="email"
                   maxsize="80"
                   ng-model="account.email"
-                  class="form-control"/>
+                  class="form-control" />
             <span field-error="email"></span>
         </div>
 
@@ -34,7 +34,8 @@
             <input type="password"
                    maxsize="20"
                    ng-model="account.password"
-                   class="form-control"/>
+                   class="form-control"
+                   autocomplete="false" />
             <span field-error="password"></span>
         </div>
         <div class="form-group has-feedback col-sm-6">
@@ -108,6 +109,17 @@
           <span field-error="badge_name"></span>
         </div>
       </div>
+
+      <div class="row">
+        <div class="form-group has-feedback col-sm-6">
+          <label><span translate>Nome da Empresa/Instituição:</span></label>
+          <input type="text" maxlength="20"
+                  ng-model="account.organization"
+                  class="form-control"/>
+         </div>
+       </div>
+
+
 
     <div class="row">
       <div class="form-group has-feedback col-sm-6" ng-show="type == 'person'">
@@ -398,4 +410,3 @@
       </div>
 
    </fieldset>
-

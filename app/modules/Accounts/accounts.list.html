@@ -1,27 +1,25 @@
 <table class="table table-striped table-responsive" ng-show="accounts.length">
   <thead>
     <tr>
-      <th translate class="id">Código da compra</th>
-      <th translate class="category">Categoria</th>
-      <th translate class="status">Situação</th>
-      <th translate class="name">Nome</th>
-      <th translate class="name">Role</th>
-      <th translate class="email">E-mail</th>
-      <th translate class="document">Documento</th>
-      <th translate class="city">Cidade</th>
+      <th translate>Código</th>
+      <th translate>Nome</th>
+      <th translate>Role</th>
+      <th translate>E-mail</th>
+      <th translate>Documento</th>
+      <th translate>Cidade</th>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="account in accounts">
-      <td class="id">{{ account.identifier.id }}</td>
-      <td class="category">{{ account.identifier.category | humanize }}</td>
-      <td class="status status-{{account.identifier.status}}">{{ account.identifier.status | humanize }}</td>
-      <td>
+     <td>
+       <span ng-bind="account.id"></span>
+     </td>
+     <td>
         <a ui-sref="accounts.detail({id: account.id})">{{ account.name }}</a>
       </td>
       <td>
         <span class="badges">
-          <span class="label label-danger"     ng-show="account.role == 'admin'"           translate>admin</span>
+          <span class="label label-danger"     ng-show="isAdmin(account)"           translate>admin</span>
           <span class="label label-warning"    ng-show="account.links.caravans.count == 1" translate>líder</span>
           <span class="label label-info" ng-show="account.links.proposals.count > 0"
                 translate translate-n="account.links.proposals.count" translate-plural="{{$count}} propostas">
@@ -35,5 +33,3 @@
     </tr>
   </tbody>
 </table>
-
-

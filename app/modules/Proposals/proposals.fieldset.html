@@ -93,45 +93,57 @@
       <span field-error="expected_duration"></span>
    </div>
 
-   <div>
-      <label class="required">
-        <span translate>Situação:</span>
-      </label>
-      <label for="call_status_pending" class="radio-inline">
-        <input type="radio" id="call_status_pending" value="pending" ng-model="proposal.status" />
-        Pendente
-      </label>
-      <label for="call_status_declined" class="radio-inline">
-        <input type="radio" id="call_status_declined" value="declined" ng-model="proposal.status" />
-        Declinado
-      </label>
-      <label for="call_status_confirmed" class="radio-inline">
-          <input type="radio" id="call_status_confirmed" value="confirmed" ng-model="proposal.status" />
-          Confirmado
-      </label>
+  </div>
+  </div>
+
+
+  <legend translate class="text-primary">Situação</legend>
+  <div class="row-fluid">
+    <div class="form-group">
+       <label for="call_status_pending" class="radio-inline">
+         <input type="radio" id="call_status_pending" value="pending" ng-model="proposal.status" />
+         Pendente
+       </label>
+       <label for="call_status_declined" class="radio-inline">
+         <input type="radio" id="call_status_declined" value="declined" ng-model="proposal.status" />
+         Declinado
+       </label>
+       <label for="call_status_confirmed" class="radio-inline">
+           <input type="radio" id="call_status_confirmed" value="confirmed" ng-model="proposal.status" />
+           Confirmado
+       </label>
+     </div>
+  </div>
+
+  <legend translate class="text-primary" ng-show="slot.id">Situação horário</legend>
+  <div  class="row-fluid" ng-show="slot.id">
+
+    <div>
+      <ul class="list-unstyled">
+        <li><strong>Sala:</strong>{{ slot.room }}</li>
+        <li><strong>Dia:</strong>{{ slot.begins | date_locale }}</li>
+        <li><strong>Horário:</strong>{{ slot.begins | time_locale }}</li>
+      </ul>
     </div>
 
-   <div  ng-if="slot">
-      <label translate>Situação horário</label>
-      <div ng-show="slot.id">
-        <label for="slot_status_dirty" class="radio-inline">
-          <input type="radio" id="slot_status_dirty" value="dirty" ng-model="slot.status" />
-          Segurar notificação
-        </label>
-        <label for="slot_status_declined" class="radio-inline">
-          <input type="radio" id="slot_status_declined" value="declined" ng-model="slot.status" />
-          Declinado
-        </label>
-        <label for="slot_status_declined" class="radio-inline">
-          <input type="radio" id="slot_status_confirmed" value="confirmed" ng-model="slot.status" />
-          Confirmado
-        </label>
-      </div>
-   </div>
+     <div class="form-group">
+       <label for="slot_status_dirty" class="radio-inline">
+         <input type="radio" id="slot_status_dirty" value="dirty" ng-model="slot.status" />
+         Segurar notificação
+       </label>
+       <label for="slot_status_declined" class="radio-inline">
+         <input type="radio" id="slot_status_declined" value="declined" ng-model="slot.status" />
+         Declinado
+       </label>
+       <label for="slot_status_declined" class="radio-inline">
+         <input type="radio" id="slot_status_confirmed" value="confirmed" ng-model="slot.status" />
+         Confirmado
+       </label>
+     </div>
+ </div>
 
 
-  </div>
-  </div>
+
 
   <legend translate class="text-primary">Autores</legend>
   <div class="row">
@@ -176,6 +188,30 @@
     </div>
   </div>
 
+<legend translate class="text-primary">Convites pendentes</legend>
+<div class="row">
+  <div class="col-sm-6">
+    <table class="table table-condensed" ng-show="invites.length > 0">
+      <thead>
+        <th>Nome da pessoa convidada</th>
+        <th>E-mail</th>
+        <th>Ação</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="invite in pending_invites">
+          <td>{{ invite.name }}</td>
+          <td>{{ invite.email }}</td>
+          <td><button class="btn btn-default btn-sm" ng-click="markInviteToRemove($index)">Remover</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <p ng-show="invites.length == 0">
+      Nenhum convite pendente
+    </p>
+  </div>
+</div>
+
+
 <legend translate class="text-primary">Descrição e restrições</legend>
 <div class="row">
   <div class="col-sm-12">
@@ -217,5 +253,3 @@
   </div>
   </div>
  </div>
-
-

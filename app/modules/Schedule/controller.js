@@ -72,28 +72,39 @@
     .controller("ScheduleGridController", function($scope, $state, $window,
                                                    ngDialog,
                                                    Schedule, Config,
-                                                   day, days, hours, rooms, focusOn) {
-
-      //var socket = io(Config.API_HOST+":9001");
-      // socket.on("sync-room", function(room) {
-      //  $scope.reloadRoom(room);
-      //});
-
-      function emitSignal(room) {
-       socket.emit("room", room);
-      }
-
+                                                   day, days, hours, rooms, focusOn, $uibModal) {
       $scope.days = days;
+
       $scope.hours = hours;
       $scope.rooms = rooms;
       $scope.currentDay = day;
       $scope.slotsOfRoom = {};
       $scope.zoomedId = 1;
 
+      $scope.eventTimes = [
+          '09:00', '09:20', '09:40',
+          '10:00', '10:20', '10:40',
+          '11:00', '11:20', '11:40',
+          '12:00', '12:20', '12:40',
+          '13:00', '13:20', '13:40',
+          '14:00', '14:20', '14:40',
+          '15:00', '15:20', '15:40',
+          '16:00', '16:20', '16:40',
+          '17:00', '17:20', '17:40',
+          '18:00', '18:20', '18:40',
+          '19:00', '19:20', '19:40'
+      ];
+
+      $scope.oneHourEvents = ['10:00', '11:00', '12:00', '13:00'];
+
+      $scope.isOneHourEvent = function(time) {
+          return $scope.oneHourEvents.contains(time) >= 0;
+      };
+
       $scope.reloadRoom = function(room) {
         if (!room) { return; }
         return Schedule.slotsOfRoom(room.id, $scope.currentDay).then(function(data) {
-          $scope.slotsOfRoom[room.id] = data;
+            $scope.slotsOfRoom[room.id] = data;
         });
       };
 
@@ -101,64 +112,24 @@
         return _.each($scope.rooms, $scope.reloadRoom);
       };
 
-      $scope.resetZoom = function($event) {
-        if ($event) $event.stopPropagation();
-        $scope.zoomedId = null;
-      };
-
-      $scope.zoomOnSlot = function(room, index) {
-        var slot = $scope.slotsOfRoom[room.id][index];
-        $scope.zoomedId = slot.id;
+      $scope.editSlot = function (room, slot) {
 
         Schedule.getSlot(slot.id).then(function(updated) {
-          $scope.slotsOfRoom[room.id][index].can_be_stretched   = updated.can_be_stretched;
-          $scope.slotsOfRoom[room.id][index].can_be_unstretched = updated.can_be_unstretched;
+            var modalInstance = $uibModal.open({
+                    animation: false,
+                    templateUrl: 'modules/Schedule/schedule.slot.edit.html',
+                    controller: 'SlotEditController',
+                    size: 'md',
+                    resolve: {
+                        slot: function () {
+                            return updated;
+                        }
+                    }
+            });
+            modalInstance.result.then(function (result) {
+                 $scope.reloadAllRooms();
+            });
         });
-      };
-
-      $scope.stretchSlot = function(slot) {
-        Schedule.stretchSlot(slot.id)
-                .then(_.partial(emitSignal, slot.room))
-                .then(_.partial($scope.reloadRoom, slot.room))
-                .then($scope.resetZoom);
-      };
-
-      $scope.unstretchSlot = function(slot) {
-        Schedule.unstretchSlot(slot.id)
-                .then(_.partial(emitSignal, slot.room))
-                .then(_.partial($scope.reloadRoom, slot.room))
-                .then($scope.resetZoom);
-      };
-
-      $scope.blockSlot = function(slot) {
-        Schedule.blockSlot(slot.id)
-                .then(_.partial(emitSignal, slot.room))
-                .then(_.partial($scope.reloadRoom, slot.room))
-                .then($scope.resetZoom);
-      };
-      $scope.unblockSlot = function(slot) {
-        Schedule.unblockSlot(slot.id)
-                .then(_.partial(emitSignal, slot.room))
-                .then(_.partial($scope.reloadRoom, slot.room))
-                .then($scope.resetZoom);
-      };
-      $scope.emptySlot = function(slot) {
-        Schedule.emptySlot(slot.id)
-                .then(_.partial(emitSignal, slot.room))
-                .then(_.partial($scope.reloadRoom, slot.room))
-                .then($scope.resetZoom);
-      };
-      $scope.saveAnnotation = function(slot) {
-        Schedule.annotateSlot(slot.id, slot.annotation)
-                .then(_.partial(emitSignal, slot.room))
-                .then(_.partial($scope.reloadRoom, slot.room))
-                .then($scope.resetZoom);
-      };
-      $scope.setStatusOfSlot = function(slot, status) {
-        Schedule.setSlotStatus(slot.id, status)
-                .then(_.partial(emitSignal, slot.room))
-                .then(_.partial($scope.reloadRoom, slot.room))
-                .then($scope.resetZoom);
       };
 
       $scope.createTalkForSlot = function(slot) {
@@ -166,33 +137,82 @@
         $window.open(url, "_blank");
       };
 
-      $scope.chooseTalkForSlot = function(slot) {
-        var options = {
-          controller: 'ProposalLookupController',
-          template: 'modules/Schedule/schedule.proposals.lookup.html',
-          data: { day: day, slot: slot },
-          className: 'ngdialog-theme-default dialog-proposal-lookup',
-        };
-        var dialog = ngDialog.open(options);
-        dialog.closePromise.then(function(data) {
-          if (noData(data)) { return; }
-          Schedule.setTalkForSlot(slot.id, data.value.id)
-                  .then(_.partial(emitSignal, slot.room))
-                  .then(_.partial($scope.reloadRoom, slot.room))
-                  .then($scope.resetZoom);
-        });
-
-      };
-
-      function noData(data) {
-          if (_(data.value).isString()) { return true; }
-          if (_(data.value).isEmpty()) { return true; }
-          if (_(data.value.id).isUndefined()) { return true; }
-          return false;
-      }
-
-      //hotkeys.bindTo($scope).add({ combo: 'esc', callback: $scope.resetZoom });
-
       $scope.reloadAllRooms();
+    })
+    .controller('SlotEditController', function ($scope, $uibModalInstance,
+                                               Proposals, Schedule,
+                                               slot) {
+
+        $scope.query = {};
+        $scope.slot = slot;
+        $scope.talk = slot.talk || {};
+
+        $scope.chooseTalkForSlot = function() {
+            if(!$scope.talk.id) { return; }
+            Schedule.setTalkForSlot($scope.slot.id, $scope.talk.id)
+                    .then(close)
+        };
+
+        $scope.saveAnnotation = function() {
+          if(!$scope.slot.annotation) { return; }
+          Schedule.annotateSlot($scope.slot.id, $scope.slot.annotation)
+        };
+
+        $scope.onSelectTalk = function(talk) {
+            $scope.talk = {
+                id: talk.id,
+                title: talk.title,
+                owner: talk.owner.name,
+                track: talk.track.name_pt
+            }
+        };
+
+        $scope.setStatusOfSlot = function(status) {
+            Schedule.setSlotStatus($scope.slot.id, status)
+                .then(close)
+        };
+
+        $scope.emptySlot = function() {
+            if(!$scope.slot.talk.id) { return; }
+            Schedule.emptySlot(slot.id)
+                .then(close);
+        };
+
+         $scope.stretchSlot = function() {
+             Schedule.stretchSlot($scope.slot.id)
+                .then(close);
+         };
+
+        $scope.unstretchSlot = function() {
+             Schedule.unstretchSlot($scope.slot.id)
+                .then(close);
+        };
+
+        $scope.blockSlot = function() {
+            Schedule.blockSlot($scope.slot.id)
+                .then(close)
+        };
+        $scope.unblockSlot = function(slot) {
+            Schedule.unblockSlot($scope.slot.id)
+                .then(close)
+        };
+
+        $scope.saveOrUpdate = function() {
+            console.log($scope.form.$dirty)
+        };
+
+        $scope.performSearch = function(value) {
+            var query = {
+                title: value
+            };
+            return Proposals.lookup(query).then(function(data) {
+              return data;
+            });
+        };
+
+        function close() {
+            $uibModalInstance.close();
+        }
+
     });
 })();

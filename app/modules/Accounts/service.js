@@ -11,10 +11,7 @@
       var accounts = Restangular.service('admin/accounts');
 
       self.lookup = function(query) {
-        if (query.needle) {
-          return accounts.getList({ q: query.needle });
-        }
-        return $q.when([]);
+          return accounts.getList(query);
       };
 
       self.get = function(id) {
@@ -49,6 +46,30 @@
           'secondary_incomplete',
         ];
       };
+
+      self.isUser = function(account) {
+        return self.hasRole(account, 'user');
+      };
+
+      self.isAdmin = function(account) {
+        return self.hasRole(account, 'admin');
+      };
+
+      self.isForeign = function(account) {
+        return self.hasRole(account, 'foreign');
+      };
+
+      self.isCorporate = function(account) {
+        return self.hasRole(account, 'corporate');
+      }
+
+      self.hasRole = function(account, role) {
+        if (!account) { return false;}
+        for(var i=0; i < account.roles.length; i++) {
+          if(account.roles[i].name === role) { return true; }
+        }
+        return false;
+      }
 
       return self;
     });

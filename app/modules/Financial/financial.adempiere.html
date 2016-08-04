@@ -1,0 +1,99 @@
+<h2 class="page-header">Gerar arquivo do ADempiere</h2>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li class="active">Gerar arquivo para o ADempiere</li>
+</ol>
+
+<form class="form">
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Data inicial:</label>
+        <input type="text" class="form-control" ng-model="query.initial_date" mask="39/19/9999"/>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Data final:</label>
+        <input type="text"class="form-control" ng-model="query.end_date" mask="39/19/9999"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-4">
+      <div class="form-group">
+        <button class="btn btn-primary" ng-click="search()">Buscar</button>
+        <button class="btn btn-primary"
+                ng-csv="adempiereDataSet" field-separator="þ"
+                ng-show="adempiereDataSet.length > 0"
+                filename="relatorio.txt">
+          Exportar
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</form>
+
+<div class="table-responsive" ng-show="adempiereDataSet.length > 0">
+  <table class="table table-striped" style="table-layout: fixed;">
+    <thead>
+      <th style="width: 100px">Ação</th>
+      <th style="width: 100px">Código compra:</th>
+      <th style="width: 60px">Tipo:</th>
+      <th style="width: 160px" >CPF:</th>
+      <th style="width: 160px">CNPJ:</th>
+
+      <th style="width: 180px">Nome:</th>
+      <th style="width: 180px">E-Mail:</th>
+      <th style="width: 180px">Telefone-1:</th>
+      <th style="width: 180px">Telefone-2:</th>
+
+      <th style="width: 180px">Código postal:</th>
+      <th style="width: 100px">País:</th>
+      <th style="width: 60px">Estado:</th>
+      <th style="width: 120px">Cidade:</th>
+      <th style="width: 120px">Logradouro</th>
+      <th style="width: 80px">Número</th>
+      <th style="width: 100px">Bairro</th>
+      <th style="width: 100px">Complemento</th>
+      <th style="width: 60px">Qtde:</th>
+      <th style="width: 100px">Valor pago:</th>
+      <th style="width: 100px">Desconto:</th>
+      <th style="width: 100px">Descrição:</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="data in adempiereDataSet">
+            <td><a rule="button" ng-click="remove($index)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+            <td><span ng-bind="data.purchase_id"></span></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_type"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_cpf"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_cnpj"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_name"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_email"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_phone1"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_phone2"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_address_zipcode"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_address_country"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_address_state"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_address_city"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_address_street"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_address_number"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_address_neighborhood"/></td>
+            <td><input type="text" class="form-control" ng-model="data.buyer_address_extra"/></td>
+            <td><input type="text" class="form-control" ng-model="data.purchase_qty"/></td>
+            <td><input type="text" class="form-control" ng-model="data.purchase_amount"/></td>
+            <td><input type="text" class="form-control" ng-model="data.purchase_discount"/></td>
+            <td><input type="text" class="form-control" ng-model="data.purchase_description"/></td>
+        </tr>
+    </tbody>
+
+  </table>
+
+</div>

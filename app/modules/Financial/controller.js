@@ -22,10 +22,13 @@
           parent: 'financial',
           views: {
             content: { controller: 'FinancialProcessBoletosController', templateUrl: 'modules/Financial/financial.process.boletos.html' }
-          },
-          resolve: {
-            account: function() { return {}; },
-            isCreation: function()  { return true; }
+          }
+        })
+        .state('financial.adempiere_report', {
+          url: '/adempiere-report',
+          parent: 'financial',
+          views: {
+            content: { controller: 'FinancialAdempiereController', templateUrl: 'modules/Financial/financial.adempiere.html' }
           }
         });
 
@@ -69,5 +72,24 @@
             file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
           });
       }
+    })
+    .controller("FinancialAdempiereController", function($scope, $state, Purchases, Financial, Config, Upload) {
+
+      $scope.adempiereDataSet = [];
+      $scope.query = {};
+
+      $scope.search = function() {
+        initial = moment($scope.query.initial_date, "DD/MM/YYYY").format("MM/DD/YYYY")
+        end = moment($scope.query.end_date, "DD/MM/YYYY").format("MM/DD/YYYY")
+
+        Purchases.getADempiereReport(initial, end).then(function(data) {
+          $scope.adempiereDataSet = data['report_data'];
+        });
+      }
+
+      $scope.remove = function(index) {
+        $scope.adempiereDataSet.splice(index, 1);
+      }
+
     });
 })();

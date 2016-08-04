@@ -1,29 +1,41 @@
+<h2 class="page-header">Detalhes do torneio</h2>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a ui-sref="tournaments.list">Torneios</a></li>
+  <li  class="active">Detalhes</li>
+</ol>
+
+<hr>
+
 <dl>
-  <dt translate>seleção</dt>
+  <dt translate>Seleção:</dt>
   <dd>{{ tournament.selection }}</dd>
-  <dt translate>situação</dt>
+  <dt translate>Situação</dt>
   <dd>{{ tournament.status }}</dd>
-  <dt translate>round atual</dt>
+  <dt translate>Round atual</dt>
   <dd>{{ tournament.round }}</dd>
 </dl>
 
-<table class="rounds" ng-hide="tournament.rounds.length == 0">
+<hr>
+
+<table class="table table-condensed table-striped" ng-hide="tournament.rounds.length == 0">
   <col class="round" />
   <col class="judged" />
   <col class="inprogress" />
   <col class="pending" />
   <thead>
     <tr>
-      <th translate>round</th>
-      <th translate>julgado</th>
-      <th translate>em julgamento</th>
-      <th translate>pendente</th>
+      <th translate>Round</th>
+      <th translate>Julgado</th>
+      <th translate>Em julgamento</th>
+      <th translate>Pendente</th>
     </tr>
   </thead>
-  <tr class="master" ng-repeat="(idx,round) in tournament.rounds | orderBy:'id'">
-    <td class="id">{{ idx }}</td>
-    <td class="judged">{{ round.judged }}</td>
-    <td class="inprogress">{{ round.in_progress }} <span ng-show="round.in_progress > 0">(stale={{round.stale}})</span></td>
-    <td class="pending">{{ round.pending }}</td>
+  <tr ng-repeat="(idx,round) in tournament.rounds | orderBy:'id'">
+    <td>{{ idx }}</td>
+    <td>{{ round.judged }}</td>
+    <td>{{ round.in_progress }} <span ng-show="round.in_progress > 0">(stale={{round.stale}})</span></td>
+    <td>{{ round.pending }}</td>
   </tr>
 </table>
