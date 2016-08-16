@@ -19,7 +19,10 @@
       'ngFileUpload',
       'angularMoment',
       'ngCsv',
+      'ngTable',
+      'ngToast',
 
+      'segue.admin.lib.flash',
 
       'segue.admin.errors',
       'segue.admin.filters',
@@ -37,6 +40,7 @@
       'segue.admin.product',
       'segue.admin.schedule',
       'segue.admin.financial',
+      'segue.admin.caravans'
     ])
     .controller('AdminController', function($scope, $state, Auth, Config) {
       $scope.$on('$stateChangeSuccess', function(event, newState) {
@@ -86,6 +90,14 @@
     })
     .config(function($urlRouterProvider) {
       $urlRouterProvider.otherwise('/');
-    });
+    })
+    .run(configureNgTableDefaults);
+
+    configureNgTableDefaults.$inject = ["ngTableDefaults"];
+
+    function configureNgTableDefaults(ngTableDefaults) {
+      ngTableDefaults.params.count = 20;
+      ngTableDefaults.settings.counts = [10,15,20,25];
+    }
 
 })();

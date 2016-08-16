@@ -1,18 +1,23 @@
-<div class="account-lookup" ng-if="!owner">
+<div class="row" ng-if="!owner">
 
-   <input type="text"
-          placeholder="Buscar por nome/email"
-          class="form-control"
-          ng-model="query.name"
-          ng-model-options="{ debounce: 500 }"
-          typeahead-min-length="3"
-          typeahead-no-results="noResults"
-          typeahead-on-select='select($item)'
-          uib-typeahead="entry as (entry.name +' '+entry.email) for entry in perform($viewValue)">
-
-    <div ng-hide="noResults" class="help-block">
-         <a ui-sref="accounts.create" target="_blank">Cadastrar pessoa</a>
+   <div class="col-sm-6">
+     <input type="text"
+            placeholder="Buscar por nome/email"
+            class="form-control"
+            ng-model="query.name"
+            ng-model-options="{ debounce: 500 }"
+            typeahead-min-length="3"
+            typeahead-no-results="noResults"
+            typeahead-on-select='select($item)'
+            uib-typeahead="entry as (entry.name +' '+entry.email) for entry in perform($viewValue)">
     </div>
 
-  </ul>
+    <div class="col-sm-6">
+      <a class="btn btn-default"
+         uib-tooltip="Cadastrar nova conta"
+         ui-sref="accounts.create" target="_blank">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </a>
+    </div>
+
 </div>

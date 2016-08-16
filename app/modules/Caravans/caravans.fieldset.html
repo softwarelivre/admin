@@ -1,0 +1,105 @@
+<fieldset ng-disabled="isReadOnly">
+
+    <legend translate class="text-primary">Dados da caravana</legend>
+
+    <div class="form-group has-feedback">
+        <label class="required">Nome:</label>
+        <input type="text" ng-model="caravan.name" class="form-control" />
+        <span field-error="name"></span>
+    </div>
+
+    <div class="form-group has-feedback">
+        <label class="required">Cidade:</label>
+        <input type="text" ng-model="caravan.city" class="form-control" />
+        <span field-error="city"></span>
+    </div>
+
+    <div class="form-group has-feedback">
+        <label class="required">Descrição:</label>
+        <textarea class="form-control" rows="3" ng-model="caravan.description"></textarea>
+        <span field-error="description"></span>
+    </div>
+
+    <div class="form-group has-feedback">
+        <label>Lider:</label>
+        <div ng-hide="caravan.owner">
+          <account-lookup on-selected="setOwner" ng-if="!caravan.owner"></account-lookup>
+        </div>
+        <div class="row" ng-show="caravan.owner">
+          <div class="col-sm-4">
+            <p>{{caravan.owner.name}}</p>
+          </div>
+          <div class="col-sm-4">
+            <button class="btn btn-default"
+                    uib-tooltip="Isentar"
+                    ng-click="exemptOwner()"
+                    ng-disabled="isDirty() || isNewCaravan">
+              <i class="fa fa-ticket" aria-hidder="true"></i>
+            </button>
+            <button class="btn btn-default"
+                    uib-tooltip="Remover"
+                    ng-click="removeOwner()">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" ng-click="save()">
+          Salvar
+        </button>
+    </div>
+
+</fieldset>
+
+
+<fieldset ng-hide="isNewCaravan">
+    <legend translate class="text-primary">Dados dos participantes</legend>
+
+    <div class="form-group">
+        <button class="btn btn-sm btn-default"
+                uib-tooltip="Adicionar convite"
+                ng-click="addInvite()"
+                ng-disabled="isReadOnly">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <div class="table-responsive">
+    <table ng-table="invitesTable" class="table table-striped" && ng-show="invitesTable.data.length > 0">
+        <tr ng-repeat="caravanInvite in $data track by caravanInvite.id">
+            <td data-title="'#'">{{caravanInvite.id}}</td>
+            <td data-title="'Nome'">{{caravanInvite.name}}</td>
+            <td data-title="'Email'">{{caravanInvite.recipient}}</td>
+            <td data-title="'Status'">{{caravanInvite.status | humanize }}</td>
+            <td data-title="'Ação'" >
+                <button class="btn btn-default"
+                        uib-tooltip="Enviar convite"
+                        ng-disabled="isReadOnly"
+                        ng-click="sendInvite(caravanInvite)">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-default"
+                        uib-tooltip="Aceitar convite"
+                        ng-disabled="isReadOnly"
+                        ng-click="acceptInvite(caravanInvite)">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-default"
+                        uib-tooltip="Rejeitar convite"
+                        ng-disabled="isReadOnly"
+                        ng-click="declineInvite(caravanInvite)">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-default"
+                        uib-tooltip="Deletar convite"
+                        ng-disabled="isReadOnly"
+                        ng-click="removeInvite($index)">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+            </td>
+        </tr>
+    </table>
+
+</fieldset>

@@ -68,6 +68,19 @@
                 </ul>
             </li>
             <li>
+              <a ng-click="caravanMenu=!caravanMenu" href="#">
+                Caravanas<i class="fa fa-fw fa-caret-down"></i>
+              </a>
+              <ul ng-show="caravanMenu">
+                <li>
+                    <a ui-sref="caravans.search">Buscar caravana</a>
+                </li>
+                <li>
+                    <a ui-sref="caravans.create">Criar caravana</a>
+                </li>
+              </ul>
+            </li>
+            <li>
                 <a  ng-click="promocodeMenu=!promocodeMenu"
                     href="#"  role="button" translate>
                     Códigos promocionais<i class="fa fa-fw fa-caret-down"></i>

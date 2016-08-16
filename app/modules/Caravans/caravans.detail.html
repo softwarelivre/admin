@@ -1,0 +1,18 @@
+<h2 class="page-header">Visualizar caravana</h2>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a ui-sref="caravans.search">Caravanas</a></li>
+  <li class="active">Visualizar</li>
+</ol>
+
+<form name="caravanForm" class="form" novalidate>
+  <ng-include src="'modules/Caravans/caravans.fieldset.html'"></ng-include>
+
+  <hr>
+  <div class="form-group">
+    <button class="btn btn-primary" ui-sref="caravans.edit({id:caravan.id})">Editar caravana</button>
+    <button class="btn btn-primary" ui-sref="caravans.search">Voltar</button>
+  </div>
+
+</form>

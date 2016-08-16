@@ -1,0 +1,54 @@
+<h2 class="page-header">Buscar caravanas</h2>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li class="active">Caravanas</li>
+</ol>
+
+<div class="container-fluid">
+    <form class="form">
+        <div class="row">
+            <div class="form-group">
+                <label>Nome:</label>
+                <input type="text" class="form-control" ng-model="query.caravan_name">
+            </div>
+            <div class="form-group">
+                <label>Lider:</label>
+                <input type="text" class="form-control" ng-model="query.owner_name">
+            </div>
+            <div class="form-group">
+                <button type="submit"
+                        class="btn btn-primary"
+                        uib-tooltip="Buscar"
+                        ng-click="search()">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+                <button type="submit" class="btn btn-primary" ui-sref="caravans.create">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<table ng-table="caravansTable" class="table table-striped" ng-show="caravansTable.data.length > 0">
+    <tr ng-repeat="caravan in $data track by caravan.id">
+        <td data-title="'Id'">{{caravan.id}}</td>
+        <td data-title="'Nome'">{{caravan.name}}</td>
+        <td data-title="'Lider'">
+            <a ui-sref="accounts.detail({id: caravan.owner.id})">{{caravan.owner.name}}</a>
+        </td>
+        <td data-title="'Ação'">
+          <button class="btn btn-default"
+                  ui-sref="caravans.edit({id: caravan.owner.id})"
+                  uib-tooltip="Editar caravana">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </button>
+          <button class="btn btn-default"
+                  ui-sref="caravans.detail({id: caravan.owner.id})"
+                  uib-toolip="Visualizar dados">
+            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+</table>
