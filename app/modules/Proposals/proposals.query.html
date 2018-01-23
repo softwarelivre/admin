@@ -69,7 +69,7 @@
         <div class="form-group">
           <label>Trilha:</label>
           <select class="form-control"
-                  ng-options="track.id as track.name_pt for track in tracks"
+                  ng-options="track.id as track.name_pt for track in tracks | orderBy:'name_pt'"
                   ng-model="query.track_id">
             <option value="">Selecione uma opção</option>
           </select>
