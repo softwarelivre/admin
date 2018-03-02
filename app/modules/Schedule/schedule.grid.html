@@ -10,7 +10,7 @@
     <thead>
       <tr>
         <th>Sala\Hora</th>
-        <td ng-repeat="time in eventTimes"
+        <td ng-repeat="time in eventTimes[currentDay]"
                 colspan="{ true: '3', false, '1'}[isOneHourEvent(time)]">
             <span ng-bind="time"></span>
         </td>
