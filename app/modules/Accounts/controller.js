@@ -171,7 +171,8 @@
       $scope.account = {
           sex: 'M',
           membership: false,
-          disability: 'none'
+          disability: 'none',
+          inform: true,
       };
 
       $scope.disabilityTypes =  Accounts.getDisabilityTypes();

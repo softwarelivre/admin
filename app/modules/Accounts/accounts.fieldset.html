@@ -300,6 +300,22 @@
       </div>
     </div>
 
+
+    <div class="row">
+      <div class="form-group has-feedback col-sm-6">
+          <label class="required">
+            <span translate>Você aceita que seus dados sejam divulgados?</span>
+          </label>
+          <select name="inform"
+                ng-model="account.inform"
+                class="form-control">
+                <option value="true" >Sim</option>
+                <option value="false">Não</option>
+          </select>
+          <span field-error="inform"></span>
+        </div>
+      </div>    
+
     </fieldset>
 
     <fieldset>
