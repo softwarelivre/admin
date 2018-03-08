@@ -65,12 +65,17 @@
 
       self.hasRole = function(account, role) {
         if (!account) { return false;}
-        for(var i=0; i < account.roles.length; i++) {
-          if(account.roles[i].name === role) { return true; }
+
+        if (account.hasOwnProperty('role') && typeof account.role === 'string') {
+          return account.role == role;
+        }
+        else if ( account.hasOwnProperty('roles') && Array.isArray(account.roles)) {
+          for(var i=0; i < account.roles.length; i++) {
+            if(account.roles[i].name === role) { return true; }
+          }
         }
         return false;
       }
-
       return self;
     });
 
