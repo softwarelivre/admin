@@ -89,13 +89,25 @@
       $scope.accounts = [];
       $scope.query = {};
       $scope.doSearch = function() {
-          Accounts.lookup($scope.query).then(function(data) {
+          var query = removeEmptyParams($scope.query)
+          
+          Accounts.lookup(query).then(function(data) {
             $scope.accounts = data;
           });
       };
 
       $scope.isAdmin = function(account) {
         return Accounts.isAdmin(account);
+      }
+
+      var removeEmptyParams = function(query) {
+        var q = Object.assign({}, query);
+        for(key in q) {
+          if (q[key] === '') {
+            delete q[key];
+          }
+        }
+        return q;
       }
 
       focusOn("query.needle");
