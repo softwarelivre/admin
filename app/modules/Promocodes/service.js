@@ -10,8 +10,9 @@
       var self = {};
       var promocodes = Restangular.service('admin/promocodes');
 
-      self.lookup = function(query) {
-        return promocodes.getList({ q: query });
+      self.lookup = function(query, perPage, page) {
+        var query_args = _.extend(query, {per_page: perPage, page: page});
+        return promocodes.one().get(query_args);
       };
 
       self.get = function(id) {

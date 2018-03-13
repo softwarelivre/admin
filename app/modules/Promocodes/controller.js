@@ -19,16 +19,11 @@
           }
         })
         .state('promocodes.list', {
-          url: '/list/:query',
+          url: '/list/',
           views: {
-            query:   { },
+            query:   {},
             content: { controller: 'PromocodeListController', templateUrl: 'modules/Promocodes/promocodes.list.html' }
           },
-          resolve: {
-            promocodes: function(Promocodes, $stateParams) {
-              return Promocodes.lookup($stateParams.query);
-            }
-          }
         })
         .state('promocodes.create', {
           url: '/create',
@@ -46,14 +41,27 @@
     .module("segue.admin.promocodes.controller", [
       'segue.admin.promocodes.service'
     ])
-    .controller("PromocodeListController", function($scope, $state, Promocodes, promocodes, focusOn) {
+    .controller("PromocodeListController", function($scope, Promocodes, NgTableParams, focusOn) {
       $scope.enforceAuth();
-      $scope.promocodes = promocodes;
-      $scope.query = { needle: $state.params.query };
+
+      $scope.query = {};
+
+      $scope.search = function() {
+        $scope.promocodeTable = new NgTableParams({}, {
+              getData: function(params, $defer) {
+                return Promocodes.lookup($scope.query, params.count(), params.page()).then(function(result) {
+                  params.total(result.total);
+                  return result.items;
+              });
+            }
+        });
+      }
+
       $scope.doSearch = function() {
-        $state.go("promocodes.list", { query: $scope.query.needle });
+        $scope.search();
       };
-      focusOn("query.needle");
+
+      focusOn("query.hash_code");
     })
     .controller("PromocodeCreateController", function($scope, $state, Validator, FormErrors, Promocodes, products, focusOn) {
       $scope.promocode = {};

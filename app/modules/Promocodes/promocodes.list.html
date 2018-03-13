@@ -5,55 +5,48 @@
   <li class="active" translate>Códigos promocionais</li>
 </ol>
 
-
 <form class="form">
 
   <div class="row">
-  <label>
-    <span translate>Hash ou descrição:</span>
-  </label>
-  <input type="text"
-         class="form-control"
-         ng-model="query.needle" focusable
-         ui-keypress="{ 'enter': 'doSearch()' }"/>
+      
+    <div class="form-group col-md-4">
+      <label><span translate>Código promocional:</span></label>
+      <input type="text"
+          class="form-control"
+          ng-model="query.hash_code" focusable
+          ui-keypress="{ 'enter': 'doSearch()' }"/>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label><span translate>Descrição:</span></label>
+      <input type="text"
+          class="form-control"
+          ng-model="query.description" focusable
+          ui-keypress="{ 'enter': 'doSearch()' }"/>
+    </div>
+
+  </div>
+
 </form>
 
-<hr>
-
-<h4 translate>
-  Total de códigos encontrados: {{ promocodes.length }}
-</h4>
-<hr>
-
-<table class="table table-responsive table-striped" ng-hide="promocodes.length == 0">
-  <thead>
-    <tr>
-      <th translate>id</th>
-      <th translate>hash</th>
-      <th translate>desconto</th>
-      <th translate>descrição</th>
-      <th translate>produto</th>
-      <th translate>usado por...</th>
-      <th translate>criador</th>
+<table ng-table="promocodeTable" class="table table-striped table-condensed" ng-show="promocodeTable.data.length > 0">
+  <tr ng-repeat="promocode in $data track by promocode.id">
+      <td data-title="'#'">{{promocode.id}}</td>
+      <td data-title="'Código'">{{promocode.hash_code}}</td>
+      <td data-title="'Desconto'">{{promocode.discount | number}}</td>
+      <td data-title="'Descrição'">{{promocode.description }}</td>
+      <td data-title="'Produto'">{{promocode.product.description }}</td>
+      <td data-title="'Status'">
+          <span ng-show="promocode.spent_with" class="id">{{ promocode.spent_with.id }}</span>
+          <span ng-show="promocode.spent_with" class="name">
+            <a ui-sref="accounts.by_purchase({ id: promocode.spent_with.id })">{{ promocode.spent_with.name }}</a>
+          </span>
+          <span ng-hide="promocode.spent_with" class="available">
+            disponível
+          </span>
+      </td>
+      <td data-title="'Criador'">
+          {{ promocode.creator.name }}
+      </td>
     </tr>
-  </thead>
-  <tr ng-repeat="promocode in promocodes | orderBy:'description'">
-    <td class="id">{{ promocode.id }}</td>
-    <td class="hash_code">{{ promocode.hash_code }}</td>
-    <td class="discount">{{ promocode.discount | number }}%</td>
-    <td class="description">{{ promocode.description }}</td>
-    <td class="product">{{ promocode.product.description }}</td>
-    <td class="status">
-      <span ng-show="promocode.spent_with" class="id">{{ promocode.spent_with.id }}</span>
-      <span ng-show="promocode.spent_with" class="name">
-        <a ui-sref="accounts.by_purchase({ id: promocode.spent_with.id })">{{ promocode.spent_with.name }}</a>
-      </span>
-      <span ng-hide="promocode.spent_with" class="available">
-        disponível
-      </span>
-    </td>
-    <td class="creator">
-      {{ promocode.creator }}
-    </td>
-  </tr>
 </table>
