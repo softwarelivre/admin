@@ -15,6 +15,13 @@
       });
     }
 
+    this.error = function(msg) {
+      ngToast.create({
+        className: 'danger',
+        content: msg
+      });
+    }
+
   });
 
 })();
