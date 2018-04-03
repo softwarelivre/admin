@@ -160,16 +160,16 @@
 
         $scope.acceptInvite = function(caravanInvite) {
           Caravan.acceptInvite($scope.caravan, caravanInvite)
-              .then(showSendInviteSuccessMsg)
+              .then(showAcceptInviteSuccessMsg)
               .then(reload)
-              .catch(showSendInviteErrorMsg);
+              .catch(showAcceptInviteErrorMsg);
         };
 
         $scope.declineInvite = function(caravanInvite) {
           Caravan.declineInvite($scope.caravan, caravanInvite)
-              .then(showSendInviteSuccessMsg)
+              .then(showRejectInviteSuccessMsg)
               .then(reload)
-              .catch(showSendInviteErrorMsg);
+              .catch(showRejectInviteErrorMsg);
         };
 
         $scope.removeInvite = function(idx) {
