@@ -29,6 +29,7 @@
         'declined': 'Rejeitado',
 
         // status
+        'accepted': 'Aceito',
         'paid': 'Pago',
         'pending': 'Pendente',
 
