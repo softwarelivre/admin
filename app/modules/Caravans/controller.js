@@ -120,6 +120,19 @@
         var showUpdateMsg = _.partial(FlashMsg.success,'Os dados da caravana foram atualizados com sucesso!');
         var showExemptMsg = _.partial(FlashMsg.success, 'O líder foi isentado!');
 
+        var showSendInviteSuccessMsg = _.partial(FlashMsg.success, 'O convite foi reenviado!');
+        var showSendInviteErrorMsg = _.partial(FlashMsg.error, 'Ocorreu um erro ao reenviar o convite.');
+
+        var showAcceptInviteSuccessMsg = _.partial(FlashMsg.success, 'O convite foi aceito!');
+        var showAcceptInviteErrorMsg = _.partial(FlashMsg.error, 'Ocorreu um erro ao aceitar o convite.');
+
+        var showRejectInviteSuccessMsg = _.partial(FlashMsg.success, 'O convite foi rejeitado!');
+        var showRejectInviteErrorMsg = _.partial(FlashMsg.error, 'Ocorreu um erro ao rejeitar o convite.');
+
+        var showDeleteInviteSuccessMsg = _.partial(FlashMsg.success, 'O convite foi removido!');
+        var showDeleteInviteErrorMsg = _.partial(FlashMsg.error, 'Ocorreu um erro ao remover o convite.');
+
+
         $scope.isDirty = function() {
           return $scope.caravanForm.$dirty;
         };
@@ -140,22 +153,31 @@
         };
 
         $scope.sendInvite = function(caravanInvite) {
-          Caravan.sendInvite($scope.caravan, caravanInvite);
+          Caravan.sendInvite($scope.caravan, caravanInvite)
+              .then(showSendInviteSuccessMsg)
+              .catch(showSendInviteErrorMsg);
         };
 
         $scope.acceptInvite = function(caravanInvite) {
           Caravan.acceptInvite($scope.caravan, caravanInvite)
+              .then(showSendInviteSuccessMsg)
+              .then(reload)
+              .catch(showSendInviteErrorMsg);
         };
 
         $scope.declineInvite = function(caravanInvite) {
-          Caravan.declineInvite($scope.caravan, caravanInvite);
+          Caravan.declineInvite($scope.caravan, caravanInvite)
+              .then(showSendInviteSuccessMsg)
+              .then(reload)
+              .catch(showSendInviteErrorMsg);
         };
 
         $scope.removeInvite = function(idx) {
           var invite = $scope.caravanInvites[idx];
-          Caravan.removeInvite($scope.caravan, invite).then(function(result) {
-            $scope.tableParams.dataset = $scope.caravanInvites;
-          });
+          Caravan.removeInvite($scope.caravan, invite)
+              .then(showDeleteInviteSuccessMsg)
+              .then(reload)
+              .catch(showDeleteInviteErrorMsg);
         };
 
         $scope.exemptOwner = function() {
