@@ -47,9 +47,11 @@
     </td>
     <td class="actions">
         <button class="btn btn-default" ng-show="!isMarked(ranked)"
-              ng-click="tagAs(ranked, 'marked-3')" translate>Marcar chamada 3</button>
+              ng-click="tagAs(ranked, currentMark.name)" translate>Marcar {{ currentMark.description }}
+        </button>
         <button class="btn btn-default" ng-show="isMarked(ranked)"
-              ng-click="untag(ranked, 'marked-3')" translate>Remover marcação</button>
+              ng-click="untag(ranked, currentMark.name)" translate>Remover marcação
+        </button>
     </td>
   </tr>
 </table>

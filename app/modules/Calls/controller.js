@@ -50,7 +50,10 @@
       $scope.tracksByZone = tracks;
       $scope.selectedType = '';
       $scope.types = Proposals.types();
- 
+      $scope.currentMark = {
+          'name': 'mark-1',
+          'description': 'chamada 1'
+      };
 
       function byStatus(ranked) {
         if(!$scope.selectedStatus) {return true}
@@ -68,7 +71,7 @@
       }
 
       $scope.isMarked = function(ranked) {
-        return _(ranked.tags).contains('marked-3');
+        return _(ranked.tags).contains($scope.currentMark.name);
       }
 
       $scope.tagAs = function(proposal, tagName) {
