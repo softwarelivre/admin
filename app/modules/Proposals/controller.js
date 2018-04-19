@@ -56,7 +56,8 @@
           resolve: {
             isCreation: function() { return false; },
             slot: function(proposal) { return proposal.slots[0]; },
-            proposal: function(Proposals, $stateParams) { return Proposals.get($stateParams.id); }
+            proposal: function(Proposals, $stateParams) { return Proposals.get($stateParams.id); },
+            invites: function(proposal) { return proposal.follow('invites'); }
           }
         })
         .state('proposals.create', {
@@ -145,13 +146,14 @@
 
     .controller("ProposalEditController", function($scope, $state, $q, isCreation,
                                                    Validator, FormErrors, Config, Accounts, Schedule, Proposals,
-                                                   AccountCreateModal, proposal, tracks, slot, focusOn) {
+                                                   AccountCreateModal, proposal, tracks, slot, invites, focusOn) {
 
       $scope.slot = slot;
       $scope.levels = Config.PROPOSAL_LEVELS;
       $scope.tracks = tracks;
       $scope.proposal = proposal;
       $scope.languages = Config.PROPOSAL_LANGUAGES;
+      $scope.invites = invites;
 
       $scope.pending_invites = _.filter($scope.invites, function(invite){
         return invite.status == 'pending';
