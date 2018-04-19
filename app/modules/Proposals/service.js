@@ -31,7 +31,7 @@
       var proposals = Restangular.service('admin/proposals');
 
       self.lookup = function(query) {
-        return proposals.getList(query);
+        return proposals.getList(cleanUpQuery(query));
       };
       
       self.types = function () {
@@ -109,6 +109,16 @@
         return function(proposal) {
           return self.setStatusOfProposal(proposal.id, status);
         };
+      };
+
+      var cleanUpQuery = function (query) {
+          var cleanedQuery = {};
+          for(var key in query) {
+            if(query[key]) {
+              cleanedQuery[key] = query[key];
+            }
+          }
+          return cleanedQuery;
       };
 
       return self;
