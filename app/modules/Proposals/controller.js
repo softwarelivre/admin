@@ -70,7 +70,8 @@
             slot: function() { return null; },
             proposal: function(Proposals) {
               return { coauthors: [], status: 'pending' };
-            }
+            },
+            invites: function() { return {}; }
           }
         })
         .state('proposals.create_for_slot', {
