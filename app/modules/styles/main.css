@@ -143,3 +143,8 @@ table.schedule thead td {
 .schedule-title {
   word-wrap: break-word;
 }
+
+p.tag-wrapper {
+  white-space: nowrap; 
+  margin-bottom: 5px;
+}

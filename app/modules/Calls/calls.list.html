@@ -3,7 +3,7 @@
   <small>marcadas = {{ totalMarked() }}</small>
 </h3>
 
-<table class="table  table-striped" ng-hide="ranking.length == 0">
+<table class="table table-striped" ng-hide="ranking.length == 0">
   <col class="id" />
   <col class="tags" />
   <col class="status" />
@@ -27,7 +27,9 @@
   <tr ng-repeat="ranked in getRanking()">
     <td class="id">{{ ranked.id }}</td>
     <td>
-      <p class="tag {{tag}}" ng-repeat="tag in ranked.tags">{{ tag }}</p>
+      <p class="tag-wrapper" ng-repeat="tag in ranked.tags">
+        <span class="label label-primary">{{ tag }}</span>
+      </p>
     </td>
     <td>
 	   <span class="status {{ranked.status}}">{{ ranked.status }}</span>
