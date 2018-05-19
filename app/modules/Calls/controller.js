@@ -51,8 +51,8 @@
       $scope.selectedType = '';
       $scope.types = Proposals.types();
       $scope.currentMark = {
-          'name': 'mark-2',
-          'description': 'chamada 2'
+          'name': 'mark-3',
+          'description': 'chamada 3'
       };
 
       function byStatus(ranked) {
