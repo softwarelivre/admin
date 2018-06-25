@@ -37,11 +37,11 @@
       <td data-title="'Descrição'">{{promocode.description }}</td>
       <td data-title="'Produto'">{{promocode.product.description }}</td>
       <td data-title="'Status'">
-          <span ng-show="promocode.spent_with" class="id">{{ promocode.spent_with.id }}</span>
-          <span ng-show="promocode.spent_with" class="name">
-            <a ui-sref="accounts.by_purchase({ id: promocode.spent_with.id })">{{ promocode.spent_with.name }}</a>
+          <span ng-show="promocode.used_by" class="name">
+            Usado por: 
+            <a ui-sref="accounts.by_purchase({ id: promocode.used_by.id })">{{ promocode.used_by.name }}</a>
           </span>
-          <span ng-hide="promocode.spent_with" class="available">
+          <span ng-hide="promocode.used_by" class="available">
             disponível
           </span>
       </td>
